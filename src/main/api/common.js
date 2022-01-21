@@ -12,3 +12,13 @@ export const upload = params => {
         headers: { "Content-Type": "multipart/form-data" }
     })
 }
+
+// JSON保存/编辑
+export const saveText = params => {
+    return instance.post(`${params.id ? '/oss/' + params.id : '/oss/text'}`, params)
+}
+
+// JSON获取
+export const getText = params => {
+    return instance.get(`/oss/${params}`)
+}

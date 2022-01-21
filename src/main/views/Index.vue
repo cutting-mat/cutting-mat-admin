@@ -17,7 +17,6 @@
 </template>
 
 <script>
-
 export default {
   components: {
     dashboard: () => import("../components/TheDashboard.vue"),

@@ -15,6 +15,10 @@ Vue.use(ElementUI);
 import register from '@/core/register'
 Vue.use(register);
 
+// 组件库
+import widgets from "@/core/widgets";
+Vue.use(widgets)
+
 // 路由
 import router from '@/core/router'
 

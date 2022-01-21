@@ -139,7 +139,7 @@
 </template>
 <script>
 import { upload } from "@/main/api/common";
-import BaseUploader from "@/main/components/BaseUploader";
+import BaseUploader from "@/core/components/BaseUploader";
 export default {
   components: {
     BaseUploader,

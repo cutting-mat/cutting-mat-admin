@@ -105,7 +105,6 @@ export default {
   },
   created() {
     report.send(packageInfo);
-    report.call(this, packageInfo)
   },
   mounted() {
     setTimeout(() => {

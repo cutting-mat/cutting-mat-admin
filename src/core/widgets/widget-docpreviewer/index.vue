@@ -46,7 +46,6 @@ export default {
   },
   created() {
     report.send(packageInfo);
-    report.call(this, packageInfo)
   },
   mounted() {
     let appMain = document.getElementsByClassName("scrollbar")[0];
