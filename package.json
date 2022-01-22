@@ -1,6 +1,6 @@
 {
-  "name": "cutting-mat-admin",
-  "version": "1.0.0",
+  "name": "cutting-mat",
+  "version": "2.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -9,7 +9,6 @@
   "homepage": "https://cutting-mat.github.io/template-element-ui/",
   "dependencies": {
     "axios": "^0.21.1",
-    "echarts": "^5.2.2",
     "element-ui": "^2.15.6",
     "ios-photo-repair": "^1.0.9",
     "vue": "^2.6.14",
