@@ -28,6 +28,6 @@ module.exports = {
     },
     outputDir: 'docs',                                          // 构建目录，默认'dist'
     publicPath: process.env.NODE_ENV === 'production'           // 网址根路径，需要配置服务器转发
-    ? '/template-element-ui/'
+    ? '/cutting-mat-admin/'
     : '/'      
 }

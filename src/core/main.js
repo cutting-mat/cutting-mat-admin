@@ -15,13 +15,18 @@ Vue.use(ElementUI);
 import register from '@/core/register';
 Vue.use(register);
 
+// 组件库
+import widgets from '@/widgets';
+Vue.use(widgets);
+
 // 账号鉴权
 import { AccountAuth } from "@/core";
 Vue.use(AccountAuth);
 
 // 权限控制
-import { AccessControl } from "@/core";
-Vue.use(AccessControl);
+// import { AccessControl } from "@/core";
+// Vue.use(AccessControl);
+Vue.directive('auth', {});
 
 // 路由
 import genRouter from '@/core/router';
