@@ -1,0 +1,18 @@
+{
+  "name": "cutting-mat-widgets",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cutting-mat/cutting-mat-widgets"
+  },
+  "author": "tower1229@foxmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "echarts": "^5.2.2"
+  }
+}
