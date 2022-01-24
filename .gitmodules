@@ -1,3 +1,0 @@
-[submodule "src/widgets"]
-	path = src/widgets
-	url = git@github.com:cutting-mat/cutting-mat-widgets.git
