@@ -8,16 +8,23 @@ import Vue from 'vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 //import '@/core/element-theme/index.css';
-import '@/core/element-theme/custom.css';
 Vue.use(ElementUI);
 
-// 全局资源
-import register from '@/core/register';
+// 全局样式
+import '@/core/assets/global.css';
+
+// Store
+import store from '@/core/utils/store';
+import storeConfig from "@/store.config";
+Vue.use(store, storeConfig);
+
+// 全局功能注册
+import { register } from '@/core';
 Vue.use(register);
 
 // 组件库
-import widgets from '@/widgets';
-Vue.use(widgets);
+import widgets from '@/widgets'
+Vue.use(widgets)
 
 // 账号鉴权
 import { AccountAuth } from "@/core";
@@ -26,15 +33,14 @@ Vue.use(AccountAuth);
 // 权限控制
 // import { AccessControl } from "@/core";
 // Vue.use(AccessControl);
-Vue.directive('auth', {});
 
 // 路由
-import genRouter from '@/core/router';
+import { routeGenerator } from '@/core';
 
 // 应用启动
-import App from '@/core/App.vue';
+import App from './App.vue';
 
 new Vue({
-    router: genRouter(),
+    router: routeGenerator(),
     render: h => h(App)
 }).$mount('#app');

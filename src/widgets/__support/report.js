@@ -8,13 +8,13 @@ export const report = {
         if (packageInfo) {
             this.init(packageInfo);
 
-            let widgetAmount = {
-                appId: 1,
-                timestamp: new Date().getTime(),
-                widgetKey: this.widgetKey,
-                pageHref: this.pageHref,
-                pageInstanceId: this.pageInstanceId
-            }
+            // let widgetAmount = {
+            //     appId: 1,
+            //     timestamp: new Date().getTime(),
+            //     widgetKey: this.widgetKey,
+            //     pageHref: this.pageHref,
+            //     pageInstanceId: this.pageInstanceId
+            // }
 
             // 上报
             // console.warn('组件上报', widgetAmount)
