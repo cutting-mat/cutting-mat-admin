@@ -15,7 +15,7 @@
       >
     </div>
     <!-- list -->
-    <BaseCURD
+    <CURD
       ref="theCURD"
       :api="apiObj"
       dataKey="dictCode"
@@ -55,7 +55,7 @@
           >删除</el-button
         >
       </template>
-    </BaseCURD>
+    </CURD>
     <!-- 数据维护 -->
     <DictEditer
       :visible="editerVisible"

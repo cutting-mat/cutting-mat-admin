@@ -14,7 +14,7 @@
       >
     </div>
     <!-- list -->
-    <BaseCURD
+    <CURD
       ref="theCURD"
       :api="apiObj"
       :model="model"
@@ -40,7 +40,7 @@
           >删除</el-button
         >
       </template>
-    </BaseCURD>
+    </CURD>
     
   </div>
 </template>

@@ -1,8 +1,0 @@
-{
-    "name": "widget-chart-pie",
-    "version": "0.0.2",
-    "description": "饼状图组件",
-    "changelog": [{
-        "title": "增加圆心位置（center）和图例颜色（legendColor）配置项"
-    }]
-}

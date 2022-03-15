@@ -4,8 +4,8 @@ export * as util from "./utils/util";
 export { default as register } from "./utils/register";
 // 请求
 export { default as instance } from "./utils/request";
-// 账号鉴权
-export { default as AccountAuth } from "./utils/account-auth";
+// 用户鉴权
+export { default as Permission } from "./utils/permission";
 // 权限控制
 export { default as AccessControl } from "./utils/access-control";
 // 路由

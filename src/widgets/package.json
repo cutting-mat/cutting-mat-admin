@@ -13,6 +13,6 @@
   "author": "tower1229@foxmail.com",
   "license": "MIT",
   "dependencies": {
-    "echarts": "^5.2.2"
+    "echarts": "^5.3.0"
   }
 }

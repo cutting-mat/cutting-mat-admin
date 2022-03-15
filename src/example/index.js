@@ -90,9 +90,13 @@ export default [{
             name: '上传',
             component: (resolve) => require(['./views/Upload.vue'], resolve)
         }, {
-            path: 'DickControl',
-            name: '字典控件',
-            component: (resolve) => require(['./views/DickControl.vue'], resolve)
+          path: 'DickControl',
+          name: '字典控件',
+          component: (resolve) => require(['./views/DickControl.vue'], resolve)
+        }, {
+          path: 'Password',
+          name: '密码强度',
+          component: (resolve) => require(['./views/Password.vue'], resolve)
         }, {
             path: 'CURD',
             name: '增删改查组件',

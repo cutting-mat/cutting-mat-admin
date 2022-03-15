@@ -1,23 +1,22 @@
 
-// 环境配置
+// 各环境baseURL配置
 const ENVIRONMENT = {
-    mock: 'http://rap2api.taobao.org/app/mock/223572',
+    mock: 'http://yapi.sogdata.com/mock/125',   // YAPI-cutting-mat-admin项目
     dev: 'http://retire.kaifa/japi',
     test: 'http://test.com/api',
     master: '//master.com/api'
 };
 
-// 域名与环境映射配置
+// 域名与环境映射关系
 const HASH = {
     "dev.com": ENVIRONMENT.dev,
     "test.com": ENVIRONMENT.test,
     "master.com": ENVIRONMENT.master
 }
 
-const baseURL = HASH[window.location.host] || ENVIRONMENT.dev;
-
+// axios 请求实例配置
 export default {
-    baseURL,
+    baseURL: HASH[window.location.host] || ENVIRONMENT.mock,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json'

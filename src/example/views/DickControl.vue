@@ -16,7 +16,7 @@
     <div class="demo">
       <el-form size="small">
           <el-form-item label="单选框">
-            <DictRadio v-model="value1" load="team_approve_state" />
+            <DictRadio v-model="value1" load="nation" />
           </el-form-item>
         </el-form>
     </div>
@@ -27,7 +27,7 @@
     <div class="demo">
       <el-form size="small">
           <el-form-item label="多选框">
-            <DictCheckbox v-model="value2" load="team_approve_state" />
+            <DictCheckbox v-model="value2" load="nation" />
           </el-form-item>
         </el-form>
     </div>
@@ -38,7 +38,7 @@
     <div class="demo">
       <el-form size="small">
           <el-form-item label="选择器">
-            <DictSelect v-model="value3" load="team_approve_state" />
+            <DictSelect v-model="value3" load="nation" />
           </el-form-item>
         </el-form>
     </div>

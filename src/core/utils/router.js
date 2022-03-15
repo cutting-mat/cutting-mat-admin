@@ -2,28 +2,24 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-// 加载所有模块路由
-import { subModules, mainModule } from '../../module.config'
+import { BypassRoute } from '@/route.config'
 
-export default function () {
-  // 拼装路由
-  mainModule[0].children = Vue.prototype.$AccessControl ? [] : subModules;
+// 路由实例
+let routeInstance;
 
-  // 路由实例
-  const route = new Router({
-    routes: mainModule
-  });
+export default function (config) {
+  if (!routeInstance) {
+    console.log('[Core] Router Start.')
 
-  if (Vue.setRouterGuards) {
-    Vue.setRouterGuards(route, mainModule)
+    routeInstance = new Router({
+      scrollBehavior: () => ({ y: 0 }),
+      routes: BypassRoute
+    });
+
+    if(config.beforeEach){
+      routeInstance.beforeEach(config.beforeEach)
+    }
   }
 
-  route.beforeEach((to, from, next) => {
-    if (to.name) {
-      document.title = to.meta.title || to.name;
-    }
-    next()
-  })
-
-  return route
+  return routeInstance
 }

@@ -1,26 +1,27 @@
 import { util, instance } from "@/core";
-import {store} from "@/core/utils/store";
 
-import {subModules} from "@/module.config";
+import { MainRoute } from "@/route.config";
+import { SetAccountToken, GetPermission, AfterGetDynamicRoute } from "@/permission.config";
 
-let checkRouteRedirectResult = []; // 临时变量
-
-const setInterceptor = function (resourcePermission) {
-    // 添加请求权限校验
-    instance.interceptors.request.use((config) => {
-        let requestURL = config.url.replace(config.baseURL, "").split("?")[0];
-
-        if (!resourcePermission[config.method + "," + requestURL]) {
-            return Promise.reject({
-                message: config.method + "," + requestURL + "无访问权限",
-            });
+/**
+ * 从axios请求函数中提取请求信息
+ * @param axiosRequest[Function] axios请求方法
+ * @return 请求信息字符串, 例如 'get,/url1'
+ * */
+export const matchRequest = function (axiosRequest) {
+    let result = null;
+    if (typeof axiosRequest === 'function') {
+        let regex = new RegExp(/\.([^(]+)\("([^"]+)"/); // 匹配请求函数：instance.post("/org", params)
+        result = axiosRequest.toString().match(regex);
+        if (result && result.length > 2) {
+            result = [result[1], result[2]].join(",")
         }
-        return config;
-    });
+    }
+    return result
 }
 
+// 提取请求权限
 const getResourcePermission = function (userPermissions) {
-    // 从用户权限数据中提取请求权限
     let resourcePermission = {};
     if (Array.isArray(userPermissions.resources)) {
         userPermissions.resources.forEach((e) => {
@@ -31,19 +32,16 @@ const getResourcePermission = function (userPermissions) {
     return resourcePermission;
 }
 
+// 提取路由权限
 const getRoutePermission = function (userPermissions) {
-    // 从用户权限数据中提取路由权限
     let routePermission = {};
     let setMenu2Hash = function (array, base) {
-        array.map((key) => {
-            if (key.route) {
-                let hashKey = ((base ? base + "/" : "") + key.route).replace(
-                    /^\//,
-                    ""
-                );
-                routePermission["/" + hashKey] = true;
-                if (Array.isArray(key.children)) {
-                    setMenu2Hash(key.children, (base ? base + "/" : "") + key.route);
+        array.forEach((router) => {
+            if (router.route) {
+                let hashKey = router.route.indexOf('/') === 0 ? router.route : [base, router.route].join(base === '/' ? '' : '/');
+                routePermission[hashKey] = true;
+                if (Array.isArray(router.children)) {
+                    setMenu2Hash(router.children, hashKey);
                 }
             }
         });
@@ -55,194 +53,158 @@ const getRoutePermission = function (userPermissions) {
     return routePermission;
 }
 
-const checkRouteRedirect = function (array, base) {
-    // 递归校验路由'redirect'路径权限
-    let replyResult = [];
-    array.forEach((route) => {
-        let pathKey = (base ? base + "/" : "") + route.path;
-        // 扩展fullPath
-        route.fullPath = pathKey;
-        // 扩展meta
-        if (!route.meta) {
-            route.meta = {};
-        }
-        const currentRouteRedirect =
-            route.redirect && route.redirect.split ? route.redirect : null;
-        if (
-            currentRouteRedirect &&
-            Array.isArray(route.children) &&
-            route.children.length
-        ) {
-            const targetIndex = route.children.findIndex((e) => {
-                return !e.fullPath || e.fullPath === currentRouteRedirect;
-            });
-            if (targetIndex === -1) {
-                console.warn(
-                    `${route.redirect}不在路由权限内，自动重置为${route.children[0].fullPath}`
-                );
-                route.redirect = route.children[0].fullPath;
-            }
-        }
-        if (Array.isArray(route.children) && route.children.length) {
-            checkRouteRedirect(
-                route.children,
-                (base ? base + "/" : "") + (route.path !== "/" ? route.path : "")
-            );
-        }
-        replyResult.push(route);
-    });
-    if (base) {
-        return replyResult;
-    } else {
-        checkRouteRedirectResult = checkRouteRedirectResult.concat(replyResult);
-    }
-}
+export default function (Vue, routeInstance) {
+    console.log("[Core] AccessControl Open.")
 
-export default {
-    install: function (Vue) {
-        console.warn("AccessControl 开启")
-        
-        // v-auth 指令（用于权限控制）
-        Vue.directive('auth', {
-            inserted: function (el, binding) {
-                if (Vue.prototype.$_auth && !Vue.prototype.$_auth(binding.value)) {
-                    el.parentNode.removeChild(el);
-                }
-            }
-        });
+    return new Promise((resolve, reject) => {
+        /*
+         * Step 1: 请求用户权限数据, 格式如下:
+         {
+            menus: [{
+                name: (...)
+                route: (...)
+            }],
+            resources: [{
+                method: (...)
+                name: (...)
+                type: (...)
+                url: (...)
+            }]
+         }
+        */
+        GetPermission().then((userPermissions) => {
+            let resourcePermission = getResourcePermission(userPermissions);
+            let routePermission = getRoutePermission(userPermissions);
+            /*
+             * 设置Axios请求拦截
+             */
+            instance.interceptors.request.use((config) => {
+                // 支持 header 携带自定义请求权限
+                let requestPermission = config.headers["X-Request-Permission"] || [config.method, config.url.replace(config.baseURL, "").split("?")[0]].join(",");
 
-        Vue.prototype.$AccessControl = function () {
-
-            return new Promise((resolve, reject) => {
-                /*
-                 * 请求用户权限
-                 */
-                store.action("permission").then((userPermissions) => {
-                    /*
-                     * 请求用户权限数据，格式如下:
-                      {
-                        menus: [{
-                          id: (...)
-                          method: (...)
-                          name: (...)
-                          remark: (...)
-                          route: (...)
-                          type: 0
-                          url: (...)
-                        }],
-                        resources: [{
-                          id: (...)
-                          method: (...)
-                          name: (...)
-                          pid: (...)
-                          remark: (...)
-                          route: (...)
-                          type: (...)
-                          url: (...)
-                        }]
-                      }
-                     */
-
-                    let resourcePermission = getResourcePermission(userPermissions);
-                    let routePermission = getRoutePermission(userPermissions);
-
-                    /*
-                     * 根据请求权限设置请求拦截
-                     */
-
-                    setInterceptor(resourcePermission);
-
-                    /*
-                     * 根据路由权限动态添加路由
-                     */
-
-                    // 根据用户权限动态注入路由
-                    let actualRouter = [];
-                    // 递归校验路由权限
-                    let checkRoutePermission = function (array, base) {
-                        let replyResult = [];
-                        array.forEach((route) => {
-                            let pathKey = (base ? base + "/" : "") + route.path;
-                            // 扩展fullPath
-                            route.fullPath = pathKey;
-
-                            if (routePermission[pathKey]) {
-                                if (Array.isArray(route.children)) {
-                                    route.children = checkRoutePermission(
-                                        route.children,
-                                        (base ? base + "/" : "") + route.path
-                                    );
-                                }
-                                replyResult.push(route);
-                            }
-                        });
-                        if (base) {
-                            return replyResult;
-                        } else {
-                            actualRouter = actualRouter.concat(replyResult);
+                if (!resourcePermission[requestPermission]) {
+                    return Promise.reject({
+                        response: {
+                            status: 403,
+                            data: `${requestPermission} 请求未授权`,
                         }
-                    };
+                    });
+                }
+                return config;
+            });
 
-                    checkRoutePermission(subModules);
+            /*
+             * 根据路由权限动态添加路由
+             */
 
-                    // 如果没有任何路由权限，判断为非法用户，登出并终止应用执行
-                    if (!actualRouter || !actualRouter.length) {
-                        util.storage("auth", "");
-                        return (document.body.innerHTML =
-                            "<h1>账号访问受限，请联系系统管理员！</h1>");
+            let dynamicRoute = [];
+            // 递归校验路由权限
+            let checkRoutePermission = function (array, base) {
+                let replyResult = [];
+                array.forEach((route) => {
+                    let pathKey = route.path.indexOf('/') === 0 ? route.path : [base, route.path].join(base === '/' ? '' : '/');
+                    // 扩展fullPath
+                    route.fullPath = pathKey;
+                    // 扩展meta
+                    if (!route.meta) {
+                        route.meta = {};
                     }
 
-                    checkRouteRedirectResult = [];
-                    checkRouteRedirect(actualRouter);
-
-                    checkRouteRedirectResult.forEach((route) => {
-                        this.$router.addRoute("首页", route);
-                    });
-
-                    this.$router.addRoute({
-                        path: "*",
-                        redirect: "/404",
-                    });
-
-                    /*
-                     * 注册 this.$_auth 方法和 v-auth 指令 (指令在@/register.js里注册)
-                     */
-
-                    Vue.prototype.$_auth = function (axiosRequest) {
-                        let RequiredPermissions = [];
-                        let permission = true;
-                        let collectPermission = function (fun) {
-                            let res = util.matchRequest(fun);
-                            if (res) {
-                                RequiredPermissions.push(res);
-                            }
-                        };
-                        if (Array.isArray(axiosRequest)) {
-                            axiosRequest.forEach(collectPermission);
-                        } else if (typeof axiosRequest === "function") {
-                            collectPermission(axiosRequest);
-                        }
-                        //console.log(RequiredPermissions, resourcePermission)
-                        for (let i = 0; i < RequiredPermissions.length; i++) {
-                            let p = RequiredPermissions[i];
-                            if (!resourcePermission[p]) {
-                                permission = false;
-                                break;
+                    if (routePermission[pathKey]) {
+                        if (Array.isArray(route.children)) {
+                            route.children = checkRoutePermission(
+                                route.children,
+                                pathKey
+                            );
+                            // 检查 Redirect 并自动纠正
+                            const currentRouteRedirect = route.redirect;
+                            if (
+                                currentRouteRedirect &&
+                                currentRouteRedirect.split &&
+                                route.children.length
+                            ) {
+                                const targetIndex = route.children.findIndex((e) => {
+                                    return e.fullPath === currentRouteRedirect;
+                                });
+                                if (targetIndex === -1) {
+                                    console.warn(
+                                        `${route.redirect}不在路由权限内, 自动重置为${route.children[0].fullPath}`
+                                    );
+                                    route.redirect = route.children[0].fullPath;
+                                }
                             }
                         }
+                        replyResult.push(route);
+                    }
+                });
+                if (base) {
+                    return replyResult;
+                } else {
+                    dynamicRoute = dynamicRoute.concat(replyResult);
+                }
+            };
+            checkRoutePermission(MainRoute);
+            //console.log('dynamicRoute', dynamicRoute)
+            // 如果没有任何路由权限, 判断为非法用户, 登出并终止应用执行
+            if (!dynamicRoute || !dynamicRoute.length) {
+                SetAccountToken("");
+                return reject(document.body.innerHTML =
+                    "<h1>账号访问受限, 请联系系统管理员！</h1>");
+            }
 
-                        return permission;
-                    };
+            dynamicRoute.forEach((route) => {
+                routeInstance.addRoute(route);
+            });
 
-                    store.set("menu", actualRouter);
+            routeInstance.addRoute({
+                path: "*",
+                redirect: "/404",
+            });
 
-                    resolve({ resourcePermission, routePermission, actualRouter });
-                }).catch(err => {
-                    reject(err)
-                })
+            /*
+             * 注册 this.$_auth 方法
+             */
 
-            })
+            Vue.prototype.$_auth = function (axiosRequest) {
+                let RequiredPermissions = [];
+                let permission = true;
+                let collectPermission = function (fun) {
+                    let res = matchRequest(fun);
+                    if (res) {
+                        RequiredPermissions.push(res);
+                    }
+                };
+                if (Array.isArray(axiosRequest)) {
+                    axiosRequest.forEach(collectPermission);
+                } else if (typeof axiosRequest === "function") {
+                    collectPermission(axiosRequest);
+                }
+                //console.log(RequiredPermissions, resourcePermission)
+                for (let i = 0; i < RequiredPermissions.length; i++) {
+                    let p = RequiredPermissions[i];
+                    if (!resourcePermission[p]) {
+                        permission = false;
+                        break;
+                    }
+                }
 
-        }
-    }
+                return permission;
+            };
+
+            // v-auth 指令
+            Vue.directive('auth', {
+                inserted: function (el, binding) {
+                    if (Vue.prototype.$_auth && !Vue.prototype.$_auth(binding.value)) {
+                        el.parentNode.removeChild(el);
+                    }
+                }
+            });
+
+            // 获取路由权限回调
+            AfterGetDynamicRoute(dynamicRoute);
+
+            resolve({ resourcePermission, routePermission, dynamicRoute });
+        }).catch(reject)
+
+    })
 }
