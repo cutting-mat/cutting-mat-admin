@@ -16,15 +16,17 @@ import dataV from '@/data-v'
 
 
 // 主路由
-export const MainRoute = [Object.assign({}, main[0], {
+export const MainRoute = [
+    Object.assign({}, main[0], {
     children: [
-        ...dataV,
-        ...example,
-        ...exampleWidgets,
-        ...system,
-        ...user,
-    ]
-})];
+            ...example,
+            ...exampleWidgets,
+            ...system,
+            ...user,
+        ]
+    }),
+    ...dataV,
+];
 
 // 旁路路由
 export const BypassRoute = [

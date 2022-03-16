@@ -3,6 +3,7 @@
   <LayoutBlank v-if="$route.path.indexOf('/data-v') === 0" />
   <!-- 统一模板 -->
   <LayoutMain v-else />
+  
 </template>
 
 <script>

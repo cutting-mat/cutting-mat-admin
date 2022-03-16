@@ -7,8 +7,7 @@
         v-for="(item, index) in list"
         :key="index"
         class="_item"
-        :class="{ cur: $route.path.indexOf(item.path) === 0 }"
-        @click="toggleNav(item)"
+        @click="$router.push(item)"
       >
         {{ (item.meta && item.meta.title) || item.name }}
       </li>
@@ -33,31 +32,18 @@
 
 <script>
 import { util } from "@/core";
-import { MainRoute } from "@/route.config";
 
 export default {
   data() {
     return {
       state: this.$store.state,
+      list: [{
+        path: '/data-v',
+        name: '数据可视化'
+      }]
     };
   },
-  computed: {
-    list: function () {
-      return (
-        this.$AccessControl ? this.state.DynamicRoute[0].children : MainRoute[0].children
-      ).filter((e) => !e.meta || !e.meta.hide);
-    },
-  },
   methods: {
-    toggleNav(item) {
-      if (item.path) {
-        if (item.redirect !== this.$route.path) {
-          this.$router.push(item.path);
-        }
-      } else {
-        window.open(item.url, "_blank");
-      }
-    },
     handleCommand: function (command) {
       switch (command) {
         case "logout":
@@ -111,6 +97,7 @@ export default {
 .navlist {
   height: 100%;
   text-align: right;
+  padding: 0 20px;
 }
 .navlist ._item {
   display: inline-block;
@@ -120,6 +107,7 @@ export default {
   cursor: pointer;
   width: 8em;
   text-align: center;
+  font-size: 16px;
 }
 .navlist .cur {
   color: #fff;
