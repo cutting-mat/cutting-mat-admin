@@ -37,10 +37,7 @@ export default {
   data() {
     return {
       state: this.$store.state,
-      list: [{
-        path: '/data-v',
-        name: '数据可视化'
-      }]
+      list: []
     };
   },
   methods: {

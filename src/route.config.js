@@ -11,7 +11,6 @@ import main from '@/main/index'
 import system from '@/system'
 import user from '@/user'
 import example from '@/example'
-import exampleWidgets from '@/example-widgets'
 import dataV from '@/data-v'
 
 
@@ -20,7 +19,6 @@ export const MainRoute = [
     Object.assign({}, main[0], {
     children: [
             ...example,
-            ...exampleWidgets,
             ...system,
             ...user,
         ]
