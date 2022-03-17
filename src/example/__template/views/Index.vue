@@ -1,0 +1,41 @@
+<template>
+  <router-view />
+</template>
+
+<script>
+//import * as util from "@/main/assets/util";
+
+export default {
+  data() {
+    return {};
+  },
+  methods: {},
+  created() {},
+};
+</script>
+
+<style scoped>
+/* 演示样式 */
+.example >>> h2 {
+  font-size: 28px;
+  color: #1f2f3d;
+  margin-bottom: 12px;
+}
+.example >>> .demo {
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.example >>> .block{
+  margin-bottom: 20px;
+  display : flex;
+  align-items    : center;
+}
+.example >>> p{
+  font-size: 14px;
+  color: #5e6d82;
+  line-height: 1.5em;
+  margin: 1em 0;
+}
+</style>

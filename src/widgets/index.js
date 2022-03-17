@@ -1,5 +1,5 @@
 // 调试开关
-const DEBUG = process.env.NODE_ENV === "development";
+const DEBUG = false;
 
 const ctx = require.context("./", true, /^\.\/[^__]+index\.js$/);
 

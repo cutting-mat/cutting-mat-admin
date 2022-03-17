@@ -1,6 +1,6 @@
 <template>
   <div>
-    <baidu-map style="height: 600px" />
+    <map-nearby style="height: 600px" />
   </div>
 </template>
 

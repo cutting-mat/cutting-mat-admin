@@ -1,6 +1,6 @@
 
-const ctx = require.context("./", true, /\.\/.+\/index.js/);
-let routes = [];
+const ctx = require.context("./", true, /^\.\/[^__]+index\.js$/);
+export let routes = [];
 
 ctx.keys().forEach((key) => {
     if (Array.isArray(ctx(key).default)) {
@@ -8,8 +8,6 @@ ctx.keys().forEach((key) => {
     }
 
 });
-
-export { routes }
 
 export default [{
     path: '/example',

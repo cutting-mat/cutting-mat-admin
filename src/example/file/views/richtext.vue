@@ -1,5 +1,5 @@
 <template>
-  <div class="lib-content">
+  <div class="example">
     <h2>同步编辑模式</h2>
     <div class="demo">
       <richtext

@@ -1,5 +1,5 @@
 <template>
-  <div class="lib-content">
+  <div class="example">
     <el-button
       @click="globalWatermark"
       globalWatermark="primary"
@@ -173,7 +173,7 @@ export default {
 .param_box span {
   color: red;
 }
-.lib-content{
+.example{
   padding-bottom: 80px;
 }
 </style>

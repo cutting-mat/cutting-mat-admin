@@ -10,7 +10,7 @@ import main from '@/main/index'
 // 业务模块
 import system from '@/system'
 import user from '@/user'
-import example from '@/example'
+import {routes} from '@/example'
 import dataV from '@/data-v'
 
 
@@ -18,7 +18,7 @@ import dataV from '@/data-v'
 export const MainRoute = [
     Object.assign({}, main[0], {
     children: [
-            ...example,
+            ...routes,
             ...system,
             ...user,
         ]

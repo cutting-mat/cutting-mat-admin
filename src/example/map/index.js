@@ -3,9 +3,9 @@ export default [{
     name: '地图',
     component: (resolve) => require(['./views/Index.vue'], resolve),
     children: [{
-            path: 'bmap',
-            name: '百度地图',
-            component: (resolve) => require(['./views/BMap.vue'], resolve)
+            path: 'Nearby',
+            name: '搜索附近',
+            component: (resolve) => require(['./views/Nearby.vue'], resolve)
         },
     ]
 }]
