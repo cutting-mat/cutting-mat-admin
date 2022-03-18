@@ -1,81 +1,70 @@
 <template>
     <div>
-        <h2>引用方式</h2>
-        <p>
-            "chart-gauge": (resolve) => require([
-            "@/__components/chart-gauge/index.vue", ], resolve)
-        </p>
-        <h2>基础样式</h2>
-        <div class="flex-col">
-            <div class="flex-1">
-                <p>value(Number，必传)：仪表盘数值</p>
-                <p>range(Array)：仪表盘数值范围，默认值：[ 0,100 ]</p>
-            </div>
-        </div>
+        <h2>简介</h2>
+        <p>基于Echart封装的仪表盘组件</p>
+
+        <h2>示例</h2>
+
+        <p>value(Number，必传)：仪表盘数值</p>
+        <p>range(Array)：仪表盘数值范围，默认值：[ 0,100 ]</p>
         <div class="demo">
-            <div class="block">
+            <chart-gauge :value="30" />
+        </div>
+        <div class="code">
+            <textarea readonly>
                 <chart-gauge :value="30" />
-            </div>
+            </textarea>
         </div>
-        <h2>起止角度</h2>
-        <div class="flex-col">
-            <div class="flex-1">
-                <p>
-                    angle(Array)：起止角度（ 默认值：[ 216 ,-36 ] ），示例：[
-                    180 ,0 ]，（ 注：以中心点左侧为180，右侧为0 ，上方为90° ）
-                </p>
-            </div>
-        </div>
+
+        <h2>配置</h2>
+        <h3>起止角度</h3>
+        <p>
+            angle(Array)：起止角度（ 默认值：[ 216 ,-36 ] ），示例：[
+            180 ,0 ]，（ 注：以中心点左侧为180，右侧为0 ，上方为90° ）
+        </p>
         <div class="demo">
-            <div class="block">
+            <chart-gauge :value="30" :angle="[180, 0]" />
+        </div>
+        <div class="code">
+            <textarea readonly>
                 <chart-gauge :value="30" :angle="[180, 0]" />
-            </div>
+            </textarea>
         </div>
-        <h2>自定义指针</h2>
-        <div class="flex-col">
-            <div class="flex-1">
-                <p>pointerStyle(String)：指针样式。</p>
-                <p style="margin-left: 130px">
-                    1、接收以'image://'开头的 url 或
-                    dataUrl。例如：'image://http://baidu.png'。<a
-                        target="_blank"
-                        style="color: #257ff7"
-                        href="https://echarts.apache.org/zh/option.html#series-gauge.pointer.icon"
-                        >详情</a
-                    >
-                </p>
-                <p style="margin-left: 130px">
-                    2、接收色值。例如：'#1ACCFF'、'rgba(0,0,0,1)'、'red'
-                </p>
-                <p>pointerLength(String/Number)：指针长度，可以是绝对数值，也可以是相对于半径的半分比，默认值 '70%'</p>
-            </div>
-        </div>
+
+        <h3>自定义指针</h3>
+        <p>pointerStyle(String)：指针样式。</p>
+        <p>
+            1、接收以'image://'开头的 url 或
+            dataUrl。例如：'image://http://baidu.png'。
+            <a
+                target="_blank"
+                style="color: #257ff7"
+                href="https://echarts.apache.org/zh/option.html#series-gauge.pointer.icon"
+            >详情</a>
+        </p>
+        <p>2、接收色值。例如：'#1ACCFF'、'rgba(0,0,0,1)'、'red'</p>
+        <p>pointerLength(String/Number)：指针长度，可以是绝对数值，也可以是相对于半径的半分比，默认值 '70%'</p>
         <div class="demo">
-            <div class="block">
-                <chart-gauge
-                    :value="data"
-                    pointerStyle="red"
-                    pointerLength="50%"
-                />
-            </div>
+            <chart-gauge :value="data" pointerStyle="red" pointerLength="50%" />
         </div>
-        <h2>自定义表盘</h2>
-        <div class="flex-col">
-            <div class="flex-1">
-                <p>
-                    dialBackground(String)：自定义表盘背景（注：若使用自定义表盘，除指针外，表盘刻度、表盘轴线等将不显示，以自定义表盘为准）
-                </p>
-            </div>
+        <div class="code">
+            <textarea readonly>
+                <chart-gauge :value="data" pointerStyle="red" pointerLength="50%" />
+            </textarea>
         </div>
+
+        <h3>自定义表盘</h3>
+        <p>dialBackground(String)：自定义表盘背景（注：若使用自定义表盘，除指针外，表盘刻度、表盘轴线等将不显示，以自定义表盘为准）</p>
+
         <div class="demo">
-            <div class="block">
-                <chart-gauge
-                    :dialBackground="dialBackground"
-                    :value="data"
-                    pointerStyle="red"
-                />
-            </div>
+            <chart-gauge :dialBackground="dialBackground" :value="data" pointerStyle="red" />
         </div>
+        <div class="code">
+            <textarea readonly>
+                <chart-gauge :dialBackground="dialBackground" :value="data" pointerStyle="red" />
+            </textarea>
+        </div>
+
     </div>
 </template>
 
@@ -101,14 +90,5 @@ export default {
 </script>
 
 <style scoped>
-.block {
-    height: 380px;
-    width: 800px;
-    margin: auto;
-    background: #fff;
-    box-shadow: 0 0 6px 6px rgba(0, 0, 0, 0.1);
-}
-._configTitle {
-    font-weight: bold;
-}
+
 </style>

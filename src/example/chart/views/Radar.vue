@@ -1,31 +1,21 @@
 <template>
     <div>
-        <h2>引用方式</h2>
+        <h2>简介</h2>
+        <p>基于Echart封装的雷达图组件</p>
+        <h2>示例</h2>
+        <p>data(Array)：通用图表格式</p>
         <p>
-            "chart-radar": (resolve) => require([
-            "@/__components/chart-radar/index.vue", ], resolve)
+            colors(Array)：该对象为数组,代表雷达图内部颜色的渐变；示例：["#B8D3E4",
+            "#72ACD1"]
         </p>
-        <h2>基础样式</h2>
-        <div class="flex-col">
-            <div class="flex-1">
-                <p>data(Array)：通用图表格式</p>
-                <p>
-                    colors(Array)：该对象为数组,代表雷达图内部颜色的渐变；示例：["#B8D3E4",
-                    "#72ACD1"]
-                </p>
-                <p>name(Array)：数据名称，数组长度与'data'保持一致</p>
-            </div>
-        </div>
+        <p>name(Array)：数据名称，数组长度与'data'保持一致</p>
         <div class="demo">
-            <div class="block">
-                <div class="chartDemoWrap">
-                    <chart-radar
-                        :data="data"
-                        :name="name"
-                        :colors="colorList"
-                    />
-                </div>
-            </div>
+            <chart-radar :data="data" :name="name" :colors="colorList" />
+        </div>
+        <div class="code">
+            <textarea readonly>
+            <chart-radar :data="data" :name="name" :colors="colorList" />
+            </textarea>
         </div>
     </div>
 </template> 
@@ -47,19 +37,10 @@ export default {
         };
     },
     methods: {},
-    created() {},
+    created() { },
 };
 </script>
 
 <style scoped>
-.chartDemoWrap {
-    height: 380px;
-    width: 800px;
-    margin: auto;
-    background: #fff;
-    box-shadow: 0 0 6px 6px rgba(0, 0, 0, 0.1);
-}
-._configTitle {
-    font-weight: bold;
-}
+
 </style>

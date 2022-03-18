@@ -1,6 +1,6 @@
 <template>
   <div class="scrollbar">
-    <router-view class="wrap example" />
+    <router-view class="wrap example chartDemo" />
   </div>
 </template>
 
@@ -18,4 +18,8 @@ export default {
 </script>
 
 <style scoped>
+.chartDemo >>> .demo {
+  height: 360px;
+}
+
 </style>

@@ -1,54 +1,42 @@
 <template>
     <div>
-        <h2>引用方式</h2>
+        <h2>简介</h2>
+        <p>基于Echart封装的进度图组件</p>
+        <h2>示例</h2>
+        <p>progress(Number)：代表进度条数据；取值范围0~100</p>
+        <div class="demo">
+            <chart-progress :progress="68" />
+        </div>
+        <div class="code">
+            <textarea readonly>
+            <chart-progress :progress="68" />
+            </textarea>
+        </div>
+
+        <h2>配置</h2>
+        <h3>进度条颜色</h3>
         <p>
-            "chart-progress": (resolve) => require([
-            "@/__components/chart-progress/index.vue", ], resolve)
+            colors(Array): 默认全局色表；
+            示例：['#F0C313','#ECEFF4']，第一项为进度颜色，第二项为未完成颜色
         </p>
-        <h2>基础样式</h2>
-        <div class="flex-col">
-            <div class="flex-1">
-                <p>progress(Number)：代表进度条数据；取值范围0~100</p>
-            </div>
-        </div>
         <div class="demo">
-            <div class="block">
-                <div class="chartDemoWrap">
-                    <chart-progress :progress="progress" />
-                </div>
-            </div>
+            <chart-progress :colors="colors" :progress="68" />
         </div>
-        <h2>进度条颜色</h2>
-        <div class="flex-1">
-            <p>
-                colors(Array): 默认全局色表；
-                示例：['#F0C313','#ECEFF4']，第一项为进度颜色，第二项为未完成颜色
-            </p>
+        <div class="code">
+            <textarea readonly>
+            <chart-progress :colors="colors" :progress="68" />
+            </textarea>
         </div>
+
+        <h3>有标题的进度条</h3>
+        <p>title(String)：代表中心所展示的内容；示例：title:'朝阳区70%'</p>
         <div class="demo">
-            <div class="block">
-                <div class="chartDemoWrap">
-                    <chart-progress
-                        :colors="colors"
-                        :progress="progress"
-                    />
-                </div>
-            </div>
+            <chart-progress :colors="colors" :title="title" :progress="68" />
         </div>
-        <h2>有标题的进度条</h2>
-        <div class="flex-1">
-            <p>title(String)：代表中心所展示的内容；示例：title:'朝阳区70%'</p>
-        </div>
-        <div class="demo">
-            <div class="block">
-                <div class="chartDemoWrap">
-                    <chart-progress
-                        :colors="colors"
-                        :title="title"
-                        :progress="progress"
-                    />
-                </div>
-            </div>
+        <div class="code">
+            <textarea readonly>
+            <chart-progress :colors="colors" :progress="68" />
+            </textarea>
         </div>
     </div>
 </template>
@@ -65,19 +53,10 @@ export default {
         };
     },
     methods: {},
-    created() {},
+    created() { },
 };
 </script>
 
 <style scoped>
-.chartDemoWrap {
-    height: 380px;
-    width: 800px;
-    margin: auto;
-    background: #fff;
-    box-shadow: 0 0 6px 6px rgba(0, 0, 0, 0.1);
-}
-._configTitle {
-    font-weight: bold;
-}
+
 </style>
