@@ -1,5 +1,5 @@
 import AccessControl from "./access-control";
-import { util, instance } from "@/core";
+import { util, axiosInstance } from "@/core";
 import { MainRoute, BypassRoute } from "@/route.config";
 import { GetAccountToken, SetAccountToken, GetTokenFromLogin } from "@/permission.config";
 
@@ -42,10 +42,9 @@ export default {
         Vue.prototype.$Permission = function (loginCallback) {
             const checkAccount = (loginPayload) => {
                 const userToken = GetAccountToken();
-
                 if (userToken) {
                     // 设置请求头
-                    instance.defaults.headers.common['Authorization'] = userToken;
+                    axiosInstance.defaults.headers.common['Authorization'] = userToken;
 
                     new Promise(resolve => {
                         if (loginPayload && loginPayload.updateToken) {

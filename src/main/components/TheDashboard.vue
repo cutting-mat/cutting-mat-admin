@@ -3,8 +3,7 @@
     <div class="flex-row main">
       <div class="flex-1 box scrollbar">
         <!--  -->
-        <uploader v-model="uploadList" :limit="2" :show-file-list="false" />
-        <TheFileList v-model="uploadList" :beforeDelete="beforeDelete" />
+        <uploader v-model="uploadList" :limit="2" />
       </div>
       <div class="flex-1 box">
         <h2>Vue全局资源测试</h2>
@@ -60,6 +59,13 @@
           未授权请求
         </el-button>
       </div>
+      <div class="flex-1 box">
+        <h2>字典控件</h2>
+        <dict-select v-model="dictSelectValue" param="select123"></dict-select>
+        <dict-radio v-model="dictRadioValue" param="radio123"></dict-radio>
+        <dict-checkbox v-model="dictCheckbox" param="check123"></dict-checkbox>
+        <dict-cascader v-model="dictCasader" param="cascader123"></dict-cascader>
+      </div>
     </div>
   </div>
 </template>
@@ -71,9 +77,6 @@ import { saveJSON, Unauthorized } from "@/main/api/common";
 import { info } from "@/user/api/user";
 
 export default {
-  components: {
-    TheFileList: () => import("./TheFileList.vue"),
-  },
   data() {
     return {
       fullLoading: false,
@@ -82,6 +85,10 @@ export default {
       log: [],
       globalMethodOutput: "",
       instanceMethodOutput: "",
+      dictSelectValue: null,
+      dictRadioValue: null,
+      dictCheckbox: [],
+      dictCasader: []
     };
   },
   computed: {

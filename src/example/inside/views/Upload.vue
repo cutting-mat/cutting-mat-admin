@@ -125,19 +125,6 @@
       </div>
     </div>
 
-    <h2>自定义上传列表</h2>
-    <p>
-      <code>showFileList[Boolean]</code>默认 false，配合： TheFileList 组件<code
-        >"@/main/components/TheFileList"</code
-      >展示上传文件列表
-    </p>
-    <div class="demo">
-      <div class="block">
-        <TheFileList v-model="list" @click="handlePreview" />
-        <el-upload-plugin @success="handleUploadFile2" />
-      </div>
-    </div>
-
     <h2>单个上传文件大小限制</h2>
     <p>
       <code>limitSize[Number]</code>：默认<code>100 * 1024 * 1024  // 100M</code>
@@ -157,10 +144,6 @@
 import { upload as uploadFunc} from "@/main/api/common";
 
 export default {
-  components: {
-    TheFileList: (resolve) =>
-      require(["@/main/components/TheFileList"], resolve),
-  },
   data() {
     return {
       images: [],

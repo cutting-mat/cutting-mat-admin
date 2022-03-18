@@ -17,19 +17,9 @@ Vue.use(ElementUI);
 // 全局样式
 import '@/core/assets/global.css';
 
-// 上传组件
-import uploader from '@cutting-mat/uploader';
-import uploadConfig from "@/upload.config";
-Vue.use(uploader, uploadConfig);
-
-// 状态管理插件
-import store from '@cutting-mat/vue-store';
-import storeConfig from "@/store.config";
-Vue.use(store, storeConfig);
-
-// 全局功能注册
-import { register } from '@/core';
-Vue.use(register);
+// 核心插件
+import plugins from '@/core/plugins';
+Vue.use(plugins);
 
 // 大屏动画插件
 import customPlugin from '@cutting-mat/animater';
@@ -49,13 +39,6 @@ const routeInstance = routeGenerator({
         next()
     })
 })
-
-// 登录鉴权
-import { Permission } from "@/core";
-Vue.use(Permission, {
-    AccessControl: false,    // 权限控制
-    routeInstance
-});
 
 // 应用启动
 import App from './App.vue';
