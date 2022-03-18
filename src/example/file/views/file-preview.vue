@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <docpreviewer :imgs='list' />
-    </div>
+    <image-lazyload :imgs='list' class="filePreview" />
 </template>
 <script>
 import * as api from "../api/file";
@@ -17,9 +15,8 @@ export default {
             api.getPreviewPics({
                 id:2516
             }).then((res) => {
-                let content = res.data.data;
-                if(Array.isArray(content)){
-                    this.list = content;
+                if(Array.isArray(res.data)){
+                    this.list = res.data;
                 }
                 
             });
@@ -32,4 +29,7 @@ export default {
 </script>
 
 <style scoped>
+.filePreview{
+    max-height: 500px;
+}
 </style>
