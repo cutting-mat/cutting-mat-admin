@@ -1,11 +1,21 @@
 <template>
-  <div v-loading.fullscreen="loading">
+  <div v-loading="loading">
     <ToolBar></ToolBar>
     <!-- 内容 -->
     <div class="infoBox wrap">
-      <div class="_avatar">
-        <img :src="userInfo.avatar" alt />
-      </div>
+      <uploader
+        class="upload_avatar"
+        accept="t-image"
+        :value="userInfo.avatar ? [{url: userInfo.avatar}] : []"
+        imgCrop
+        :show-file-list="false"
+        :on-success="handleUpload"
+      >
+        <img v-if="userInfo.avatar" :src="userInfo.avatar" alt />
+        <span v-else>
+          上传头像
+        </span>
+      </uploader>
       <el-descriptions border>
         <el-descriptions-item label="用户名">{{ userInfo.accountName }}</el-descriptions-item>
         <el-descriptions-item label="手机号">{{ userInfo.accountNumber }}</el-descriptions-item>
@@ -18,6 +28,8 @@
 </template>
 
 <script>
+import { edit } from "@/system/api/account"
+
 export default {
   data() {
     return {
@@ -29,17 +41,42 @@ export default {
       return this.$store.state.user;
     },
   },
+  methods: {
+    handleUpload(res) {
+      if (res.url) {
+        this.loading = true;
+        const newInfo = Object.assign({}, this.$store.state.user, {
+          avatar: res.url
+        })
+        edit(newInfo).then(() => {
+          this.$store.action('user', {
+            cache: 'update'
+          }).then(() => {
+            this.loading = false;
+            this.$message.success('更新成功！')
+          })
+
+        }).catch(() => {
+          this.loading = false;
+        })
+      }
+    }
+  }
 };
 </script>
 
 <style scoped>
-.infoBox ._avatar {
+.upload_avatar {
+  display: block;
   width: 200px;
   height: 200px;
   margin: 0 auto 20px;
+  line-height: 200px;
   background: #dedede;
+  text-align: center;
+  cursor: pointer;
 }
-.infoBox ._avatar img {
+.upload_avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;

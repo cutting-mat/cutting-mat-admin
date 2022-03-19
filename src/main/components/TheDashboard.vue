@@ -2,8 +2,10 @@
   <div class="scrollbar" v-loading="fullLoading">
     <div class="flex-row main">
       <div class="flex-1 box scrollbar">
-        <!--  -->
+        <!-- 上传 -->
         <uploader v-model="uploadList" :limit="2" />
+        <!-- 输入密码 -->
+        <input-password placeholder="输入密码" v-model="password" />
       </div>
       <div class="flex-1 box">
         <h2>Vue全局资源测试</h2>
@@ -88,7 +90,9 @@ export default {
       dictSelectValue: null,
       dictRadioValue: null,
       dictCheckbox: [],
-      dictCasader: []
+      dictCasader: [],
+      num: null,
+      password: null
     };
   },
   computed: {
