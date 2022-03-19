@@ -14,7 +14,7 @@
     <p>支持事件：<code>exceed, success, error</code></p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin @success="handleUploadFile" />
+        <uploader @success="handleUploadFile" />
       </div>
     </div>
 
@@ -25,7 +25,7 @@
     </p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin accept="t-document,.txt" @success="handleUploadFile" />
+        <uploader accept="t-document,.txt" @success="handleUploadFile" />
       </div>
     </div>
 
@@ -33,7 +33,7 @@
     <p><code>data[Object]</code>：上传时附带的额外参数</p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin :data="{ test: 123 }" />
+        <uploader :data="{ test: 123 }" />
       </div>
     </div>
 
@@ -41,7 +41,7 @@
     <p><code>multiple[Boolean]</code>：默认'false'不可多选</p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin multiple @success="handleUploadFile" />
+        <uploader multiple @success="handleUploadFile" />
       </div>
     </div>
 
@@ -49,7 +49,7 @@
     <p><code>limit[Number]</code>：设置最大上传文件数，默认9</p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin
+        <uploader
           :limit="1"
           @exceed="handleExceed"
           @success="handleUploadFile"
@@ -61,7 +61,7 @@
     <p><code>disabled[Boolean]</code>：默认'false'不禁用</p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin disabled />
+        <uploader disabled />
       </div>
     </div>
 
@@ -69,7 +69,7 @@
     <p><code>triggerId[String]</code>：默认自动生成随机字符串</p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin triggerId="myUploadTrigger" />
+        <uploader triggerId="myUploadTrigger" />
       </div>
     </div>
 
@@ -82,7 +82,7 @@
     </p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin accept="t-image" @success="handleUploadImage" />
+        <uploader accept="t-image" @success="handleUploadImage" />
       </div>
     </div>
 
@@ -97,7 +97,7 @@
     </p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin accept="t-image" :imgCompressOption="{width: 1000, height: 1000}" @success="handleUploadImage" />
+        <uploader accept="t-image" :imgCompressOption="{width: 1000, height: 1000}" @success="handleUploadImage" />
       </div>
     </div>
     
@@ -109,7 +109,7 @@
     </p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin :uploadFunc="uploadFunc" @success="handleUploadFile" />
+        <uploader :uploadFunc="uploadFunc" @success="handleUploadFile" />
       </div>
     </div>
 
@@ -121,7 +121,7 @@
     </p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin @success="handleUploadFile" />
+        <uploader @success="handleUploadFile" />
       </div>
     </div>
 
@@ -131,7 +131,7 @@
     </p>
     <div class="demo">
       <div class="block">
-        <el-upload-plugin :limitSize="150 * 1024 * 1024" @success="handleUploadFile" />
+        <uploader :limitSize="150 * 1024 * 1024" @success="handleUploadFile" />
       </div>
     </div>
 

@@ -73,7 +73,7 @@
               </div>
             </div>
             <div class="export-right-btn">
-              <el-upload-plugin
+              <uploader
                 class="upload-demo"
                 ref='upload'
                 @change="handleChange"
@@ -92,7 +92,7 @@
                   type="primary"
                   plain
                 >上传文件</el-button>
-              </el-upload-plugin>
+              </uploader>
             </div>
           </div>
         </div>

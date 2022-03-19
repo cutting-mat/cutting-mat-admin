@@ -3,7 +3,7 @@
     <div class="flex-1" :id="editorId"></div>
 
     <!-- 隐藏上传图片 -->
-    <el-upload-plugin
+    <uploader
       :triggerId="uploaderId"
       style="display: none"
       :multiple="false"
