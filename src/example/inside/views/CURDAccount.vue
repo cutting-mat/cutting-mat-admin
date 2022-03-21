@@ -77,8 +77,8 @@
 
 <script>
 //import { util } from '@/core';
-import * as api from "@/system/api/account";
-import { list as requestRoles } from "@/system/api/role";
+import * as api from "@/user/api/account";
+import { list as requestRoles } from "@/user/api/role";
 
 export default {
   data() {

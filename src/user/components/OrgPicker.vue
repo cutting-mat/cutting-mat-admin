@@ -13,38 +13,18 @@
       append-to-body
       :close-on-click-modal="false"
       title="选择组织"
-      :visible="dialogVisible"
+      :visible.sync="dialogVisible"
       width="1000px"
       @open="dialogOpen"
-      @close="dialogClose"
     >
-      <div class="orgPicker flex-col">
-        <el-table
-          class="flex-1"
-          :data="list"
-          highlight-current-row
-          @current-change="checkedNode=$event"
-        >
-          <el-table-column prop="name" label="名称" show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column prop="fullName" label="全称" show-overflow-tooltip>
-          </el-table-column>
-          <el-table-column label="创建时间" show-overflow-tooltip>
-            <template slot-scope="scope">
-              {{ scope.row.createTime | date }}
-            </template>
-          </el-table-column>
-        </el-table>
-
+    
+      <div class="orgPicker">
+        <OrgTree v-if="dialogVisible" :value="list" picker @pick="checkedNode = $event"></OrgTree>
       </div>
 
-      <div slot="footer" class="dialog-footer">
-        <el-button size="medium" type="primary" @click="submit"
-          >确 定</el-button
-        >
-        <el-button size="medium" @click="dialogVisible = false"
-          >取 消</el-button
-        >
+      <div slot="footer">
+        <el-button size="medium" type="primary" @click="submit">确 定</el-button>
+        <el-button size="medium" @click="dialogVisible = false">取 消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -52,7 +32,7 @@
 
 <script>
 import { util } from "@/core";
-import * as api from "../api/org";
+import { list } from "../api/org";
 
 export default {
   model: {
@@ -62,7 +42,7 @@ export default {
   props: {
     value: {
       // 已选中机构id
-      type: Number,
+      type: [Number, String],
       required: false,
     },
     adapter: {
@@ -79,6 +59,9 @@ export default {
       default: "small",
     },
   },
+  components: {
+    OrgTree: resolve => require(["../components/OrgTree"], resolve),
+  },
   data() {
     return {
       loading: false,
@@ -94,22 +77,17 @@ export default {
     },
   },
   methods: {
-    dialogOpen(){
+    dialogOpen() {
       this.checkedNode = {}
       this.submitNode = {}
     },
-    dialogClose(){
-      this.dialogVisible = false;
-    },
     fetchData: function () {
       this.loading = true;
-      api
-        .list()
+      list()
         .then((res) => {
           this.loading = false;
-          const data = res.data;
-          if (data) {
-            this.list = util.buildTree(data);
+          if (res.data) {
+            this.list = util.buildTree(res.data);
           }
         })
         .catch(() => {
@@ -117,15 +95,14 @@ export default {
         });
     },
     submit() {
-      
-      if (this.checkedNode && this.checkedNode.id) {
-        this.submitNode = util.deepcopy(this.checkedNode)
-        this.$emit("change", this.checkedNode.id);
+      if (this.checkedNode && this.checkedNode[0]) {
+        this.submitNode = util.deepcopy(this.checkedNode[0])
+        this.$emit("change", this.checkedNode[0].id);
       }
 
       this.dialogVisible = false;
     },
-    
+
   },
   created() {
     this.fetchData();
@@ -135,7 +112,8 @@ export default {
 
 <style scoped>
 .orgPicker {
-  height: 400px;
+  height: 50vh;
+  min-height: 350px;
 }
 .orgPicker ._side {
   width: 280px;

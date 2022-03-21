@@ -102,6 +102,84 @@
       },
       {
         "query_path": {
+          "path": "/mobileValidCode",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3025,
+        "method": "GET",
+        "catid": 2010,
+        "title": "发手机验证码",
+        "path": "/mobileValidCode",
+        "project_id": 125,
+        "req_params": [],
+        "res_body_type": "json",
+        "uid": 38,
+        "add_time": 1647689742,
+        "up_time": 1647768323,
+        "req_query": [
+          {
+            "required": "1",
+            "_id": "6236f303f1bf0506f3872967",
+            "name": "mobile",
+            "desc": "手机号"
+          }
+        ],
+        "req_headers": [],
+        "req_body_form": [],
+        "__v": 0,
+        "desc": "",
+        "markdown": "",
+        "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}"
+      },
+      {
+        "query_path": {
+          "path": "/emailValidCode",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3026,
+        "method": "GET",
+        "catid": 2010,
+        "title": "发邮箱验证码",
+        "path": "/emailValidCode",
+        "project_id": 125,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [
+          {
+            "required": "1",
+            "_id": "6236f2fbf1bf0506f3872966",
+            "name": "email",
+            "desc": "邮箱"
+          }
+        ],
+        "req_headers": [],
+        "req_body_form": [],
+        "desc": "",
+        "markdown": "",
+        "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}",
+        "uid": 38,
+        "add_time": 1647689829,
+        "up_time": 1647768315,
+        "__v": 0
+      },
+      {
+        "query_path": {
           "path": "/oss/{id}",
           "params": []
         },
@@ -514,39 +592,10 @@
         "req_body_form": [],
         "desc": "",
         "markdown": "",
-        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"accountNumber\":{\"type\":\"string\",\"mock\":{\"mock\":\"@word\"}},\"accountName\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cname\"}},\"avatar\":{\"type\":\"null\",\"mock\":{\"mock\":\"@image(200x200,@hex,fff,IMAGE)\"}},\"contactNumber\":{\"type\":\"number\",\"mock\":{\"mock\":\"13@string(\\\"number\\\", 9)\"}},\"state\":{\"type\":\"boolean\"},\"createTime\":{\"type\":\"number\",\"mock\":{\"mock\":\"@timestamp\"}},\"orgId\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"orgName\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(3)组织\"}},\"roleId\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}}},\"required\":[\"id\",\"accountNumber\",\"accountName\",\"avatar\",\"contactNumber\",\"state\",\"createTime\",\"orgId\",\"orgName\",\"roleId\"]}},\"required\":[\"data\"]}",
+        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"accountNumber\":{\"type\":\"string\",\"mock\":{\"mock\":\"@word\"}},\"accountName\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cname\"}},\"avatar\":{\"type\":\"null\",\"mock\":{\"mock\":\"@image(200x200,@hex,fff,IMAGE)\"}},\"contactNumber\":{\"type\":\"number\",\"mock\":{\"mock\":\"13@string(\\\"number\\\", 9)\"}},\"state\":{\"type\":\"boolean\"},\"createTime\":{\"type\":\"number\",\"mock\":{\"mock\":\"@timestamp\"}},\"orgId\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"orgName\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(3)组织\"}},\"roleId\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"email\":{\"type\":\"string\",\"mock\":{\"mock\":\"@email\"}}},\"required\":[\"id\",\"accountNumber\",\"accountName\",\"avatar\",\"contactNumber\",\"state\",\"createTime\",\"orgId\",\"orgName\",\"roleId\",\"email\"]}},\"required\":[\"data\"]}",
         "uid": 38,
         "add_time": 1647311483,
-        "up_time": 1647311483,
-        "__v": 0
-      },
-      {
-        "query_path": {
-          "path": "/tlogin",
-          "params": []
-        },
-        "edit_uid": 0,
-        "status": "undone",
-        "type": "static",
-        "req_body_is_json_schema": false,
-        "res_body_is_json_schema": false,
-        "api_opened": false,
-        "index": 0,
-        "tag": [],
-        "_id": 3002,
-        "method": "POST",
-        "catid": 2031,
-        "title": "临时校验（用于修改密码）",
-        "path": "/tlogin",
-        "project_id": 125,
-        "req_params": [],
-        "res_body_type": "json",
-        "req_query": [],
-        "req_headers": [],
-        "req_body_form": [],
-        "uid": 38,
-        "add_time": 1647311483,
-        "up_time": 1647311483,
+        "up_time": 1647764321,
         "__v": 0
       },
       {
@@ -574,7 +623,7 @@
         "req_headers": [
           {
             "required": "1",
-            "_id": "6226b325f1bf0506f3872800",
+            "_id": "6236e036f1bf0506f3872965",
             "name": "Content-Type",
             "value": "application/json"
           }
@@ -582,12 +631,12 @@
         "req_body_form": [],
         "desc": "",
         "markdown": "",
-        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"password\":{\"type\":\"string\"}},\"required\":[\"password\"]}",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"newPassword\":{\"type\":\"string\"},\"authCode\":{\"type\":\"string\"}},\"required\":[\"newPassword\",\"authCode\"]}",
         "req_body_type": "json",
         "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{}}",
         "uid": 38,
         "add_time": 1647311483,
-        "up_time": 1647311483,
+        "up_time": 1647763510,
         "__v": 0
       },
       {
@@ -671,6 +720,60 @@
         "add_time": 1647311483,
         "up_time": 1647311483,
         "__v": 0
+      },
+      {
+        "query_path": {
+          "path": "/authCode",
+          "params": []
+        },
+        "edit_uid": 0,
+        "status": "undone",
+        "type": "static",
+        "req_body_is_json_schema": true,
+        "res_body_is_json_schema": true,
+        "api_opened": false,
+        "index": 0,
+        "tag": [],
+        "_id": 3002,
+        "method": "GET",
+        "catid": 2031,
+        "title": "验证身份（用于修改密码）",
+        "path": "/authCode",
+        "project_id": 125,
+        "req_params": [],
+        "res_body_type": "json",
+        "req_query": [
+          {
+            "required": "0",
+            "_id": "6235bf78f1bf0506f387295f",
+            "name": "password",
+            "desc": "密码验证"
+          },
+          {
+            "required": "0",
+            "_id": "6235bf78f1bf0506f387295e",
+            "name": "mobileValidCode",
+            "example": "",
+            "desc": "手机验证码"
+          },
+          {
+            "required": "0",
+            "_id": "6235bf78f1bf0506f387295d",
+            "name": "emailValidCode",
+            "example": "",
+            "desc": "邮箱验证码"
+          }
+        ],
+        "req_headers": [],
+        "req_body_form": [],
+        "uid": 38,
+        "add_time": 1647311483,
+        "up_time": 1647689592,
+        "__v": 0,
+        "desc": "",
+        "markdown": "",
+        "req_body_type": "form",
+        "res_body": "{\"type\":\"object\",\"title\":\"empty object\",\"properties\":{\"authCode\":{\"type\":\"string\",\"mock\":{\"mock\":\"@id\"}}},\"required\":[\"authCode\"]}"
       }
     ]
   },
@@ -1267,7 +1370,7 @@
         "status": "done",
         "type": "static",
         "req_body_is_json_schema": true,
-        "res_body_is_json_schema": true,
+        "res_body_is_json_schema": false,
         "api_opened": false,
         "index": 0,
         "tag": [],
@@ -1282,8 +1385,9 @@
         "req_query": [
           {
             "required": "0",
-            "_id": "6226fb1ff1bf0506f3872835",
+            "_id": "6238031ff1bf0506f3872977",
             "name": "pid",
+            "example": "1",
             "desc": ""
           }
         ],
@@ -1291,10 +1395,10 @@
         "req_body_form": [],
         "desc": "",
         "markdown": "",
-        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"mock\":{\"mock\":\"@integer(1,10)\"}},\"name\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(4)组织\"}},\"fullName\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(8)组织\"}},\"pid\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"createTime\":{\"type\":\"number\",\"mock\":{\"mock\":\"@timestamp\"}}},\"required\":[\"id\",\"name\",\"fullName\",\"pid\",\"createTime\"]},\"uniqueItems\":true,\"minItems\":5,\"maxItems\":10}},\"required\":[\"data\"]}",
+        "res_body": " {\n    \"data|2-6\": [\n        {\n\n          \"id\": \"@id\",\n          \"name\": \"@cword(4)组织\",\n          \"fullName\": \"@cword(8)组织\",\n          \"pid\": \"${query.pid}\",\n          \"createTime\":\"@timestamp\",\n          \"hasChildren\": \"@boolean\"\n        },\n    ]\n  }",
         "uid": 38,
         "add_time": 1647311483,
-        "up_time": 1647311483,
+        "up_time": 1647837983,
         "__v": 0
       },
       {
@@ -1306,7 +1410,7 @@
         "status": "done",
         "type": "static",
         "req_body_is_json_schema": true,
-        "res_body_is_json_schema": true,
+        "res_body_is_json_schema": false,
         "api_opened": false,
         "index": 0,
         "tag": [],
@@ -1322,7 +1426,7 @@
         "req_headers": [
           {
             "required": "1",
-            "_id": "6226b557f1bf0506f3872813",
+            "_id": "62386cf0f1bf0506f387297f",
             "name": "Content-Type",
             "value": "application/json"
           }
@@ -1330,12 +1434,12 @@
         "req_body_form": [],
         "desc": "",
         "markdown": "",
-        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"fullName\":{\"type\":\"string\"},\"pid\":{\"type\":\"number\"}},\"required\":[\"name\"]}",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"fullName\":{\"type\":\"string\"},\"pid\":{\"type\":\"string\"}},\"required\":[\"name\"]}",
         "req_body_type": "json",
-        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"name\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(4)组织\"}},\"fullName\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(8)组织\"}},\"pid\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"createTime\":{\"type\":\"number\",\"mock\":{\"mock\":\"@timestamp\"}}},\"required\":[\"id\",\"name\",\"fullName\",\"pid\",\"createTime\"]}},\"required\":[\"data\"]}",
+        "res_body": "{\n   \"data\": {\n      \"id\": \"@id\",\n      \"name\": \"@cword(4)组织\",\n      \"fullName\": \"@cword(8)组织\",\n      \"pid\": \"${body.pid}\",\n      \"createTime\": \"@timestamp\"\n   }\n}",
         "uid": 38,
         "add_time": 1647311483,
-        "up_time": 1647311483,
+        "up_time": 1647865072,
         "__v": 0
       },
       {
@@ -1394,7 +1498,7 @@
         "status": "done",
         "type": "static",
         "req_body_is_json_schema": true,
-        "res_body_is_json_schema": true,
+        "res_body_is_json_schema": false,
         "api_opened": false,
         "index": 0,
         "tag": [],
@@ -1410,7 +1514,7 @@
         "req_headers": [
           {
             "required": "1",
-            "_id": "6226b561f1bf0506f3872814",
+            "_id": "62386ce4f1bf0506f387297e",
             "name": "Content-Type",
             "value": "application/json"
           }
@@ -1418,12 +1522,12 @@
         "req_body_form": [],
         "desc": "",
         "markdown": "",
-        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"},\"fullName\":{\"type\":\"string\"},\"pid\":{\"type\":\"number\"}},\"required\":[\"id\",\"name\"]}",
+        "req_body_other": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"fullName\":{\"type\":\"string\"},\"pid\":{\"type\":\"string\"}},\"required\":[\"id\",\"name\"]}",
         "req_body_type": "json",
-        "res_body": "{\"$schema\":\"http://json-schema.org/draft-04/schema#\",\"type\":\"object\",\"properties\":{\"data\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"name\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(4)组织\"}},\"fullName\":{\"type\":\"string\",\"mock\":{\"mock\":\"@cword(8)组织\"}},\"pid\":{\"type\":\"number\",\"mock\":{\"mock\":\"@id\"}},\"createTime\":{\"type\":\"number\",\"mock\":{\"mock\":\"@timestamp\"}}},\"required\":[\"id\",\"name\",\"fullName\",\"pid\",\"createTime\"]}},\"required\":[\"data\"]}",
+        "res_body": "{\n   \"data\": {\n      \"id\": \"${body.id}\",\n      \"name\": \"${body.name}\",\n      \"fullName\": \"${body.fullName}\",\n      \"pid\": \"${body.pid}\",\n      \"createTime\": \"@timestamp\"\n   }\n}",
         "uid": 38,
         "add_time": 1647311484,
-        "up_time": 1647311484,
+        "up_time": 1647865060,
         "__v": 0
       }
     ]

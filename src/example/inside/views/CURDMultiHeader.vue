@@ -47,7 +47,7 @@
 
 <script>
 //import { util } from "@/core";
-import * as api from "@/system/api/role";
+import * as api from "@/user/api/role";
 
 export default {
   data() {
