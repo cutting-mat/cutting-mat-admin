@@ -12,41 +12,42 @@
  *    @param payload[Any]:      store.action(key, payload) 所传递的参数, 可用于 actions.action 方法的内部逻辑
  * */
 
-import * as userApi from "@/system/api/personal";
+ import * as userApi from "@/system/api/personal";
 
-export default {
-    state: {
-        testValue: null,            // 仅用于测试
-        accessToken: null,          // token
-        permission: [],             // 用户权限
-        DynamicRoute: [],           // 动态路由
-        user: {},                   // 用户信息
-    },
-    actions: {
-        testAction: function(context){
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    context.set('testValue', parseInt(context.get('testValue')+1))
-                    resolve()
-                }, 500)
-            })
-        },
-        permission: function (context, payload) {
-            return userApi.permission(null, Object.assign({
-                cache: true
-            }, payload || {})).then(res => {
-                return {
-                    menus: res.data.filter((e) => e.type === 0),
-                    resources: res.data.filter((e) => e.type === 1),
-                };
-            })
-        },
-        user: function (context, payload) {
-            return userApi.info(null, Object.assign({
-                cache: true
-            }, payload || {})).then(res => {
-                return res.data
-            })
-        }
-    }
-}
+ export default {
+     state: {
+         testValue: null,            // 仅用于测试
+         rememberLogin: true,        // 记录登录状态
+         accessToken: null,          // token
+         permission: [],             // 用户权限
+         DynamicRoute: [],           // 动态路由
+         user: {},                   // 用户信息
+     },
+     actions: {
+         testAction: function(context){
+             return new Promise(resolve => {
+                 setTimeout(() => {
+                     context.set('testValue', parseInt(context.get('testValue')+1))
+                     resolve()
+                 }, 500)
+             })
+         },
+         permission: function (context, payload) {
+             return userApi.permission(null, Object.assign({
+                 cache: true
+             }, payload || {})).then(res => {
+                 return {
+                     menus: res.data.filter((e) => e.type === 0),
+                     resources: res.data.filter((e) => e.type === 1),
+                 };
+             })
+         },
+         user: function (context, payload) {
+             return userApi.info(null, Object.assign({
+                 cache: true
+             }, payload || {})).then(res => {
+                 return res.data
+             })
+         }
+     }
+ }
