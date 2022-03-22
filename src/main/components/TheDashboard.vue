@@ -2,6 +2,7 @@
   <div class="scrollbar" v-loading="fullLoading">
     <div class="flex-row main">
       <div class="flex-1 box scrollbar">
+        <h2>内置组件演示</h2>
         <el-form label-width="70px">
           <el-form-item label="上传">
             <uploader v-model="uploadList" :limit="2" />
@@ -9,6 +10,15 @@
           <el-form-item label="输入密码">
             <input-password placeholder="输入密码" v-model="password" />
           </el-form-item>
+          <el-form-item label="输入数字">
+            <input-number v-model="number" />
+          </el-form-item>
+          <el-form-item label="计时按钮">
+            <countdown-button ref="countbtn" :number="10" @click="$refs.countbtn.count()">
+              发送验证码
+            </countdown-button>
+          </el-form-item>
+
         </el-form>
       </div>
       <div class="flex-1 box">
@@ -19,7 +29,7 @@
           {{ new Date().getTime() | date }}
         </div>
         <div v-test></div>
-        <div>{{ globalMethodOutput }}</div>
+        <div>{{ TestOutput }}</div>
         <div>{{ instanceMethodOutput }}</div>
       </div>
       <div class="flex-1 box">
@@ -93,15 +103,17 @@ export default {
       fullLoading: false,
       loading: false,
       uploadList: [],
+      password: null,
+      number: null,
       log: [],
-      globalMethodOutput: "",
+      TestOutput: "",
       instanceMethodOutput: "",
       dictSelectValue: null,
       dictRadioValue: null,
       dictCheckbox: [],
       dictCasader: [],
       num: null,
-      password: null
+      
     };
   },
   computed: {
@@ -134,8 +146,8 @@ export default {
       });
     },
     testGlobalFunc() {
-      this.globalMethodOutput = Vue.globalMethod();
-      this.instanceMethodOutput = this.$myMethod();
+      this.TestOutput = Vue.Test();
+      this.instanceMethodOutput = this.$test();
     },
     testStoreFun1() {
       this.$store.set("testValue", Math.random());

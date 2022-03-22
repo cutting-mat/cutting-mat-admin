@@ -1,13 +1,9 @@
 /**
  * 全局组件
- * */ 
-import coreComponents from "@/core/components";
+ * */
 import Header from '@/main/components/Header.vue'
 
-const components = {
-    // 框架内置组件
-    ...coreComponents,
-    // 业务组件
+export const components = {
     Header,
     Breadcrumb: () => import("@/main/components/Breadcrumb.vue"),
     SubNav: () => import("@/main/components/SubNav.vue"),
@@ -17,23 +13,19 @@ const components = {
 
 /**
  * 全局过滤器
- * */ 
-import { util } from '@/core'
-
-const filters = {
-    date: util.formatDate
+ * */
+ export const filters = {
+    "test"() {
+        return "test filters"
+    }
 }
 
 /**
  * 全局指令
- * */ 
-const directives = {
-    'auth': {
-        // 误删，避免不开启权限控制时v-auth指令报错
-    },
+ * */
+ export const directives = {
     'test': {
-        // 用于测试可删除
-        inserted (el) {
+        inserted(el) {
             setTimeout(() => {
                 el.innerText += ' test directive inject!'
             }, 0)
@@ -43,12 +35,9 @@ const directives = {
 
 /**
  * 实例方法
- * */ 
-import clipboard from "@/main/assets/clipboard";
-
-const $methods = {
-    $clipboard: clipboard,
-    $myMethod: function(){
+ * */
+ export const $methods = {
+    $test() {
         // 用于测试可删除
         return ('test instance method output!')
     }
@@ -56,17 +45,9 @@ const $methods = {
 
 /**
  * 全局方法
- * */ 
- const methods = {
-    globalMethod: function(){
+ * */
+ export const methods = {
+    Test() {
         return ('test globalMethod output!')
     }
-}
-
-export default {
-    components,
-    filters,
-    directives,
-    $methods,
-    methods
 }
