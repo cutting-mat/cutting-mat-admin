@@ -19,8 +19,8 @@ export const MainRoute = [
     Object.assign({}, main[0], {
     children: [
             ...routes,
-            ...system,
             ...user,
+            ...system,
         ]
     }),
     ...dataV,
