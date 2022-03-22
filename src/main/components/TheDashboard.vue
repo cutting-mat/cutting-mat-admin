@@ -59,11 +59,11 @@
         </div>
       </div>
       <div class="flex-1 box">
-        <h2>存取JSON</h2>
-        <el-button @click="saveJSON()">保存JSON</el-button>
+        <h2>请求模拟</h2>
         <el-button @click="simulateRequest('Unauthorized')">未授权请求</el-button>
         <el-button @click="simulateRequest('fail')">业务失败</el-button>
         <el-button @click="simulateRequest('error')">接口异常</el-button>
+        <el-button @click="$router.push('/404')">访问不存在页面</el-button>
       </div>
       <div class="flex-1 box scrollbar">
         <h2>字典控件</h2>
