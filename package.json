@@ -10,7 +10,7 @@
   "dependencies": {
     "@cutting-mat/animater": "^1.0.8",
     "@cutting-mat/axios": "^1.1.4",
-    "@cutting-mat/uploader": "^1.1.8",
+    "@cutting-mat/uploader": "^2.0.1",
     "@cutting-mat/vue-store": "^1.0.8",
     "element-ui": "^2.15.6",
     "vue": "^2.6.14",
