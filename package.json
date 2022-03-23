@@ -1,6 +1,6 @@
 {
   "name": "cutting-mat-admin",
-  "version": "2.7.5",
+  "version": "2.7.6",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,7 +11,7 @@
     "@cutting-mat/animater": "^1.0.8",
     "@cutting-mat/axios": "^1.1.4",
     "@cutting-mat/uploader": "^2.0.2",
-    "@cutting-mat/vue-store": "^1.0.8",
+    "@cutting-mat/vue-store": "^2.0.3",
     "element-ui": "^2.15.6",
     "vue": "^2.6.14",
     "vue-router": "^3.5.2"
