@@ -1,10 +1,10 @@
 
-# template-element-ui
+# cutting-mat-admin
 
-[![license](https://img.shields.io/github/license/cutting-mat/template-element-ui.svg)]()
+[![license](https://img.shields.io/github/license/cutting-mat/cutting-mat-admin.svg)]()
 
-> 基于Element-UI的PC端项目脚手架
+> 基于Element-UI的PC端组件库
 
-Live Demo: http://cutting-mat.refined-x.com/template-element-ui/
+Live Demo: http://cutting-mat.refined-x.com/cutting-mat-admin/
 
 输入任意符合长度要求的用户名密码
