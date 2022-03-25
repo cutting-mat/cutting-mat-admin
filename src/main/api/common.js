@@ -1,5 +1,15 @@
 import { axiosInstance as instance } from "@/core";
 
+//登录
+export const login = params => {
+    return instance.post(`/login`, params)
+}
+
+//用户权限
+export const permission = (params, opt) => {
+    return instance.get(`/getPermissions`, { params }, opt)
+}
+
 // 上传文件
 export const upload = (file, fileName) => {
     let formData = new FormData();
@@ -26,11 +36,3 @@ export const getJSON = (params, opt) => {
     }, opt)
 }
 
-// 发手机验证码
-export const mobileValidCode = params => {
-    return instance.get(`/mobileValidCode`, { params })
-}
-// 发邮箱验证码
-export const emailValidCode = params => {
-    return instance.get(`/emailValidCode`, { params })
-}
