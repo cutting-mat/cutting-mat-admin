@@ -92,9 +92,9 @@
 
 <script>
 import Vue from "vue";
-import { util } from "@/core";
+import { buildTree } from "@/core";
 import { saveJSON } from "@/main/api/common";
-import { info } from "@/system/api/personal";
+import { profile } from "@/system/api/personal";
 import * as test from "@/main/api/test";
 
 export default {
@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     CasaderTransfer(res) {
-      return util.buildTree(res.data)
+      return buildTree(res.data)
     },
     simulateRequest(type) {
       // 模拟请求
@@ -170,7 +170,7 @@ export default {
       this.log = [];
     },
     testRequest(cacheOption) {
-      return info(null, {
+      return profile(null, {
         cache: cacheOption,
       })
         .then((res) => {

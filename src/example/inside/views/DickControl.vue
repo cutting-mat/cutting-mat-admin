@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { util } from "@/core";
+import { buildTree } from "@/core";
 import { itemList } from "@/system/api/dict";
 
 export default {
@@ -80,7 +80,7 @@ export default {
           cache: true,
         }
       ).then((res) => {
-        return util.buildTree(res.data.data);
+        return buildTree(res.data.data);
       });
     },
   },

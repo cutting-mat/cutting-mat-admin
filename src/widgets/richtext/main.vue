@@ -27,7 +27,7 @@ const packageInfo = require("./package.json");
 import { report } from "../__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 import { getJSON, saveJSON } from "@/main/api/common";
-import { util } from "@/core";
+import { throttle } from "@/core";
 const Quill = require("./lib/quill.min.js");
 
 export default {
@@ -138,7 +138,7 @@ export default {
         const toolbar = this.quill.getModule("toolbar");
         toolbar.addHandler("image", this.getImage);
         // 异步保存请求防抖
-        const throttleSave = util.throttle(this.saveString, 500, 10000);
+        const throttleSave = throttle(this.saveString, 500, 10000);
 
         // 初始内容
         if (!this.async && Array.isArray(this.value)) {

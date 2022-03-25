@@ -1,4 +1,4 @@
-import { util } from "@/core";
+import { getSuffix } from "@/core";
 
 const fileTypes = {
     img: {
@@ -53,7 +53,7 @@ export const dynamicAlbum = (url, previewImg) => {
         return fileAlbum
     }
 
-    let fileExt = util.getSuffix(url);
+    let fileExt = getSuffix(url);
     const typeIndex = Object.keys(fileTypes).findIndex(type => {
         return fileTypes[type].type.findIndex(ext => ext === fileExt) !== -1
     })

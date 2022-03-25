@@ -1,6 +1,8 @@
 <template>
   <header class="flex-row align-center myheader">
-    <h1 class="logo" @click="$router.push('/')">LOGO</h1>
+    <h1 class="logo" @click="$router.push('/')">
+      cutting-mat-admin
+    </h1>
 
     <ul class="flex-1 navlist">
       <li
@@ -34,12 +36,15 @@
 </template>
 
 <script>
-import { util } from "@/core";
+import { event } from "@/core";
 
 export default {
   data() {
     return {
-      list: []
+      list: [{
+        path: '/data-v',
+        name: '数据可视化',
+      }]
     };
   },
   computed: {
@@ -67,7 +72,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning",
       }).then(() => {
-        util.emit("logout");
+        event.emit("logout");
       });
     },
   }

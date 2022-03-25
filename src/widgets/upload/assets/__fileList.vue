@@ -59,6 +59,7 @@ export default {
       type: Function,
       required: false,
       default(item, index) {
+        console.log(`delete item: ${item}, index: ${index}`)
         return true;
       },
     },
