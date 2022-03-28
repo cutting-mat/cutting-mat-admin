@@ -7,11 +7,11 @@
         <div class="demo">
             <chart-progress :progress="68" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-progress :progress="68" />
             </textarea>
-        </div>
+        </pre>
 
         <h2>配置</h2>
         <h3>进度条颜色</h3>
@@ -22,22 +22,22 @@
         <div class="demo">
             <chart-progress :colors="colors" :progress="68" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-progress :colors="colors" :progress="68" />
             </textarea>
-        </div>
+        </pre>
 
         <h3>有标题的进度条</h3>
         <p>title(String)：代表中心所展示的内容；示例：title:'朝阳区70%'</p>
         <div class="demo">
             <chart-progress :colors="colors" :title="title" :progress="68" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-progress :colors="colors" :progress="68" />
             </textarea>
-        </div>
+        </pre>
     </div>
 </template>
 

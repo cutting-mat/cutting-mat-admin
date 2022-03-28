@@ -9,11 +9,11 @@
         <div class="demo">
             <chart-wave :liquidWidth="300" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-wave :liquidWidth="300" />
             </textarea>
-        </div>
+        </pre>
     </div>
 </template>
 

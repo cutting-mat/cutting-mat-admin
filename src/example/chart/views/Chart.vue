@@ -6,11 +6,11 @@
     <div class="demo">
       <chart :data="data1" />
     </div>
-    <div class="code">
+    <pre class="code">
       <textarea readonly>
         <chart :data="data1" />
       </textarea>
-    </div>
+    </pre>
 
     <h2>配置</h2>
     <h3>图表类型</h3>
@@ -20,17 +20,17 @@
         <div class="demo">
           <chart :data="data2" chartType="line" />
         </div>
-        <div class="code">
+        <pre class="code">
           <textarea readonly>
-                  <chart :data="data2" chartType="line" />
-              </textarea>
-        </div>
+              <chart :data="data2" chartType="line" />
+          </textarea>
+        </pre>
       </div>
       <div class="flex-1">
         <div class="demo">
           <chart :data="data3" :colors="colors" chartType="bar,line" :legend="['宣传', '教育']" />
         </div>
-        <div class="code">
+        <pre class="code">
           <textarea readonly>
             <chart
                 :data="data3"
@@ -39,7 +39,7 @@
                 :legend="['宣传', '教育']"
             />
         </textarea>
-        </div>
+        </pre>
       </div>
     </div>
 
@@ -49,14 +49,14 @@
     <div class="demo">
       <chart :data="data1" :legend="['宣传教育']" />
     </div>
-    <div class="code">
+    <pre class="code">
       <textarea readonly>
           <chart
               :data="data1"
               :legend="['宣传教育']"
           />
       </textarea>
-    </div>
+    </pre>
 
     <h3>颜色</h3>
     <p>colors(Array): 用于柱图背景/折线图线条和区域，默认使用全局色表。</p>
@@ -79,28 +79,28 @@
     <div class="demo">
       <chart :data="data3" :colors="colors" chartType="bar,line" />
     </div>
-    <div class="code">
-      <textarea readonly>
+    <pre class="code">
+      <textarea readonly rows="6">
           <chart
               :data="data3"
               :colors="colors"
               chartType="bar,line"
           />
       </textarea>
-    </div>
+    </pre>
 
     <div class="demo">
       <chart :data="data2" :colors="colors2" chartType="line" />
     </div>
-    <code class="code">
-      <textarea readonly>
+    <pre class="code">
+      <textarea readonly rows="6">
           <chart
               :data="data2"
               :colors="colors2"
               chartType="line"
           />
       </textarea>
-    </code>
+    </pre>
 
     <h3>坐标轴颜色</h3>
     <p>axisColor(String): 坐标轴，坐标轴刻度标签，坐标轴分割线相关颜色，默认 #000</p>
@@ -108,14 +108,14 @@
     <div class="demo">
       <chart :data="data1" :axisColor="'#2978ff'" />
     </div>
-    <code class="code">
-      <textarea readonly>
+    <pre class="code">
+      <textarea readonly rows="6">
           <chart
               :data="data1"
               :axisColor="'#2978ff'"
           />
       </textarea>
-    </code>
+    </pre>
 
     <h3>柱状图堆叠</h3>
     <p>stack(Boolean): 多组柱图是否堆叠，默认false</p>
@@ -123,15 +123,15 @@
     <div class="demo">
       <chart :data="data3" :colors="colors" stack />
     </div>
-    <code class="code">
-      <textarea readonly>
-            <chart
-                :data="data3"
-                :colors="colors"
-                stack
-            />
-            </textarea>
-    </code>
+    <pre class="code">
+      <textarea readonly rows="6">
+        <chart
+            :data="data3"
+            :colors="colors"
+            stack
+        />
+        </textarea>
+    </pre>
 
     <h3>柱状图圆角</h3>
     <p>radius(Number): 柱图圆角尺寸，默认2</p>
@@ -139,14 +139,14 @@
     <div class="demo">
       <chart :data="data3" :radius="10" />
     </div>
-    <code class="code">
-      <textarea readonly>
-        <chart
-            :data="data3"
-            :radius="10"
-        />
-        </textarea>
-    </code>
+    <pre class="code">
+      <textarea readonly rows="6">
+      <chart
+          :data="data3"
+          :radius="10"
+      />
+      </textarea>
+    </pre>
   </div>
 </template>
 

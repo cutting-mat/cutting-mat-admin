@@ -10,11 +10,11 @@
                 </el-form-item>
             </el-form>
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <upload-file v-model="fileList" />
             </textarea>
-        </div>
+        </pre>
         <h2>配置</h2>
         <p>
             支持

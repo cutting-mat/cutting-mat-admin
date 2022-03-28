@@ -8,11 +8,11 @@
         <div class="demo">
             <chart-pie :data="data" :radius="radius" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-pie :data="data" :radius="radius" />
             </textarea>
-        </div>
+        </pre>
 
         <h2>配置</h2>
         <h3>饼状图颜色</h3>
@@ -24,23 +24,23 @@
         <div class="demo">
             <chart-pie :data="data" :radius="radius" :colors="colors" />
         </div>
-        <div class="code">
-            <textarea readonly>
+        <pre class="code">
+            <textarea readonly rows="6">
             <chart-pie
                 :data="data"
                 :radius="radius"
                 :colors="colors"
             />
             </textarea>
-        </div>
+        </pre>
 
         <h3>图例颜色</h3>
         <p>legendColor(String): 图例字体颜色，默认 #000</p>
         <div class="demo">
             <chart-pie :data="data" :radius="radius" :colors="colors" :legendColor="'#2978ff'" />
         </div>
-        <div class="code">
-            <textarea readonly>
+        <pre class="code">
+            <textarea readonly rows="6">
             <chart-pie
                 :data="data"
                 :radius="radius"
@@ -48,7 +48,7 @@
                 :legendColor="'#2978ff'"
             />
             </textarea>
-        </div>
+        </pre>
 
         <h3>两列图例</h3>
         <p>isMoreLegend(Boolean)：图列是否为两列，默认false</p>
@@ -56,8 +56,8 @@
         <div class="demo">
             <chart-pie :data="data" :radius="radius" :colors="colors" :isMoreLegend="isLegend" />
         </div>
-        <div class="code">
-            <textarea readonly>
+        <pre class="code">
+            <textarea readonly rows="6">
             <chart-pie
                 :data="data"
                 :radius="radius"
@@ -65,7 +65,7 @@
                 :isMoreLegend="isLegend"
             />
             </textarea>
-        </div>
+        </pre>
 
         <h3>饼图圆心位置</h3>
         <p>center(Array)：设置饼图圆心位置，默认：[45%(水平),50%（垂直）]</p>
@@ -79,8 +79,8 @@
                 :center="['32%', '50%']"
             />
         </div>
-        <div class="code">
-            <textarea readonly>
+        <pre class="code">
+            <textarea readonly rows="6">
             <chart-pie
                 :data="data"
                 :radius="radius"
@@ -89,7 +89,7 @@
                 :center="['32%', '50%']"
             />
             </textarea>
-        </div>
+        </pre>
 
         <h3>大小 & 环形图</h3>
         <p>
@@ -103,22 +103,22 @@
         <div class="demo">
             <chart-pie :data="data" :radius="radiusArr" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-pie :data="data" :radius="radiusArr" />
             </textarea>
-        </div>
+        </pre>
 
         <h3>有引导的环形饼状图</h3>
         <p>isLableLine(Boolean)：是否有引导线，默认false</p>
         <div class="demo">
             <chart-pie :data="data" :radius="radiusArr" :isLableLine="isShowLine" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-pie :data="data" :radius="radiusArr" :isLableLine="isShowLine" />
             </textarea>
-        </div>
+        </pre>
 
         <h3>图例翻页的环形饼状图</h3>
         <p>isScroll(Boolean)：图例是否可以滚动，默认false</p>
@@ -131,7 +131,7 @@
                 :isScroll="isScroll"
             />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-pie
                 :data="data1"
@@ -140,7 +140,7 @@
                 :isScroll="isScroll"
             />
             </textarea>
-        </div>
+        </pre>
     </div>
 </template>
 

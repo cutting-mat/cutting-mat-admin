@@ -7,18 +7,18 @@
             <upload-single-img
                 :value="{ url: editForm.album }"
                 placeholder="上传封面"
-                @change="(file) => { editForm.album = file.url; $refs.editForm.validateField('album') }"
+                @change="(file) => { editForm.album = file.url }"
             />
         </div>
-        <div class="code">
-            <textarea readonly>
+        <pre class="code">
+            <textarea readonly rows="6">
             <upload-single-img
                 :value="{ url: editForm.album }"
                 placeholder="上传封面"
-                @change="(file) => { editForm.album = file.url; $refs.editForm.validateField('album') }"
+                @change="(file) => { editForm.album = file.url }"
             />
             </textarea>
-        </div>
+        </pre>
         <h2>配置</h2>
         <el-table :data="props">
             <el-table-column prop="name" label="属性"></el-table-column>

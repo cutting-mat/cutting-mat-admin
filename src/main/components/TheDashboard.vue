@@ -18,6 +18,9 @@
               发送验证码
             </countdown-button>
           </el-form-item>
+          <el-form-item label="输入验证">
+            <input-valid v-model="inputValid" :maxlength="10" show-word-limit />
+          </el-form-item>
 
         </el-form>
       </div>
@@ -113,7 +116,7 @@ export default {
       dictCheckbox: [],
       dictCasader: [],
       num: null,
-      
+      inputValid: ''
     };
   },
   computed: {

@@ -9,11 +9,11 @@
         <div class="demo">
             <chart-scatter :data="data" colors="rgba(91,143,249,0.5)" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-scatter :data="data" colors="rgba(91,143,249,0.5)" />
             </textarea>
-        </div>
+        </pre>
     </div>
 </template>
 

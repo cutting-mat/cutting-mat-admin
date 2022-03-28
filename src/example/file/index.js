@@ -1,6 +1,6 @@
 export default [{
   path: 'file',
-  name: '文件操作',
+  name: '其他',
   component: (resolve) => require(['./views/Index.vue'], resolve),
   children: [{
     path: 'filePreview',
@@ -21,7 +21,11 @@ export default [{
     name: '水印组件',
     component: (resolve) => require(['./views/watermark.vue'], resolve)
   },
-  
+  {
+    path: 'input-vlaid',
+    name: '输入验证',
+    component: (resolve) => require(['./views/input-vlaid.vue'], resolve)
+  },
 
   ]
 }]

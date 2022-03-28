@@ -12,11 +12,11 @@
         <div class="demo">
             <chart-radar :data="data" :name="name" :colors="colorList" />
         </div>
-        <div class="code">
+        <pre class="code">
             <textarea readonly>
             <chart-radar :data="data" :name="name" :colors="colorList" />
             </textarea>
-        </div>
+        </pre>
     </div>
 </template> 
 
