@@ -18,13 +18,13 @@
       type="info"
       show-icon
       :closable="false">
-    </el-alert> -->
+    </el-alert>-->
   </div>
 </template>
 
 <script>
 const packageInfo = require("./package.json");
-import { report } from "../__support/report";
+import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 import { getJSON, saveJSON } from "@/main/api/common";
 import { throttle } from "@/core";
@@ -141,14 +141,19 @@ export default {
         const throttleSave = throttle(this.saveString, 500, 10000);
 
         // 初始内容
-        if (!this.async && Array.isArray(this.value)) {
-          // 同步模式
-          this.content = this.value;
-          this.quill.setContents(this.content);
-        } else if (this.async && this.value && this.value.split) {
+        if (this.async) {
           // 异步模式
-          this.urlDispose(this.value);
+          if (this.value && this.value.split) {
+            this.urlDispose(this.value);
+          }
+        } else {
+          // 同步模式
+          if (Array.isArray(this.value)) {
+            this.content = this.value;
+            this.quill.setContents(this.content);
+          }
         }
+
         // 内容编辑事件
         this.quill.on("text-change", () => {
           this.content = this.quill.getContents().ops;
@@ -163,22 +168,25 @@ export default {
       }
     },
     saveString() {
+      // 异步模式保存
       if (!this.async || !this.content) {
         return null;
       }
       this.loading = true;
-      this.asyncSaveApi({ 
+      this.asyncSaveApi({
         id: this.value && this.value.split ? this.value : null,
         content: JSON.stringify(this.content)
-       })
+      })
         .then((res) => {
           this.loading = false;
-          let contentUrl = res.data.data;
+          let contentUrl = res.data.id;
 
           if (contentUrl && contentUrl.split) {
             this.$nextTick(() => {
               this.$emit("change", contentUrl);
             });
+          }else{
+            console.warn(`richtext 保存失败`)
           }
         })
         .catch(() => {
@@ -189,14 +197,14 @@ export default {
     urlDispose(url) {
       this.asyncGetApi(url).then((res) => {
         let result = JSON.parse(res.data && res.data.content);
-        if(Array.isArray(result)){
+        if (Array.isArray(result)) {
           this.content = result;
           this.$nextTick(() => {
             this.quill.setContents(this.content);
             this.$emit("change", result);
           });
         }
-        
+
       });
     },
   },

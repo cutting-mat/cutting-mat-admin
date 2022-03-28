@@ -22,7 +22,7 @@
 
 <script>
 const packageInfo = require('./package.json');
-import { report } from "../__support/report";
+import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 
 export default {

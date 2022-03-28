@@ -1,18 +1,18 @@
 <template>
     <div>
         <h2>简介</h2>
-        <p>文件上传组件。</p>
+        <p>图片上传组件。</p>
         <h2>示例</h2>
         <div class="demo">
             <el-form label-width="90px">
-                <el-form-item label="上传附件：">
-                    <upload-file v-model="fileList" />
+                <el-form-item label="上传图片：">
+                    <upload-img v-model="fileList" />
                 </el-form-item>
             </el-form>
         </div>
         <div class="code">
             <textarea readonly>
-            <upload-file v-model="fileList" />
+            <upload-img v-model="fileList" />
             </textarea>
         </div>
         <h2>配置</h2>

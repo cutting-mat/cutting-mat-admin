@@ -34,8 +34,10 @@ export default {
   position: sticky;
   top: 0;
   z-index: 9;
-  padding: 20px 0;
+  padding: 8px 0;
+  margin: 0 0 16px;
   background: #fff;
+  border-bottom: 1px solid #d8dee4;
 }
 .toolBar ._back {
   font-size: 20px;
