@@ -42,8 +42,7 @@ module.exports = {
                                 }
                             }
                         })
-                    // https:// webpack.js.org/configuration/optimization/#optimizationruntimechunk
-                    config.optimization.runtimeChunk('single')
+
                 }
             )
     }
