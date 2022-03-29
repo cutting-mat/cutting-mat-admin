@@ -39,6 +39,12 @@ module.exports = {
                                     name: 'chunk-elementUI', // split elementUI into a single package
                                     priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
                                     test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+                                },
+                                widgets: {
+                                    name: 'chunk-widgets',
+                                    test: /src[\\/]widgets[\\/]/, // can customize your rules
+                                    priority: 15,
+                                    reuseExistingChunk: true
                                 }
                             }
                         })
