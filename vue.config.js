@@ -1,7 +1,7 @@
 /**
  * vue-cli配置
  * */
- module.exports = {
+module.exports = {
     transpileDependencies: ['@cutting-mat/axios', '@cutting-mat/uploader', 'tiny-emitter'],    // 需要babel编译的依赖包名
     css: {
         sourceMap: true                                         // 开启css map, 方便调试
@@ -10,7 +10,7 @@
     integrity: process.env.NODE_ENV === 'production',           // 子资源完整性校验（SRI）
     outputDir: 'dist',                                          // 构建目录, 默认'dist'
     publicPath: process.env.NODE_ENV === 'production'
-        ? '/'                                                   // 生产环境构建路径, 默认'/'
+        ? '/cutting-mat-admin/'                                                   // 生产环境构建路径, 默认'/'
         : '/',
     chainWebpack(config) {
         // 打包分析插件 npm run build --report
