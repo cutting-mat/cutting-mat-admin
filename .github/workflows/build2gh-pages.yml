@@ -1,5 +1,5 @@
 
-name: pages
+name: build2gh-pages
 
 on:
   push:
