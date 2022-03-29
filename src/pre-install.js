@@ -1,3 +1,4 @@
+// UI组件库按需引入
 import {
     Loading,
     Pagination,
@@ -177,8 +178,19 @@ const components = [
 
 import 'element-ui/lib/theme-chalk/index.css';
 
+// 加载全局样式
+import '@/core/assets/global.css';
+
+// 大屏动画插件
+import animater from '@cutting-mat/animater';
+
+// 组件库
+import widgets from '@/widgets'
+
+// 预安装插件
 export default {
     install: function (Vue, opts = {}) {
+        // 安装ElementUI
         components.forEach(component => {
             Vue.use(component);
         });
@@ -198,5 +210,11 @@ export default {
         Vue.prototype.$prompt = MessageBox.prompt;
         Vue.prototype.$notify = Notification;
         Vue.prototype.$message = Message;
+
+        // 安装大屏动画插件
+        Vue.use(animater);
+        // 安装组件库
+        Vue.use(widgets)
+
     }
 }

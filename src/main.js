@@ -8,26 +8,18 @@ import Vue from 'vue';
 // import mocker from '../mock';
 // mocker()
 
-// UI库
-import ElementUI from '@/element-ui.install';
-Vue.use(ElementUI);
+// 加载根组件
+import App from './App.vue';
 
-// 全局样式
-import '@/core/assets/global.css';
+// 预安装
+import preInstall from '@/pre-install';
+Vue.use(preInstall);
 
-// 核心插件
+// 安装核心插件
 import plugins from '@/core/plugins';
 Vue.use(plugins);
 
-// 大屏动画插件
-import customPlugin from '@cutting-mat/animater';
-Vue.use(customPlugin);
-
-// 组件库
-import widgets from '@/widgets'
-Vue.use(widgets)
-
-// 路由
+// 创建路由实例
 import { routeGenerator } from '@/core';
 const routeInstance = routeGenerator({
     beforeEach: ((to, from, next) => {
@@ -39,8 +31,6 @@ const routeInstance = routeGenerator({
 })
 
 // 应用启动
-import App from './App.vue';
-
 new Vue({
     router: routeInstance,
     render: h => h(App)

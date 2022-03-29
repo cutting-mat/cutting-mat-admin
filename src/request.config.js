@@ -1,7 +1,7 @@
 
-// 各环境baseURL配置
+// 各环境BaseURL配置
 const ENVIRONMENT = {
-    mock: 'http://yapi.sogdata.com/mock/125',   // YAPI-cutting-mat-admin项目
+    mock: 'http://yapi.sogdata.com/mock/125',   // 内网YAPI项目
     dev: 'http://retire.kaifa/japi',
     test: 'http://test.com/api',
     master: '//master.com/api'
@@ -14,7 +14,7 @@ const HASH = {
     "master.com": ENVIRONMENT.master
 }
 
-// axios 请求实例配置
+// Axios 请求实例配置
 export default {
     baseURL: HASH[window.location.host] || ENVIRONMENT.mock,
     timeout: 10000,
