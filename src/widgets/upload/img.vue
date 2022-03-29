@@ -66,7 +66,11 @@ export default {
 .upload_text {
   margin-bottom: 8px;
 }
-
+.upload-img >>> .el-upload-list--picture-card .el-upload-list__item,
+.upload-img >>> .el-upload--picture-card {
+  width: 128px;
+  height: 128px;
+}
 .upload-img >>> .el-upload-list--picture-card .el-upload-list__item-thumbnail {
   object-fit: cover;
 }
@@ -89,8 +93,7 @@ export default {
   padding: 0 6px;
   border-radius: 0 0 0 6px;
 }
-.upload-img >>> .el-upload-list__item-delete:hover{
-  color:red;
+.upload-img >>> .el-upload-list__item-delete:hover {
+  color: red;
 }
-
 </style>
