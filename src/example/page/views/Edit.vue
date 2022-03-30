@@ -7,7 +7,14 @@
             </el-button>
         </ToolBar>
         <!-- main -->
-        <el-form class="wrap" ref="editForm" :model="editForm" :rules="rules" label-width="80px">
+        <el-form
+            class="wrap"
+            ref="editForm"
+            :model="editForm"
+            :rules="rules"
+            label-width="80px"
+            status-icon
+        >
             <el-form-item label="标题：" prop="title">
                 <el-input v-model="editForm.title"></el-input>
             </el-form-item>
