@@ -196,8 +196,8 @@ export default {
         });
     },
     // 链接解析
-    urlDispose(url) {
-      this.asyncGetApi(url).then((res) => {
+    urlDispose(id) {
+      this.asyncGetApi({ id }).then((res) => {
         let result = JSON.parse(res.data && res.data.content);
         if (Array.isArray(result)) {
           this.content = result;
