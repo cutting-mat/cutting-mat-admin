@@ -7,7 +7,7 @@
       :triggerId="uploaderId"
       style="display: none"
       :multiple="false"
-      @success="getImageSuccess"
+      :on-success="getImageSuccess"
     />
 
     <!-- 异步存取提示信息 -->
@@ -120,6 +120,8 @@ export default {
           ? this.quill.getSelection().index
           : this.quill.getLength();
         this.quill.insertEmbed(index, "image", image.url);
+      } else {
+        console.warn(`richtext: 上传图片结果异常:`, image)
       }
     },
     getImage() {
@@ -185,7 +187,7 @@ export default {
             this.$nextTick(() => {
               this.$emit("change", contentUrl);
             });
-          }else{
+          } else {
             console.warn(`richtext 保存失败`)
           }
         })
