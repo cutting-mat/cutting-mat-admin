@@ -35,4 +35,3 @@ export const getJSON = (params, opt) => {
         }
     }, opt)
 }
-
