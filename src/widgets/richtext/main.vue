@@ -1,5 +1,5 @@
 <template>
-  <div class="myTextEditor" :class="{ readOnly: readOnly }">
+  <div class="myTextEditor" :class="{ readOnly: readOnly, imgZoom: imgZoom }">
     <div class="flex-1" :id="editorId"></div>
 
     <!-- 隐藏上传图片 -->
@@ -19,6 +19,11 @@
       show-icon
       :closable="false">
     </el-alert>-->
+
+    <!-- 大图预览 -->
+    <el-dialog width="800px" title="查看大图" :visible.sync="showPreview" append-to-body>
+      <img :src="previewImg" style="display: block;margin:auto" />
+    </el-dialog>
   </div>
 </template>
 
@@ -82,6 +87,11 @@ export default {
       required: false,
       default: false,
     },
+    imgZoom: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     asyncGetApi: {
       type: Function,
       required: false,
@@ -98,8 +108,8 @@ export default {
       loading: false,
       content: [],
       quill: null,
-      editorId: "editor" + parseInt(Math.random() * 1e8),
-      uploaderId: "uploader" + parseInt(Math.random() * 1e8),
+      editorId: "editor" + parseInt(Math.random() * 100000000),
+      uploaderId: "uploader" + parseInt(Math.random() * 100000000),
       editorOption: {
         readOnly: false,
         theme: "snow",
@@ -118,11 +128,13 @@ export default {
           },
         },
       },
+      showPreview: false, // 大图预览
+      previewImg: null
     };
   },
   computed: {
     textCont() {
-      return getText(this.content)
+      return getText(this.content);
     }
   },
   watch: {
@@ -140,8 +152,9 @@ export default {
           ? this.quill.getSelection().index
           : this.quill.getLength();
         this.quill.insertEmbed(index, "image", image.url, "user");
-      } else {
-        console.warn(`richtext: 上传图片结果异常:`, image)
+      }
+      else {
+        console.warn(`richtext: 上传图片结果异常:`, image);
       }
     },
     getImage() {
@@ -149,7 +162,8 @@ export default {
       const fileInput = document.getElementById(this.uploaderId);
       if (fileInput) {
         fileInput.click();
-      } else {
+      }
+      else {
         console.warn("没找到上传控件");
       }
     },
@@ -161,30 +175,30 @@ export default {
         toolbar.addHandler("image", this.getImage);
         // 异步保存请求防抖
         const throttleSave = throttle(this.saveString, 500, 10000);
-
         // 初始内容
         if (this.async) {
           // 异步模式
           if (this.value && this.value.split) {
             this.urlDispose(this.value);
           }
-        } else {
+        }
+        else {
           // 同步模式
           if (Array.isArray(this.value)) {
             this.content = this.value;
             this.quill.setContents(this.content);
           }
         }
-
         // 内容编辑事件
         this.quill.on("text-change", () => {
           this.content = this.quill.getContents().ops;
           this.$nextTick(() => {
             if (this.async) {
               throttleSave(this.quill.getContents().ops);
-            } else {
+            }
+            else {
               this.$emit("change", this.content);
-              this.$emit("textChange", this.textCont)
+              this.$emit("textChange", this.textCont);
             }
           });
         });
@@ -196,19 +210,19 @@ export default {
         return null;
       }
       this.loading = true;
-      this.asyncSaveApi(this.value && this.value.split ? this.value.replace(/^text\//, '') : randomUUID(), {
+      this.asyncSaveApi(this.value && this.value.split ? this.value.replace(/^text\//, "") : randomUUID(), {
         content: JSON.stringify(this.content)
       })
         .then((res) => {
           this.loading = false;
-
           if (res.data && res.data.split) {
             this.$nextTick(() => {
               this.$emit("change", res.data);
-              this.$emit("textChange", this.textCont)
+              this.$emit("textChange", this.textCont);
             });
-          } else {
-            console.warn(`richtext 保存失败`)
+          }
+          else {
+            console.warn(`richtext 保存失败`);
           }
         })
         .catch(() => {
@@ -217,52 +231,75 @@ export default {
     },
     // 链接解析
     urlDispose(path) {
-      this.asyncGetApi(path.replace(/^text\//, '')).then((res) => {
+      this.asyncGetApi(path.replace(/^text\//, "")).then((res) => {
         if (this.async) {
           if (res.data && res.data.split) {
             this.$emit("change", res.data);
-            this.$emit("textChange", this.textCont)
-          } else {
-            console.warn('接口未正确返回text/path', res.data)
+            this.$emit("textChange", this.textCont);
           }
-        } else {
+          else {
+            console.warn("接口未正确返回text/path", res.data);
+          }
+        }
+        else {
           try {
             let result = JSON.parse(res.data.content);
             this.content = result;
             this.$nextTick(() => {
               this.quill.setContents(this.content);
               this.$emit("change", result);
-              this.$emit("textChange", this.textCont)
+              this.$emit("textChange", this.textCont);
             });
-          } catch (e) {
-            console.warn('接口未正确返回 richtext/content')
+          }
+          catch (e) {
+            console.warn("接口未正确返回 richtext/content");
           }
         }
-
       });
+    },
+    ImgClick(e) {
+      let el = e.target;
+      const matchResult = el.matches(".myTextEditor.imgZoom img");
+      while (el && !matchResult) {
+        el = el.parentNode;
+        if (this === el) {
+          el = null;
+        }
+      }
+      if (el) {
+        this.showPreview = !!(this.previewImg = el.src)
+      }
     },
   },
   created() {
     report.send(packageInfo);
-
     // 监听value第一次变化
-    let unwatch = this.$watch('value', function (value) {
+    let unwatch = this.$watch("value", function (value) {
       if (this.quill && this.value) {
         // 只读模式监听数据变化
         if (!this.async && Array.isArray(value)) {
           // 同步模式
           this.quill.setContents(value);
-        } else if (this.async && value.split) {
+        }
+        else if (this.async && value.split) {
           // 异步模式
           this.urlDispose(value);
         }
-
-        unwatch()
+        unwatch();
       }
-    })
+    });
   },
   mounted: function () {
     this.init();
+    // 图片点击放大
+    if (this.imgZoom) {
+      document.body.addEventListener("click", this.ImgClick);
+    }
+  },
+  beforeDestroy() {
+    if (this.imgZoom) {
+      document.body.removeEventListener("click", this.ImgClick);
+    }
   },
 };
 </script>
@@ -295,9 +332,6 @@ export default {
   line-height: 1.7;
 }
 
-.myTextEditor >>> .ql-editor img {
-  margin: 1em auto;
-}
 /* 只读模式 */
 .readOnly {
   -webkit-touch-callout: none;
@@ -324,5 +358,10 @@ export default {
   right: 0;
   top: 0;
   z-index: 10;
+}
+.readOnly.imgZoom >>> .ql-editor img {
+  max-width: 70px;
+  max-height: 70px;
+  cursor: pointer;
 }
 </style>

@@ -28,7 +28,7 @@
 
     <p>只读模式：</p>
     <div class="demo">
-      <richtext read-only :value="demoCont" />
+      <richtext :value="demoCont" imgZoom read-only />
     </div>
     <pre class="code">
         <textarea readonly>
@@ -99,7 +99,13 @@ export default {
         default: 'false'
       }, {
         name: 'async',
-        desc: '是否异步模式，如果设成异步模式value传递的是存储接口返回的fileID',
+        desc: '异步模式，如果设成异步模式value传递的是存储接口返回的fileID',
+        type: 'Boolean',
+        options: '-',
+        default: 'false'
+      }, {
+        name: 'imgZoom',
+        desc: '图片预览模式，图片默认缩小尺寸，点击放大',
         type: 'Boolean',
         options: '-',
         default: 'false'
