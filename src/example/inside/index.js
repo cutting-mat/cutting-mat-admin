@@ -4,19 +4,19 @@ export default [{
     component: (resolve) => require(['./views/Index.vue'], resolve),
     children: [{
         path: 'InputNumber',
-        name: '输入数字',
+        name: '数字输入框',
         component: (resolve) => require(['./views/InputNumber.vue'], resolve)
     }, {
         path: 'upload',
-        name: '上传',
+        name: '上传组件',
         component: (resolve) => require(['./views/Upload.vue'], resolve)
     }, {
         path: 'DickControl',
-        name: '字典控件',
+        name: '数据字典控件',
         component: (resolve) => require(['./views/DickControl.vue'], resolve)
     }, {
         path: 'Password',
-        name: '输入密码',
+        name: '密码输入框',
         component: (resolve) => require(['./views/Password.vue'], resolve)
     }, {
         path: 'CURD',

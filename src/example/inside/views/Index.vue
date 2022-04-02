@@ -5,13 +5,12 @@
 </template>
 
 <script>
-import "@/example/__assets/style.css";
+import "@/example/__assets/style.css"
 
 export default {
-  
+
 };
 </script>
 
 <style scoped>
-
 </style>

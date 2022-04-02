@@ -119,7 +119,7 @@ export default {
         const index = this.quill.getSelection()
           ? this.quill.getSelection().index
           : this.quill.getLength();
-        this.quill.insertEmbed(index, "image", image.url);
+        this.quill.insertEmbed(index, "image", image.url, "user");
       } else {
         console.warn(`richtext: 上传图片结果异常:`, image)
       }

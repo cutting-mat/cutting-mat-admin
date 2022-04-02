@@ -1,13 +1,11 @@
 <template>
-  <div class="scrollbar">
-    <router-view class="wrap example" />
-  </div>
+  <router-view />
 </template>
 
 <script>
 //import * as util from "@/main/assets/util";
-import {routes} from "./index.js";
-import "@/example/__assets/style.css";
+import { routes } from "./index.js";
+import "@/example/__assets/style.css"
 
 export default {
   data() {
@@ -16,9 +14,9 @@ export default {
     };
   },
   methods: {},
-  created() {},
+  created() { },
 };
 </script>
 
-<style scoped>
+<style>
 </style>
