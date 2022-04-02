@@ -29,13 +29,34 @@ import { report } from "@/widgets/__support/report";
 import { getJSON, saveJSON } from "@/main/api/common";
 import { throttle, formatDate } from "@/core";
 const Quill = require("./lib/quill.min.js");
-
+// 生成UUID
 function randomUUID() {
   const path = formatDate(new Date(), 'year')
   const temp_url = URL.createObjectURL(new Blob());
   const uuid = temp_url.toString(); // blob:https://xxx.com/b250d159-e1b6-4a87-9002-885d90033be3
   URL.revokeObjectURL(temp_url);
   return `${path}/${uuid.substring(uuid.lastIndexOf("/") + 1)}`;
+}
+// 提取富文本内容
+function getText(richDate) {
+  if (Array.isArray(richDate)) {
+    return richDate.map(e => {
+      if (e.insert) {
+        if (e.insert.split) {
+          return e.insert.replace(/\n/g, '')
+        } else if (typeof (e.insert) === 'object') {
+          if (e.insert.image) {
+            return '[图片]'
+          }
+          return '[媒体]'
+        }
+      } else {
+        return ''
+      }
+    }).join('')
+  } else {
+    return '-'
+  }
 }
 
 export default {
@@ -99,6 +120,11 @@ export default {
       },
     };
   },
+  computed: {
+    textCont() {
+      return getText(this.content)
+    }
+  },
   watch: {
     readOnly: {
       handler: function (readOnly) {
@@ -158,6 +184,7 @@ export default {
               throttleSave(this.quill.getContents().ops);
             } else {
               this.$emit("change", this.content);
+              this.$emit("textChange", this.textCont)
             }
           });
         });
@@ -178,6 +205,7 @@ export default {
           if (res.data && res.data.split) {
             this.$nextTick(() => {
               this.$emit("change", res.data);
+              this.$emit("textChange", this.textCont)
             });
           } else {
             console.warn(`richtext 保存失败`)
@@ -189,13 +217,13 @@ export default {
     },
     // 链接解析
     urlDispose(path) {
-      console.log('urlDispose', path)
       this.asyncGetApi(path.replace(/^text\//, '')).then((res) => {
         if (this.async) {
           if (res.data && res.data.split) {
             this.$emit("change", res.data);
+            this.$emit("textChange", this.textCont)
           } else {
-            console.warn('接口未正确返回text/path')
+            console.warn('接口未正确返回text/path', res.data)
           }
         } else {
           try {
@@ -204,6 +232,7 @@ export default {
             this.$nextTick(() => {
               this.quill.setContents(this.content);
               this.$emit("change", result);
+              this.$emit("textChange", this.textCont)
             });
           } catch (e) {
             console.warn('接口未正确返回 richtext/content')
