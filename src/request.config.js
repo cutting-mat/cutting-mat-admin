@@ -2,7 +2,7 @@
 // 各环境BaseURL配置
 const ENVIRONMENT = {
     mock: 'http://yapi.sogdata.com/mock/125',   // 内网YAPI项目
-    dev: 'http://retire.kaifa/japi',
+    dev: 'http://medicalshare.kaifa/japi',
     test: 'http://test.com/api',
     master: '//master.com/api'
 };

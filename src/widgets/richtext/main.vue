@@ -27,14 +27,15 @@ const packageInfo = require("./package.json");
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 import { getJSON, saveJSON } from "@/main/api/common";
-import { throttle } from "@/core";
+import { throttle, formatDate } from "@/core";
 const Quill = require("./lib/quill.min.js");
 
 function randomUUID() {
-  var temp_url = URL.createObjectURL(new Blob());
-  var uuid = temp_url.toString(); // blob:https://xxx.com/b250d159-e1b6-4a87-9002-885d90033be3
+  const path = formatDate(new Date(), 'year')
+  const temp_url = URL.createObjectURL(new Blob());
+  const uuid = temp_url.toString(); // blob:https://xxx.com/b250d159-e1b6-4a87-9002-885d90033be3
   URL.revokeObjectURL(temp_url);
-  return uuid.substr(uuid.lastIndexOf("/") + 1);
+  return `${path}/${uuid.substring(uuid.lastIndexOf("/") + 1)}`;
 }
 
 export default {
@@ -188,14 +189,25 @@ export default {
     },
     // 链接解析
     urlDispose(path) {
+      console.log('urlDispose', path)
       this.asyncGetApi(path.replace(/^text\//, '')).then((res) => {
-        let result = JSON.parse(res.data && res.data.content);
-        if (Array.isArray(result)) {
-          this.content = result;
-          this.$nextTick(() => {
-            this.quill.setContents(this.content);
-            this.$emit("change", result);
-          });
+        if (this.async) {
+          if (res.data && res.data.split) {
+            this.$emit("change", res.data);
+          } else {
+            console.warn('接口未正确返回text/path')
+          }
+        } else {
+          try {
+            let result = JSON.parse(res.data.content);
+            this.content = result;
+            this.$nextTick(() => {
+              this.quill.setContents(this.content);
+              this.$emit("change", result);
+            });
+          } catch (e) {
+            console.warn('接口未正确返回 richtext/content')
+          }
         }
 
       });
