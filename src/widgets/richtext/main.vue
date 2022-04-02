@@ -30,6 +30,13 @@ import { getJSON, saveJSON } from "@/main/api/common";
 import { throttle } from "@/core";
 const Quill = require("./lib/quill.min.js");
 
+function randomUUID() {
+  var temp_url = URL.createObjectURL(new Blob());
+  var uuid = temp_url.toString(); // blob:https://xxx.com/b250d159-e1b6-4a87-9002-885d90033be3
+  URL.revokeObjectURL(temp_url);
+  return uuid.substr(uuid.lastIndexOf("/") + 1);
+}
+
 export default {
   model: {
     prop: "value",
@@ -92,20 +99,6 @@ export default {
     };
   },
   watch: {
-    value: {
-      handler: function (value) {
-        if (this.quill && this.readOnly) {
-          // 只读模式监听数据变化
-          if (!this.async && Array.isArray(value)) {
-            // 同步模式
-            this.quill.setContents(value);
-          } else if (this.async && value && value.split) {
-            // 异步模式
-            this.urlDispose(value);
-          }
-        }
-      },
-    },
     readOnly: {
       handler: function (readOnly) {
         this.$set(this.editorOption, "readOnly", !!readOnly);
@@ -175,17 +168,15 @@ export default {
         return null;
       }
       this.loading = true;
-      this.asyncSaveApi({
-        id: this.value && this.value.split ? this.value : null,
+      this.asyncSaveApi(this.value && this.value.split ? this.value.replace(/^text\//, '') : randomUUID(), {
         content: JSON.stringify(this.content)
       })
         .then((res) => {
           this.loading = false;
-          let contentUrl = res.data.id;
 
-          if (contentUrl && contentUrl.split) {
+          if (res.data && res.data.split) {
             this.$nextTick(() => {
-              this.$emit("change", contentUrl);
+              this.$emit("change", res.data);
             });
           } else {
             console.warn(`richtext 保存失败`)
@@ -196,8 +187,8 @@ export default {
         });
     },
     // 链接解析
-    urlDispose(id) {
-      this.asyncGetApi({ id }).then((res) => {
+    urlDispose(path) {
+      this.asyncGetApi(path.replace(/^text\//, '')).then((res) => {
         let result = JSON.parse(res.data && res.data.content);
         if (Array.isArray(result)) {
           this.content = result;
@@ -212,6 +203,22 @@ export default {
   },
   created() {
     report.send(packageInfo);
+
+    // 监听value第一次变化
+    let unwatch = this.$watch('value', function (value) {
+      if (this.quill && this.value) {
+        // 只读模式监听数据变化
+        if (!this.async && Array.isArray(value)) {
+          // 同步模式
+          this.quill.setContents(value);
+        } else if (this.async && value.split) {
+          // 异步模式
+          this.urlDispose(value);
+        }
+
+        unwatch()
+      }
+    })
   },
   mounted: function () {
     this.init();

@@ -32,14 +32,16 @@
 export default {
     data() {
         return {
-            fileList: [{
-                url: "http://dummyimage.com/200x200/a1f279/fff&text=IMAGE.png"
-            }]
+            fileList: []
         };
     },
     methods: {},
     created() {
-
+        setTimeout(() => {
+            this.fileList = [{
+                url: "http://dummyimage.com/200x200/a1f279/fff&text=IMAGE.png"
+            }]
+        }, 1000)
     },
 };
 </script>
