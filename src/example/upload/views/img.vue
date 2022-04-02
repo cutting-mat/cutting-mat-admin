@@ -32,7 +32,9 @@
 export default {
     data() {
         return {
-            fileList: []
+            fileList: [{
+                url: "http://dummyimage.com/200x200/a1f279/fff&text=IMAGE.png"
+            }]
         };
     },
     methods: {},
