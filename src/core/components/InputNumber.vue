@@ -126,7 +126,7 @@ export default {
       if (inputValue > this.max) {
         inputValue = this.max;
       }
-      
+
       // 小数位数处理
       this.myValue = this.retainDecimal(inputValue, this.precision);
       // 补零
@@ -150,7 +150,7 @@ export default {
         .replace(/^-/, "$#$") // 只保留开头的-
         .replace(/-/g, "")
         .replace("$#$", "-");
-      
+
     },
     retainDecimal(num, dec) {
       // dec合法性校验

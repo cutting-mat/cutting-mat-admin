@@ -15,9 +15,9 @@ export default [{
         name: '数据字典控件',
         component: (resolve) => require(['./views/DickControl.vue'], resolve)
     }, {
-        path: 'Password',
+        path: 'InputPassword',
         name: '密码输入框',
-        component: (resolve) => require(['./views/Password.vue'], resolve)
+        component: (resolve) => require(['./views/InputPassword.vue'], resolve)
     }, {
         path: 'CURD',
         name: '增删改查组件',
