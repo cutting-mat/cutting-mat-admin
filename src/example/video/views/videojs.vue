@@ -75,7 +75,7 @@ export default {
             methods: [
                 {
                     name: 'markerPlugin',
-                    desc: '为进度条添加打点信息',
+                    desc: '为进度条添加打点信息。来自插件：https://github.com/tower1229/videojs-plugin-marker',
                     param: '打点信息[Array]',
                     example: `player.markerPlugin({
                         //  打点信息
