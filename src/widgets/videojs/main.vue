@@ -9,6 +9,8 @@ import { report } from "@/widgets/__support/report";
 import videojs from 'video.js';
 import 'video.js/dist/video-js.min.css'
 import '@videojs/themes/dist/fantasy/index.css';
+import '@tower1229/videojs-plugin-marker';
+import '@tower1229/videojs-plugin-marker/dist/style.css';
 
 export default {
   name: `${packageInfo.name}__${packageInfo.version}`,
@@ -35,9 +37,6 @@ export default {
       intervalNum: 0
     }
   },
-  methods: {
-
-  },
   created() {
     report.send(packageInfo);
   },
@@ -46,9 +45,22 @@ export default {
       playbackRates: [0.5, 1, 1.5, 2]
     }, this.options)
 
-    this.player = videojs(this.$refs.videoPlayer, options, () => {
-      this.$emit('ready', this.player);
+    const player = videojs(this.$refs.videoPlayer, options, () => {
+      this.$emit('ready', player);
     })
+    this.player = player;
+
+    // 
+    // Create a track object.
+    var track = new videojs.VideoTrack({
+      id: 'my-alternate-video-track',
+      kind: 'commentary',
+      label: 'Director\'s Commentary',
+      language: 'en'
+    });
+
+    // Add the track to the player's video track list.
+    player.videoTracks().addTrack(track);
 
     // 拖拽进度控制
     this.player.on('seeked', () => {

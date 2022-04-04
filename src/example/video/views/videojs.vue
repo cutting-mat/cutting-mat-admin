@@ -27,6 +27,13 @@
             <el-table-column prop="options" label="可选"></el-table-column>
             <el-table-column prop="default" label="默认"></el-table-column>
         </el-table>
+        <h2>方法</h2>
+        <el-table :data="methods">
+            <el-table-column prop="name" label="名称"></el-table-column>
+            <el-table-column prop="desc" label="说明"></el-table-column>
+            <el-table-column prop="param" label="参数"></el-table-column>
+            <el-table-column prop="example" label="示例"></el-table-column>
+        </el-table>
         <h2>事件</h2>
         <el-table :data="events">
             <el-table-column prop="name" label="名称"></el-table-column>
@@ -44,7 +51,7 @@ export default {
         return {
             videoOptions: {
                 autoplay: true,
-                controls: true
+                controls: true,
             },
             props: [{
                 name: 'options',
@@ -65,6 +72,32 @@ export default {
                 options: '-',
                 default: 'true'
             }],
+            methods: [
+                {
+                    name: 'markerPlugin',
+                    desc: '为进度条添加打点信息',
+                    param: '打点信息[Array]',
+                    example: `player.markerPlugin({
+                        //  打点信息
+                        markers: [
+                            {
+                                offset: 2,
+                                type: 'text',
+                                data: {
+                                    content: 'content1'
+                                }
+                            },
+                            {
+                                offset: 10,
+                                type: 'text',
+                                data: {
+                                    content: 'content2'
+                                }
+                            },
+                        ]
+                    });`
+                }
+            ],
             events: [
                 {
                     name: 'ready',
@@ -90,6 +123,8 @@ export default {
                 src: "https://static.refined-x.com/trans4K720.m3u8",
                 type: "application/x-mpegURL"
             })
+
+
 
         }
     },

@@ -13,6 +13,7 @@
   "author": "tower1229@foxmail.com",
   "license": "MIT",
   "dependencies": {
+    "@tower1229/videojs-plugin-marker": "^0.0.3",
     "@videojs/themes": "^1.0.1",
     "echarts": "^5.3.0",
     "video.js": "^7.18.1"
