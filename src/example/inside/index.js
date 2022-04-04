@@ -3,9 +3,17 @@ export default [{
     name: '内置组件',
     component: (resolve) => require(['./views/Index.vue'], resolve),
     children: [{
+        path: 'countdownButton',
+        name: '倒计时按钮',
+        component: (resolve) => require(['./views/countdownButton.vue'], resolve)
+    }, {
         path: 'InputNumber',
         name: '数字输入框',
         component: (resolve) => require(['./views/InputNumber.vue'], resolve)
+    }, {
+        path: 'InputPassword',
+        name: '密码输入框',
+        component: (resolve) => require(['./views/InputPassword.vue'], resolve)
     }, {
         path: 'upload',
         name: '上传组件',
@@ -14,10 +22,6 @@ export default [{
         path: 'DickControl',
         name: '数据字典控件',
         component: (resolve) => require(['./views/DickControl.vue'], resolve)
-    }, {
-        path: 'InputPassword',
-        name: '密码输入框',
-        component: (resolve) => require(['./views/InputPassword.vue'], resolve)
     }, {
         path: 'CURD',
         name: '增删改查组件',

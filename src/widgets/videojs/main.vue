@@ -1,5 +1,5 @@
 <template>
-  <video ref="videoPlayer" class="video-js" style="width:100%;height:100%"></video>
+  <video ref="videoPlayer" class="video-js vjs-theme-fantasy" style="width:100%;height:100%"></video>
 </template>
 
 <script>
@@ -8,6 +8,7 @@ import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 import videojs from 'video.js';
 import 'video.js/dist/video-js.min.css'
+import '@videojs/themes/dist/fantasy/index.css';
 
 export default {
   name: `${packageInfo.name}__${packageInfo.version}`,
@@ -41,15 +42,13 @@ export default {
     report.send(packageInfo);
   },
   mounted() {
-    const vm = this;
     const options = Object.assign({
       playbackRates: [0.5, 1, 1.5, 2]
     }, this.options)
 
-    this.player = videojs(this.$refs.videoPlayer, options, function () {
-      vm.$emit('onPlayerReady', this);
+    this.player = videojs(this.$refs.videoPlayer, options, () => {
+      this.$emit('ready', this.player);
     })
-
 
     // 拖拽进度控制
     this.player.on('seeked', () => {
@@ -83,7 +82,7 @@ export default {
         return this.intervalNum--;
       }
       this.intervalNum = this.heartbeatSecond;
-      vm.$emit('heartbeat', this.player.currentTime())
+      this.$emit('heartbeat', this.player.currentTime())
     }, 1000)
 
   },
@@ -96,4 +95,11 @@ export default {
 </script>
 
 <style scoped>
+/* 主题样式bug */
+.vjs-theme-fantasy >>> .vjs-playback-rate-value {
+  line-height: 54px;
+}
+.vjs-theme-fantasy >>> .vjs-menu-content {
+  bottom: 2.5em;
+}
 </style>

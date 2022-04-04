@@ -4,13 +4,17 @@
         <p>图片上传组件。</p>
         <h2>示例</h2>
         <div class="demo">
-            <videojs style="height:400px;width:600px" :options="videoOptions" />
+            <videojs style="height:400px;width:600px" :options="videoOptions" @ready="handleReady" />
         </div>
         <pre class="code">
-            <textarea readonly rows="5">
+            <textarea readonly rows="9">
             <videojs
                 style="height:400px;width:600px"
                 :options="videoOptions"
+                @ready="player => player.src({
+                    src: "http://tracesr.refined-x.com/_nuxt/videos/caozuo.2d1b87a.mp4",
+                    type: "video/mp4"
+                })"
             />
             </textarea>
         </pre>
@@ -40,14 +44,7 @@ export default {
         return {
             videoOptions: {
                 autoplay: true,
-                controls: true,
-                sources: [
-                    {
-                        src:
-                            "http://tracesr.refined-x.com/_nuxt/videos/caozuo.2d1b87a.mp4",
-                        type: "video/mp4"
-                    },
-                ]
+                controls: true
             },
             props: [{
                 name: 'options',
@@ -70,7 +67,7 @@ export default {
             }],
             events: [
                 {
-                    name: 'onPlayerReady',
+                    name: 'ready',
                     desc: 'videojs就绪事件',
                     param: 'player[videojs实例]',
                 }, {
@@ -82,7 +79,19 @@ export default {
         };
     },
     methods: {
+        handleReady(player) {
+            // player.src({
+            //     src:
+            //         "http://tracesr.refined-x.com/_nuxt/videos/caozuo.2d1b87a.mp4",
+            //     type: "video/mp4"
+            // })
 
+            player.src({
+                src: "https://static.refined-x.com/trans4K720.m3u8",
+                type: "application/x-mpegURL"
+            })
+
+        }
     },
     created() {
 
