@@ -1,14 +1,15 @@
 <template>
     <el-button v-bind="$attrs" :disabled="disabled" @click="$emit('click')" class="countdownButton">
-        <span v-if="renderNumber">({{ renderNumber }}s)</span>
         <slot></slot>
+        <span v-if="renderNumber">({{ renderNumber }}s)</span>
     </el-button>
 </template>
 
 <script>
 export default {
+    name: "countdown-button",
     props: {
-        number: {
+        count: {
             type: Number,
             required: true
         },
@@ -21,9 +22,9 @@ export default {
         }
     },
     methods: {
-        count() {
+        start() {
             return new Promise(resolve => {
-                this.renderNumber = this.number;
+                this.renderNumber = this.count;
                 this.disabled = true;
                 this.timer = setInterval(() => {
                     if (this.renderNumber - 1 > 0) {
@@ -32,7 +33,7 @@ export default {
                         this.reset()
                         resolve()
                     }
-                    
+
                 }, 1000)
             })
         },

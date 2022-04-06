@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>简介</h2>
-    <p>倒计时按钮，可实现发验证码的倒计时</p>
+    <p>上传组件。来自：https://github.com/cutting-mat/uploader</p>
     <h2>示例</h2>
     <div class="demo">
       <countdownButton

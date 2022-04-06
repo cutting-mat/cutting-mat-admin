@@ -15,9 +15,9 @@ export default [{
         name: '密码输入框',
         component: (resolve) => require(['./views/InputPassword.vue'], resolve)
     }, {
-        path: 'upload',
+        path: 'uploader',
         name: '上传组件',
-        component: (resolve) => require(['./views/Upload.vue'], resolve)
+        component: (resolve) => require(['./views/Uploader.vue'], resolve)
     }, {
         path: 'DickControl',
         name: '数据字典控件',

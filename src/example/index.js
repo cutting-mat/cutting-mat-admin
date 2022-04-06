@@ -11,7 +11,7 @@ ctx.keys().forEach((key) => {
 
 export default [{
     path: '/example',
-    name: '组件',
+    name: '组件示例',
     component: (resolve) => require(['./Index.vue'], resolve),
     children: routes
 }]

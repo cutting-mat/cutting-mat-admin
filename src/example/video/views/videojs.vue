@@ -27,18 +27,19 @@
             <el-table-column prop="options" label="可选"></el-table-column>
             <el-table-column prop="default" label="默认"></el-table-column>
         </el-table>
+
+        <h2>事件</h2>
+        <el-table :data="events">
+            <el-table-column prop="name" label="名称"></el-table-column>
+            <el-table-column prop="desc" label="说明"></el-table-column>
+            <el-table-column prop="param" label="参数"></el-table-column>
+        </el-table>
         <h2>方法</h2>
         <el-table :data="methods">
             <el-table-column prop="name" label="名称"></el-table-column>
             <el-table-column prop="desc" label="说明"></el-table-column>
             <el-table-column prop="param" label="参数"></el-table-column>
             <el-table-column prop="example" label="示例"></el-table-column>
-        </el-table>
-        <h2>事件</h2>
-        <el-table :data="events">
-            <el-table-column prop="name" label="名称"></el-table-column>
-            <el-table-column prop="desc" label="说明"></el-table-column>
-            <el-table-column prop="param" label="参数"></el-table-column>
         </el-table>
     </div>
 </template>

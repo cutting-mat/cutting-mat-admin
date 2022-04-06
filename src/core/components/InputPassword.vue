@@ -1,35 +1,37 @@
 <template>
-  <el-input
-    class="input-password"
-    v-bind="$attrs"
-    :value="myValue"
-    :placeholder="placeholder"
-    :minlength="minlength"
-    :show-password="showPassword"
-    @paste.native.capture.prevent="false;"
-    @copy.native.capture.prevent="false;"
-    @cut.native.capture.prevent="false;"
-    @input="handleInput"
-  >
-    <div slot="append" v-if="myValue">
-      <div class="_text" :style="scoreStyle.textStyle">{{ format(score) }}</div>
-      <div class="_progress">
-        <div class="_bar" :style="scoreStyle.progressStyle"></div>
+  <div class="input-password">
+    <el-input
+      :name="name"
+      :value="myValue"
+      :placeholder="placeholder"
+      :size="size"
+      :maxlength="maxlength"
+      :minlength="minlength"
+      :suffix-icon="suffixIcon"
+      :prefix-icon="prefixIcon"
+      :autocomplete="autocomplete"
+      :show-password="showPassword"
+      :disabled="disabled"
+      :readonly="readonly"
+      :clearable="clearable"
+      :autofocus="autofocus"
+      @paste.native.capture.prevent="false;"
+      @copy.native.capture.prevent="false;"
+      @cut.native.capture.prevent="false;"
+      @input="handleInput"
+    >
+      <div slot="append" v-if="myValue">
+        <div class="_text" :style="scoreStyle.textStyle">{{ format(score) }}</div>
+        <div class="_progress">
+          <div class="_bar" :style="scoreStyle.progressStyle"></div>
+        </div>
       </div>
-    </div>
-  </el-input>
+    </el-input>
+  </div>
 </template>
 
 <script>
 import { checkPassword } from "./assets/checkpassword";
-
-// 获取值的长度
-const getLength = function (value) {
-  if (value === void (0) || value === null) {
-    return 0
-  }
-  return String(value).length
-}
 
 export default {
   name: "input-password",
@@ -38,10 +40,10 @@ export default {
     event: "change",
   },
   props: {
-    required: {
-      type: Boolean,
+    name: {
+      type: String,
       required: false,
-      default: true
+      default: "",
     },
     value: {
       type: [String, Number],
@@ -53,6 +55,12 @@ export default {
       required: false,
       default: "请输入密码",
     },
+    size: {
+      /**组件大小 */
+      type: String,
+      required: false,
+      default: "",
+    },
     minlength: {
       /**密码最小位数 */
       type: Number,
@@ -60,9 +68,28 @@ export default {
       default: 6,
     },
     maxlength: {
+      /**密码最大位数 */
       type: Number,
+      require: false,
+      default: 16,
+    },
+    suffixIcon: {
+      /**后缀图标 */
+      type: String,
       required: false,
-      default: 16
+      default: "",
+    },
+    prefixIcon: {
+      /**前缀图标 */
+      type: String,
+      required: false,
+      default: "",
+    },
+    autocomplete: {
+      /**自动补全 */
+      type: String,
+      required: false,
+      default: "off",
     },
     showPassword: {
       /**是否显示切换密码图标 */
@@ -70,10 +97,29 @@ export default {
       required: false,
       default: true,
     },
-    minScore: {
-      type: Number,
+    disabled: {
+      /**禁用 */
+      type: Boolean,
       required: false,
-      default: 25
+      default: false,
+    },
+    readonly: {
+      /**只读 */
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    clearable: {
+      /**是否显示清空图标 */
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    autofocus: {
+      /**自动获取焦点 */
+      type: Boolean,
+      required: false,
+      default: false,
     },
     format: {
       type: Function,
@@ -138,11 +184,6 @@ export default {
           ) 0  0/16px 100%`,
         }
       }
-    },
-    rules() {
-      return [
-        { required: this.required, validator: () => this.valid(), trigger: 'blur' }
-      ]
     }
   },
   watch: {
@@ -170,31 +211,19 @@ export default {
         .replace(/[^a-zA-Z0-9!@#$%^&*(),./]/g, '');
       this.$emit('verify', this.score)
     },
-    valid() {
-      return new Promise((resolve, reject) => {
-        if (this.required && !getLength(this.myValue)) {
-          return reject(`请输入密码`)
-        }
-        if (this.minlength && (this.minlength > getLength(this.myValue))) {
-          return reject(`密码长度不能低于${this.minlength}`)
-        }
-        if (this.maxlength && (this.maxlength < getLength(this.myValue))) {
-          return reject(`密码长度不能高于${this.maxlength}`)
-        }
-        if (this.score < this.minScore) {
-          return reject(`密码强度不足，请更换密码`)
-        }
-        resolve()
-      })
-    }
-  },
-  mounted() {
-    this.$emit('ready', this.rules)
   },
 };
 </script>
 
 <style scoped>
+.input-password {
+  display: flex;
+}
+.input-password .el-input {
+  -ms-flex: 1;
+  flex: 1;
+  min-width: 0;
+}
 .input-password >>> .el-input-group__append {
   background: #fcfcfc;
   padding: 0 12px;

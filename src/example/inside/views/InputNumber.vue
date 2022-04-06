@@ -46,9 +46,6 @@
 //import { util } from '@/core';
 
 export default {
-  components: {
-    InputNumber: () => import("@/core/components/InputNumber.vue"),
-  },
   data() {
     return {
       inputNumber1: null,

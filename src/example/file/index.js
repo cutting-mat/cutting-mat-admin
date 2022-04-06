@@ -1,5 +1,5 @@
 export default [{
-  path: 'file',
+  path: 'others',
   name: '其他',
   component: (resolve) => require(['./views/Index.vue'], resolve),
   children: [{

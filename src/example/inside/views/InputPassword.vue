@@ -47,9 +47,6 @@
 //import { util } from '@/core';
 
 export default {
-  components: {
-    InputPassword: () => import("@/core/components/InputPassword.vue"),
-  },
   data() {
 
     return {
