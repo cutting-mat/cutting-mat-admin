@@ -22,7 +22,7 @@
 
     <!-- 大图预览 -->
     <el-dialog width="800px" title="查看大图" :visible.sync="showPreview" append-to-body>
-      <img :src="previewImg" style="display: block;margin:auto" />
+      <img :src="previewImg" style="display: block; margin: auto" />
     </el-dialog>
   </div>
 </template>
@@ -36,7 +36,7 @@ import { throttle, formatDate } from "@/core";
 const Quill = require("./lib/quill.min.js");
 // 生成UUID
 function randomUUID() {
-  const path = formatDate(new Date(), 'year')
+  const path = formatDate(new Date(), "year");
   const temp_url = URL.createObjectURL(new Blob());
   const uuid = temp_url.toString(); // blob:https://xxx.com/b250d159-e1b6-4a87-9002-885d90033be3
   URL.revokeObjectURL(temp_url);
@@ -45,22 +45,24 @@ function randomUUID() {
 // 提取富文本内容
 function getText(richDate) {
   if (Array.isArray(richDate)) {
-    return richDate.map(e => {
-      if (e.insert) {
-        if (e.insert.split) {
-          return e.insert.replace(/\n/g, '')
-        } else if (typeof (e.insert) === 'object') {
-          if (e.insert.image) {
-            return '[图片]'
+    return richDate
+      .map((e) => {
+        if (e.insert) {
+          if (e.insert.split) {
+            return e.insert.replace(/\n/g, "");
+          } else if (typeof e.insert === "object") {
+            if (e.insert.image) {
+              return "[图片]";
+            }
+            return "[媒体]";
           }
-          return '[媒体]'
+        } else {
+          return "";
         }
-      } else {
-        return ''
-      }
-    }).join('')
+      })
+      .join("");
   } else {
-    return '-'
+    return "-";
   }
 }
 
@@ -129,13 +131,13 @@ export default {
         },
       },
       showPreview: false, // 大图预览
-      previewImg: null
+      previewImg: null,
     };
   },
   computed: {
     textCont() {
       return getText(this.content);
-    }
+    },
   },
   watch: {
     readOnly: {
@@ -152,8 +154,7 @@ export default {
           ? this.quill.getSelection().index
           : this.quill.getLength();
         this.quill.insertEmbed(index, "image", image.url, "user");
-      }
-      else {
+      } else {
         console.warn(`richtext: 上传图片结果异常:`, image);
       }
     },
@@ -162,8 +163,7 @@ export default {
       const fileInput = document.getElementById(this.uploaderId);
       if (fileInput) {
         fileInput.click();
-      }
-      else {
+      } else {
         console.warn("没找到上传控件");
       }
     },
@@ -181,8 +181,7 @@ export default {
           if (this.value && this.value.split) {
             this.urlDispose(this.value);
           }
-        }
-        else {
+        } else {
           // 同步模式
           if (Array.isArray(this.value)) {
             this.content = this.value;
@@ -195,8 +194,7 @@ export default {
           this.$nextTick(() => {
             if (this.async) {
               throttleSave(this.quill.getContents().ops);
-            }
-            else {
+            } else {
               this.$emit("change", this.content);
               this.$emit("textChange", this.textCont);
             }
@@ -210,9 +208,14 @@ export default {
         return null;
       }
       this.loading = true;
-      this.asyncSaveApi(this.value && this.value.split ? this.value.replace(/^text\//, "") : randomUUID(), {
-        content: JSON.stringify(this.content)
-      })
+      this.asyncSaveApi(
+        this.value && this.value.split
+          ? this.value.replace(/^text\//, "")
+          : randomUUID(),
+        {
+          content: JSON.stringify(this.content),
+        }
+      )
         .then((res) => {
           this.loading = false;
           if (res.data && res.data.split) {
@@ -220,8 +223,7 @@ export default {
               this.$emit("change", res.data);
               this.$emit("textChange", this.textCont);
             });
-          }
-          else {
+          } else {
             console.warn(`richtext 保存失败`);
           }
         })
@@ -232,28 +234,16 @@ export default {
     // 链接解析
     urlDispose(path) {
       this.asyncGetApi(path.replace(/^text\//, "")).then((res) => {
-        if (this.async) {
-          if (res.data && res.data.split) {
-            this.$emit("change", res.data);
+        try {
+          let result = JSON.parse(res.data.content);
+          this.content = result;
+          this.$nextTick(() => {
+            this.quill.setContents(this.content);
+
             this.$emit("textChange", this.textCont);
-          }
-          else {
-            console.warn("接口未正确返回text/path", res.data);
-          }
-        }
-        else {
-          try {
-            let result = JSON.parse(res.data.content);
-            this.content = result;
-            this.$nextTick(() => {
-              this.quill.setContents(this.content);
-              this.$emit("change", result);
-              this.$emit("textChange", this.textCont);
-            });
-          }
-          catch (e) {
-            console.warn("接口未正确返回 richtext/content");
-          }
+          });
+        } catch (e) {
+          console.warn("接口未正确返回 richtext/content");
         }
       });
     },
@@ -267,7 +257,7 @@ export default {
         }
       }
       if (el) {
-        this.showPreview = !!(this.previewImg = el.src)
+        this.showPreview = !!(this.previewImg = el.src);
       }
     },
   },
@@ -280,8 +270,7 @@ export default {
         if (!this.async && Array.isArray(value)) {
           // 同步模式
           this.quill.setContents(value);
-        }
-        else if (this.async && value.split) {
+        } else if (this.async && value.split) {
           // 异步模式
           this.urlDispose(value);
         }
