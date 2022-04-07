@@ -5,6 +5,6 @@
 
 > 基于Element-UI的PC端组件库
 
-Live Demo: http://cutting-mat.refined-x.com/cutting-mat-admin/
+Live Demo: https://cutting-mat.github.io/cutting-mat-admin/
 
 输入任意符合长度要求的用户名密码
