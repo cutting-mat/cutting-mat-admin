@@ -8,7 +8,7 @@
     @input="$nextTick(() => { textLength = $refs.input.textLength })"
     @change="$emit('change', $event)"
   >
-    <div slot="suffix" v-if="showWordCount">
+    <div slot="suffix" v-if="showWordCount" class="input-valid-count">
       <span :class="{ overWordCount }">{{ textLength }}</span>
       /{{ maxlength }}
     </div>
@@ -125,5 +125,16 @@ export default {
 <style scoped>
 .input-valid >>> .overWordCount {
   color: #f56c6c;
+}
+.input-valid-count {
+  position: absolute;
+  white-space: nowrap;
+  top: 2px;
+  bottom: 2px;
+  right: 2px;
+  padding-left: 2px;
+  display: flex;
+  align-items: center;
+  background: #fff;
 }
 </style>
