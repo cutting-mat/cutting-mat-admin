@@ -7,6 +7,7 @@
       accept="t-image"
       v-bind="$attrs"
       list-type="picture-card"
+      :on-preview="handlePictureCardPreview"
       :limit="limit"
       @change="$emit('change', $event)"
     >
@@ -15,6 +16,9 @@
         <div>点击上传</div>
       </div>
     </uploader>
+    <el-dialog :visible.sync="dialogVisible" title="预览">
+      <img width="100%" :src="dialogImageUrl" alt />
+    </el-dialog>
   </div>
 </template>
 
@@ -44,12 +48,17 @@ export default {
   },
   data() {
     return {
+      dialogVisible: false,
+      dialogImageUrl: "",
       acceptFinnal: "",
       fileSize: ""
     };
   },
   methods: {
-
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    }
   },
   created() {
     report.send(packageInfo);
