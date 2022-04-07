@@ -13,5 +13,8 @@ export default [{
     path: '/example',
     name: '组件示例',
     component: (resolve) => require(['./Index.vue'], resolve),
+    meta: {
+        hide: true
+    },
     children: routes
 }]

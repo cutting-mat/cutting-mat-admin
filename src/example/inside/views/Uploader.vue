@@ -4,19 +4,11 @@
     <p>上传组件。来自：https://github.com/cutting-mat/uploader</p>
     <h2>示例</h2>
     <div class="demo">
-      <countdownButton
-        ref="countdownButton"
-        :count="10"
-        @click="$refs.countdownButton.start()"
-      >获取验证码</countdownButton>
+      <uploader>点击上传</uploader>
     </div>
     <pre class="code">
-      <textarea readonly rows="6">
-      <countdownButton
-          ref="countdownButton"
-          :count="10"
-          @click="$refs.countdownButton.start()"
-      >获取验证码</countdownButton>
+      <textarea readonly>
+      <uploader>点击上传</uploader>
       </textarea>
     </pre>
     <h2>配置</h2>
