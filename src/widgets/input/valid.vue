@@ -111,6 +111,9 @@ export default {
             reject(`validType error: ${this.validType}`)
         }
       })
+    },
+    getValue() {
+      return this.inputValue
     }
   },
   created() {

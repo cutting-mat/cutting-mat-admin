@@ -14,14 +14,11 @@
             <input-number v-model="number" />
           </el-form-item>
           <el-form-item label="计时按钮">
-            <countdown-button ref="countbtn" :number="10" @click="$refs.countbtn.count()">
-              发送验证码
-            </countdown-button>
+            <countdown-button ref="countbtn" :count="10" @click="$refs.countbtn.start()">发送验证码</countdown-button>
           </el-form-item>
           <el-form-item label="输入验证">
             <input-valid v-model="inputValid" :maxlength="10" show-word-limit />
           </el-form-item>
-
         </el-form>
       </div>
       <div class="flex-1 box">

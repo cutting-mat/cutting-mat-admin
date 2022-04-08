@@ -68,6 +68,13 @@
       <el-table-column prop="desc" label="说明"></el-table-column>
       <el-table-column prop="param" label="参数"></el-table-column>
     </el-table>
+    <h2>方法</h2>
+    <el-table :data="methods">
+      <el-table-column prop="name" label="名称"></el-table-column>
+      <el-table-column prop="desc" label="说明"></el-table-column>
+      <el-table-column prop="param" label="参数"></el-table-column>
+      <el-table-column prop="example" label="示例"></el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -126,7 +133,21 @@ export default {
           desc: '组件就绪回调，参数接收根据validType生成的验证规则，可直接用于el-form验证',
           param: 'rule[Array]',
         }
-      ]
+      ],
+      methods: [
+        {
+          name: 'valid',
+          desc: '根据"validType"验证输入，返回 Promise ，可以直接用做 el-form 的自定义校验方法',
+          param: '-',
+          example: `this.$refs.myInput.valid().then(() => alert("验证通过"))`
+        },
+        {
+          name: 'getValue',
+          desc: '获取当前输入值',
+          param: '-',
+          example: `this.$refs.myInput.getValue()`
+        }
+      ],
     };
   },
   methods: {
