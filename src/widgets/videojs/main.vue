@@ -7,6 +7,8 @@ const packageInfo = require('./package.json');
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 import videojs from 'video.js';
+window.videojs = videojs;
+require('video.js/dist/lang/zh-CN.js')
 import 'video.js/dist/video-js.min.css'
 import '@videojs/themes/dist/fantasy/index.css';
 import '@tower1229/videojs-plugin-marker';
@@ -42,7 +44,8 @@ export default {
   },
   mounted() {
     const options = Object.assign({
-      playbackRates: [0.5, 1, 1.5, 2]
+      playbackRates: [0.5, 1, 1.5, 2],
+      language: 'zh-CN'
     }, this.options)
 
     const player = videojs(this.$refs.videoPlayer, options, () => {

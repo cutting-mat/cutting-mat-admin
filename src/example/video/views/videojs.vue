@@ -136,11 +136,4 @@ export default {
 </script>
 
 <style scoped>
-.block {
-    height: 380px;
-    width: 800px;
-    margin: auto;
-    background: #fff;
-    box-shadow: 0 0 6px 6px rgba(0, 0, 0, 0.1);
-}
 </style>
