@@ -79,7 +79,7 @@ export default {
     },
     rules() {
       return [
-        { required: this.required, validator: () => this.valid(), trigger: 'blur' }
+        { required: this.required, validator: () => this.valid(), trigger: 'change' }
       ]
     }
   },
