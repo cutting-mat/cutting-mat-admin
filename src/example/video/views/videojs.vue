@@ -40,8 +40,7 @@
             <el-table-column prop="desc" label="说明"></el-table-column>
             <el-table-column prop="param" label="参数"></el-table-column>
             <el-table-column prop="example" label="示例"></el-table-column>
-        </el-table>
-    </div>
+        </el-table>  </div>
 </template>
 
 <script>
@@ -82,18 +81,10 @@ export default {
                         //  打点信息
                         markers: [
                             {
-                                offset: 2,
-                                type: 'text',
-                                data: {
-                                    content: 'content1'
-                                }
+                                offset: 2
                             },
                             {
-                                offset: 10,
-                                type: 'text',
-                                data: {
-                                    content: 'content2'
-                                }
+                                offset: 10
                             },
                         ]
                     });`
@@ -114,18 +105,10 @@ export default {
     },
     methods: {
         handleReady(player) {
-            // player.src({
-            //     src:
-            //         "http://tracesr.refined-x.com/_nuxt/videos/caozuo.2d1b87a.mp4",
-            //     type: "video/mp4"
-            // })
-
             player.src({
-                src: "https://static.refined-x.com/trans4K720.m3u8",
-                type: "application/x-mpegURL"
+                src: "https://static.refined-x.com/static/1080p-watermark.mp4",
+                type: "video/mp4"
             })
-
-
 
         }
     },
@@ -135,5 +118,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
