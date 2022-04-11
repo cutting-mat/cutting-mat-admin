@@ -154,6 +154,7 @@ export default {
 <style scoped>
 .input-valid {
   position: relative;
+  display: inline-block;
 }
 .input-valid >>> .overWordCount {
   color: #f56c6c;
