@@ -1,16 +1,9 @@
 <template>
   <div class="upload-img">
     <div class="flex-1 upload_text">数量限制 {{ limit }} 个，支持 {{ acceptFinnal }}，单文件大小不超过 {{ fileSize }}</div>
-    <uploader
-      ref="myuploader"
-      :value="value"
-      accept="t-image"
-      v-bind="$attrs"
-      list-type="picture-card"
-      :on-preview="handlePictureCardPreview"
-      :limit="limit"
-      @change="$emit('change', $event)"
-    >
+    <uploader ref="myuploader" :value="value" accept="t-image" v-bind="$attrs" list-type="picture-card"
+      :limitSize="10 * 1024 * 1024" :on-preview="handlePictureCardPreview" :limit="limit"
+      @change="$emit('change', $event)">
       <div slot="default" style="display: inline-block;vertical-align: middle;line-height: 2;">
         <i class="el-icon-upload"></i>
         <div>点击上传</div>
@@ -18,14 +11,14 @@
     </uploader>
     <el-dialog :visible.sync="dialogVisible" title="预览">
       <img width="100%" :src="dialogImageUrl" alt />
-    </el-dialog>
-  </div>
+    </el-dialog>  </div>
 </template>
 
 <script>
 const packageInfo = require('./package.json');
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
+
 
 export default {
   model: {
@@ -75,24 +68,27 @@ export default {
 .upload_text {
   margin-bottom: 8px;
 }
-.upload-img >>> .el-upload-list--picture-card .el-upload-list__item,
-.upload-img >>> .el-upload--picture-card {
+
+.upload-img>>>.el-upload-list--picture-card .el-upload-list__item,
+.upload-img>>>.el-upload--picture-card {
   width: 128px;
   height: 128px;
 }
-.upload-img >>> .el-upload-list--picture-card .el-upload-list__item-thumbnail {
+
+.upload-img>>>.el-upload-list--picture-card .el-upload-list__item-thumbnail {
   object-fit: cover;
 }
-.upload-img
-  >>> .el-upload-list--picture-card
-  .el-upload-list__item-status-label {
+
+.upload-img>>>.el-upload-list--picture-card .el-upload-list__item-status-label {
   display: none;
 }
-.upload-img >>> .el-upload-list--picture-card .el-upload-list__item-actions {
+
+.upload-img>>>.el-upload-list--picture-card .el-upload-list__item-actions {
   opacity: 1;
   background: none;
 }
-.upload-img >>> .el-upload-list__item-delete {
+
+.upload-img>>>.el-upload-list__item-delete {
   display: block;
   position: absolute;
   right: 0;
@@ -102,7 +98,8 @@ export default {
   padding: 0 6px;
   border-radius: 0 0 0 6px;
 }
-.upload-img >>> .el-upload-list__item-delete:hover {
+
+.upload-img>>>.el-upload-list__item-delete:hover {
   color: red;
 }
 </style>

@@ -69,3 +69,4 @@ export const dynamicAlbum = (url, previewImg) => {
     }
     return fileAlbum;
 }
+
