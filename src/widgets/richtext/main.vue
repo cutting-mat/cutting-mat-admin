@@ -21,7 +21,12 @@
     </el-alert>-->
 
     <!-- 大图预览 -->
-    <el-dialog width="800px" title="查看大图" :visible.sync="showPreview" append-to-body>
+    <el-dialog
+      width="800px"
+      title="查看大图"
+      :visible.sync="showPreview"
+      append-to-body
+    >
       <img :src="previewImg" style="display: block; margin: auto" />
     </el-dialog>
   </div>
@@ -104,6 +109,10 @@ export default {
       required: false,
       default: saveJSON,
     },
+    autoSave: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -174,7 +183,7 @@ export default {
         const toolbar = this.quill.getModule("toolbar");
         toolbar.addHandler("image", this.getImage);
         // 异步保存请求防抖
-        const throttleSave = throttle(this.saveString, 500, 10000);
+        const throttleSave = throttle(this.asyncSave, 500, 10000);
         // 初始内容
         if (this.async) {
           // 异步模式
@@ -193,7 +202,9 @@ export default {
           this.content = this.quill.getContents().ops;
           this.$nextTick(() => {
             if (this.async) {
-              throttleSave(this.quill.getContents().ops);
+              if (this.autoSave) {
+                throttleSave(this.quill.getContents().ops);
+              }
             } else {
               this.$emit("change", this.content);
               this.$emit("textChange", this.textCont);
@@ -202,34 +213,40 @@ export default {
         });
       }
     },
-    saveString() {
+    asyncSave() {
       // 异步模式保存
-      if (!this.async || !this.content) {
-        return null;
-      }
-      this.loading = true;
-      this.asyncSaveApi(
-        this.value && this.value.split
-          ? this.value.replace(/^text\//, "")
-          : randomUUID(),
-        {
-          content: JSON.stringify(this.content),
+      return new Promise((resolve, reject) => {
+        if (!this.async || !this.content) {
+          return reject(
+            `this.async:${this.async};this.content:${this.content}`
+          );
         }
-      )
-        .then((res) => {
-          this.loading = false;
-          if (res.data && res.data.split) {
-            this.$nextTick(() => {
-              this.$emit("change", res.data);
-              this.$emit("textChange", this.textCont);
-            });
-          } else {
-            console.warn(`richtext 保存失败`);
+        this.loading = true;
+        this.asyncSaveApi(
+          this.value && this.value.split
+            ? this.value.replace(/^text\//, "")
+            : randomUUID(),
+          {
+            content: JSON.stringify(this.content),
           }
-        })
-        .catch(() => {
-          this.loading = false;
-        });
+        )
+          .then((res) => {
+            this.loading = false;
+            if (res.data && res.data.split) {
+              this.$nextTick(() => {
+                this.$emit("change", res.data);
+                this.$emit("textChange", this.textCont);
+                resolve();
+              });
+            } else {
+              reject(`保存失败: 接口数据异常`);
+            }
+          })
+          .catch((err) => {
+            this.loading = false;
+            reject(`保存失败, err:`, err);
+          });
+      });
     },
     // 链接解析
     urlDispose(path) {
