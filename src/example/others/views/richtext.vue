@@ -23,13 +23,53 @@
     </p>
 
     <div class="demo">
-      <richtext v-model="contentUrl" async autoSave />
-      <el-input type="textarea" :rows="6" :value="'富文本 ID：' + contentUrl" />
+      <el-form
+        ref="editForm"
+        :model="editForm"
+        :rules="rules"
+        label-width="80px"
+      >
+        <el-form-item label="标题" prop="title">
+          <richtext
+            ref="inputTitle"
+            v-model="editForm.title"
+            async
+            required
+            @ready="(rule) => (rules.title = rule)"
+            @textChange="$refs.editForm.validateField('title')"
+          />
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="handleSubmit">表单提交</el-button>
+        </el-form-item>
+      </el-form>
+      <el-input
+        type="textarea"
+        :rows="6"
+        :value="'富文本 ID：' + editForm.title"
+      />
     </div>
     <pre class="code">
-        <textarea readonly>
-        <richtext v-model="contentUrl" async autoSave />
-        </textarea>
+      <textarea readonly rows="17">
+      <el-form
+        ref="editForm"
+        :model="editForm"
+        :rules="rules"
+        label-width="80px"
+        >
+        <el-form-item label="标题" prop="title">
+          <richtext
+            ref="inputTitle"
+            v-model="editForm.title"
+            async
+            required
+            @ready="(rule) => (rules.title = rule)"
+            @textChange="$refs.editForm.validateField('title')"
+          />
+        </el-form-item>
+        ...
+      </textarea>
+      
     </pre>
 
     <p>只读模式：</p>
@@ -38,7 +78,7 @@
     </div>
     <pre class="code">
         <textarea readonly>
-        <richtext read-only :value="demoCont" />
+        <richtext :value="demoCont" imgZoom read-only />
         </textarea>
     </pre>
     <h2>配置</h2>
@@ -65,18 +105,14 @@
   </div>
 </template>
 <script>
-/**
- * 
- * <p>
-      异步模式需要定义asyncGetApi（请求文本）和asyncSaveApi（保存文本）接口，默认会从common中取getText和saveText：
-      <code>import {getJSON, saveJSON} from "@/main/api/common";</code>
-    </p>
- * */
 export default {
   data() {
     return {
       content: [],
-      contentUrl: "",
+      editForm: {
+        title: "",
+      },
+      rules: {},
       demoCont: [
         { insert: "标题一" },
         { attributes: { header: 1 }, insert: "\n" },
@@ -148,6 +184,20 @@ export default {
           options: "-",
           default: "false",
         },
+        {
+          name: "required",
+          desc: "内容必填（将生成校验对象）",
+          type: "Boolean",
+          options: "-",
+          default: "false",
+        },
+        {
+          name: "label",
+          desc: "控件名称，用于校验提示",
+          type: "String",
+          options: "-",
+          default: "富文本",
+        },
       ],
       events: [
         {
@@ -160,16 +210,35 @@ export default {
           desc: "纯文本变化事件",
           param: "提取纯文本[String]",
         },
+        {
+          name: "ready",
+          desc: "组件就绪回调，参数接收根据validType生成的验证规则，可直接用于el-form验证",
+          param: "rule[Array]",
+        },
       ],
       methods: [
         {
           name: "asyncSave",
-          desc: "异步模式模式下手动保存方法，返回 Promise",
+          desc: "异步模式模式下手动保存方法，返回 Promise，resolve(text[String], response[Any])",
           param: "-",
           example: `this.$refs.myInput.asyncSave().then(() => alert("保存成功"))`,
         },
       ],
     };
+  },
+  methods: {
+    handleSubmit() {
+      this.$refs.editForm.validate((valid) => {
+        if (valid) {
+          this.$message.success("验证通过");
+          this.$refs.inputTitle.asyncSave().then(() => {
+            this.$message.success("富文本保存成功");
+            // send request
+            this.$message.success("表单提交...");
+          });
+        }
+      });
+    },
   },
 };
 </script>

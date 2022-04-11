@@ -54,7 +54,7 @@ function getText(richDate) {
       .map((e) => {
         if (e.insert) {
           if (e.insert.split) {
-            return e.insert.replace(/\n/g, "");
+            return e.insert.replace(/\n/g, "").trim();
           } else if (typeof e.insert === "object") {
             if (e.insert.image) {
               return "[图片]";
@@ -113,6 +113,16 @@ export default {
       type: Boolean,
       default: false,
     },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    label: {
+      type: String,
+      required: false,
+      default: "富文本",
+    },
   },
   data() {
     return {
@@ -147,6 +157,15 @@ export default {
     textCont() {
       return getText(this.content);
     },
+    rules() {
+      return [
+        {
+          required: this.required,
+          validator: () => this.valid(),
+          trigger: "change",
+        },
+      ];
+    },
   },
   watch: {
     readOnly: {
@@ -157,6 +176,14 @@ export default {
     },
   },
   methods: {
+    valid() {
+      return new Promise((resolve, reject) => {
+        if (this.required && !this.textCont.length) {
+          return reject(`请输入${this.label}`);
+        }
+        resolve();
+      });
+    },
     getImageSuccess(image) {
       if (image.url) {
         const index = this.quill.getSelection()
@@ -202,6 +229,7 @@ export default {
           this.content = this.quill.getContents().ops;
           this.$nextTick(() => {
             if (this.async) {
+              this.$emit("textChange", this.textCont);
               if (this.autoSave) {
                 throttleSave(this.quill.getContents().ops);
               }
@@ -235,8 +263,7 @@ export default {
             if (res.data && res.data.split) {
               this.$nextTick(() => {
                 this.$emit("change", res.data);
-                this.$emit("textChange", this.textCont);
-                resolve();
+                resolve(this.textCont, res.data);
               });
             } else {
               reject(`保存失败: 接口数据异常`);
@@ -301,6 +328,8 @@ export default {
     if (this.imgZoom) {
       document.body.addEventListener("click", this.ImgClick);
     }
+    // 校验规则
+    this.$emit("ready", this.rules);
   },
   beforeDestroy() {
     if (this.imgZoom) {
