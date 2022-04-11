@@ -1,20 +1,31 @@
 <template>
-  <uploader class="upload-single-img" accept="t-image" :value="value.url ? [value] : []" imgCrop
-    :limitSize="10 * 1024 * 1024" :show-file-list="false" :on-success="(res) => { $emit('change', res) }">
+  <uploader
+    class="upload-single-img"
+    accept="t-image"
+    :value="value.url ? [value] : []"
+    imgCrop
+    :limitSize="10 * 1024 * 1024"
+    :show-file-list="false"
+    :on-success="
+      (res) => {
+        $emit('change', res);
+      }
+    "
+  >
     <img v-if="value.url" :src="value.url" alt class="_img" />
     <div v-else class="_cont">
       <div class="_inner">
         <div>
-          <i class="el-icon-upload" style="font-size:2em"></i>
+          <i class="el-icon-upload" style="font-size: 2em"></i>
         </div>
         {{ placeholder }}
       </div>
     </div>
-    </uploader>
+  </uploader>
 </template>
 
 <script>
-const packageInfo = require('./package.json');
+const packageInfo = require("./package.json");
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 
@@ -24,19 +35,18 @@ export default {
       type: Object,
       required: false,
       default() {
-        return {}
-      }
+        return {};
+      },
     },
     placeholder: {
       type: String,
       required: false,
-      default: '上传'
-    }
+      default: "上传",
+    },
   },
   created() {
     report.send(packageInfo);
-
-  }
+  },
 };
 </script>
 
@@ -53,7 +63,7 @@ export default {
   overflow: hidden;
 }
 
-.upload-single-img>>>.el-upload {
+.upload-single-img >>> .el-upload {
   display: block;
 }
 

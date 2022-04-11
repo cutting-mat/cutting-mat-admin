@@ -8,6 +8,7 @@
   },
   "homepage": "https://cutting-mat.github.io/template-element-ui/",
   "dependencies": {
+    "@authing/vue-ui-components": "^3.0.32",
     "@cutting-mat/animater": "^1.0.9",
     "@cutting-mat/axios": "^1.1.4",
     "@cutting-mat/uploader": "^2.0.10",

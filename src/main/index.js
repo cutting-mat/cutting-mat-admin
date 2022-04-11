@@ -10,6 +10,10 @@ export default [
         name: '登录',
         component: (resolve) => require(['./views/Login.vue'], resolve)
     }, {
+        path: '/login3',
+        name: '三方登录',
+        component: (resolve) => require(['./views/Login3.vue'], resolve)
+    }, {
         path: '/500',
         name: '服务异常',
         component: (resolve) => require(['./views/500.vue'], resolve)
