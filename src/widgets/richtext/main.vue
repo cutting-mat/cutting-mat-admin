@@ -293,7 +293,10 @@ export default {
     },
     ImgClick(e) {
       let el = e.target;
-      const matchResult = el.matches(".myTextEditor.imgZoom img");
+
+      const matchResult = el.matches(
+        `.myTextEditor.imgZoom #${this.editorId} img`
+      );
       while (el && !matchResult) {
         el = el.parentNode;
         if (this === el) {
