@@ -55,3 +55,22 @@ export const GetPermission = () => $store.action("permission");
  * */
 export const AfterGetDynamicRoute = routes => $store.set("DynamicRoute", routes);
 
+/**
+ * 用户认证失败回调
+ * @param to[Object] 路由守卫(beforeEach)方法的同名参数
+ * @param from[Object] 路由守卫(beforeEach)方法的同名参数
+ * @param next[Object] 路由守卫(beforeEach)方法的同名参数
+ * @return next() || [Any]
+ * */
+export const AuthFailedCallback = (to, from, next) => {
+    if (to.path !== "/login") {
+        // 未登录跳转登录页
+        let query = {
+            redirect: to.fullPath
+        };
+        return next({
+            path: "/login",
+            query
+        });
+    }
+}
