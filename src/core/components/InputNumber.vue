@@ -88,7 +88,17 @@ export default {
   watch: {
     value: {
       handler(newVal) {
-        this.myValue = newVal;
+        let inputValue = newVal;
+        if (!isNaN(parseFloat(inputValue))) {
+          if (inputValue < this.min && this.myValue !== "") {
+            inputValue = this.min;
+          }
+          if (inputValue > this.max) {
+            inputValue = this.max;
+          }
+        }
+
+        this.myValue = inputValue;
       },
       immediate: true,
     },
