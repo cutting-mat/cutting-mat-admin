@@ -5,12 +5,9 @@
     <h2>示例</h2>
     <p>默认v-model传递的值为富文本数据[Array]：</p>
     <div class="demo">
-      <richtext v-model="content" />
-      <el-input
-        type="textarea"
-        :rows="6"
-        :value="'富文本数据：' + JSON.stringify(content)"
-      />
+      <richtext v-model="content" @textChange="pureText = $event" />
+      <el-input placeholder="富文本数据" :value="JSON.stringify(content)" />
+      <el-input placeholder="纯文本数据" :value="pureText" />
     </div>
     <pre class="code">
         <textarea readonly>
@@ -33,6 +30,11 @@
           <richtext
             ref="inputTitle"
             v-model="editForm.title"
+            :content="[
+              {
+                insert: '标题123',
+              },
+            ]"
             async
             required
             @ready="(rule) => (rules.title = rule)"
@@ -109,6 +111,7 @@ export default {
   data() {
     return {
       content: [],
+      pureText: null,
       editForm: {
         title: "",
       },
@@ -141,6 +144,13 @@ export default {
           type: "Array/String",
           options: "-",
           default: '[]/""',
+        },
+        {
+          name: "content",
+          desc: "异步模式的初始富文本数据",
+          type: "Array",
+          options: "-",
+          default: "-",
         },
         {
           name: "read-only",
@@ -203,7 +213,7 @@ export default {
         {
           name: "change",
           desc: "内容变化事件",
-          param: "富文本内容[Array]/富文本id[String]",
+          param: "(异步模式富文本id[String], 富文本内容[Array])",
         },
         {
           name: "textChange",

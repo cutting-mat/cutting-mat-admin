@@ -86,6 +86,10 @@ export default {
         return this.async ? "" : [];
       },
     },
+    content: {
+      type: Array,
+      required: false,
+    },
     readOnly: {
       type: Boolean,
       required: false,
@@ -129,7 +133,7 @@ export default {
   data() {
     return {
       loading: false,
-      content: [],
+      richtextCont: [],
       quill: null,
       editorId: "editor" + parseInt(Math.random() * 100000000),
       uploaderId: "uploader" + parseInt(Math.random() * 100000000),
@@ -157,7 +161,7 @@ export default {
   },
   computed: {
     textCont() {
-      return getText(this.content);
+      return getText(this.richtextCont);
     },
     rules() {
       return [
@@ -222,33 +226,41 @@ export default {
         } else {
           // 同步模式
           if (Array.isArray(this.value)) {
-            this.content = this.value;
-            this.quill.setContents(this.content);
+            this.richtextCont = this.value;
+            this.quill.setContents(this.richtextCont);
           }
         }
         // 内容编辑事件
         this.quill.on("text-change", () => {
-          this.content = this.quill.getContents().ops;
+          this.richtextCont = this.quill.getContents().ops;
           this.$nextTick(() => {
             if (this.async) {
-              this.$emit("textChange", this.textCont);
+              // 异步模式
               if (this.autoSave) {
                 throttleSave(this.quill.getContents().ops);
+              } else {
+                this.$emit("change", this.value, this.richtextCont);
+                this.$emit("textChange", this.textCont);
               }
             } else {
-              this.$emit("change", this.content);
+              // 同步模式
+              this.$emit("change", this.richtextCont);
               this.$emit("textChange", this.textCont);
             }
           });
         });
       }
+      // 初始内容
+      if (Array.isArray(this.content) && this.content.length) {
+        this.quill.setContents(this.content);
+      }
     },
     asyncSave() {
       // 异步模式保存
       return new Promise((resolve, reject) => {
-        if (!this.async || !this.content) {
+        if (!this.async || !this.richtextCont) {
           return reject(
-            `this.async:${this.async};this.content:${this.content}`
+            `this.async:${this.async};this.richtextCont:${this.richtextCont}`
           );
         }
         this.loading = true;
@@ -257,14 +269,15 @@ export default {
             ? this.value.replace(/^text\//, "")
             : randomUUID(),
           {
-            content: JSON.stringify(this.content),
+            content: JSON.stringify(this.richtextCont),
           }
         )
           .then((res) => {
             this.loading = false;
             if (res.data && res.data.split) {
               this.$nextTick(() => {
-                this.$emit("change", res.data);
+                this.$emit("change", res.data, this.richtextCont);
+                this.$emit("textChange", this.textCont);
                 resolve(this.textCont, res.data);
               });
             } else {
@@ -282,9 +295,9 @@ export default {
       this.asyncGetApi(path.replace(/^text\//, "")).then((res) => {
         try {
           let result = JSON.parse(res.data.content);
-          this.content = result;
+          this.richtextCont = result;
           this.$nextTick(() => {
-            this.quill.setContents(this.content);
+            this.quill.setContents(this.richtextCont);
 
             this.$emit("textChange", this.textCont);
           });
@@ -315,7 +328,6 @@ export default {
     // 监听value第一次变化
     let unwatch = this.$watch("value", function (value) {
       if (this.quill && this.value) {
-        // 只读模式监听数据变化
         if (!this.async && Array.isArray(value)) {
           // 同步模式
           this.quill.setContents(value);
