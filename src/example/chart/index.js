@@ -1,46 +1,46 @@
 export default [{
     path: 'charts',
     name: '图表',
-    component: (resolve) => require(['./views/Index.vue'], resolve),
+    component: () => import('./views/Index.vue'),
     children: [{
         path: 'readme',
         name: '可视化图表约定',
-        component: (resolve) => require(['./views/Readme.vue'], resolve)
+        component: () => import('./views/Readme.vue')
     },
     {
         path: 'chart',
         name: '混合图表（柱，线）',
-        component: (resolve) => require(['./views/Chart.vue'], resolve)
+        component: () => import('./views/Chart.vue')
     },
     {
         path: 'pie',
         name: '饼状图',
-        component: (resolve) => require(['./views/Pie.vue'], resolve)
+        component: () => import('./views/Pie.vue')
     },
     {
         path: 'progress',
         name: '进度图',
-        component: (resolve) => require(['./views/Progress.vue'], resolve)
+        component: () => import('./views/Progress.vue')
     },
     {
         path: 'radar',
         name: '雷达图',
-        component: (resolve) => require(['./views/Radar.vue'], resolve)
+        component: () => import('./views/Radar.vue')
     },
     {
         path: 'scatter',
         name: '散点图',
-        component: (resolve) => require(['./views/Scatter.vue'], resolve)
+        component: () => import('./views/Scatter.vue')
     },
     {
         path: 'gauge',
         name: '仪表盘',
-        component: (resolve) => require(['./views/Gauge.vue'], resolve)
+        component: () => import('./views/Gauge.vue')
     },
     {
         path: 'wave',
         name: '水球图',
-        component: (resolve) => require(['./views/Wave.vue'], resolve)
+        component: () => import('./views/Wave.vue')
     }
     ]
 }]

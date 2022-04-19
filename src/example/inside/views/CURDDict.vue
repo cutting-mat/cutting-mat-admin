@@ -22,7 +22,7 @@
       :model="model"
       :columns="columns"
       :dialogAttribute="{
-        title: '字典信息'
+        title: '字典信息',
       }"
       @loading-state="loading = $event"
       @row-click="handleRowClick"
@@ -37,7 +37,10 @@
         ></i>
       </template>
       <template v-slot:action="scope">
-        <el-button v-auth="apiObj.update" size="mini" @click="$refs.theCURD.update(scope.row)"
+        <el-button
+          v-auth="apiObj.update"
+          size="mini"
+          @click="$refs.theCURD.update(scope.row)"
           >编辑</el-button
         >
         <el-button
@@ -85,7 +88,7 @@ export default {
     },
   },
   components: {
-    DictEditer: (resolve) => require(["@/system/components/DictEditer"], resolve),
+    DictEditer: () => import("@/system/components/DictEditer"),
   },
   data() {
     return {
@@ -95,7 +98,7 @@ export default {
         create: api.add,
         update: api.edit,
         delete: api.remove,
-        itemEdit: api.itemEdit
+        itemEdit: api.itemEdit,
       },
       editerVisible: false,
       loading: false,

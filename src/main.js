@@ -1,12 +1,8 @@
-// 根据.browserslistrc 配置加载polyfill, 需同时替换babel.config.js中注释的presets配置
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-
-import Vue from 'vue';
-
 // 开启 mock
 import mocker from '../mock';
 mocker()
+
+import Vue from 'vue';
 
 // 加载根组件
 import App from './App.vue';
@@ -29,6 +25,14 @@ Vue.use(preInstall);
 // 加载核心插件
 import plugins from '@/core/plugins';
 Vue.use(plugins);
+
+// 大屏动画插件
+import animater from '@cutting-mat/animater';
+Vue.use(animater);
+
+// 组件库
+import widgets from '@/widgets'
+Vue.use(widgets)
 
 // 创建应用
 const app = new Vue({

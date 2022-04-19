@@ -33,12 +33,14 @@
 </template>
 
 <script>
-const packageInfo = require("./package.json");
+import packageInfo from "./package.json";
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 import { getJSON, saveJSON } from "@/main/api/common";
 import { throttle, formatDate } from "@/core";
-const Quill = require("./lib/quill.min.js");
+import Quill from "quill";
+import "./lib/quill.snow.css";
+
 // 生成UUID
 function randomUUID() {
   const path = formatDate(new Date(), "year");
@@ -343,8 +345,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("./lib/quill.snow.css");
-
 .myTextEditor {
   position: relative;
 }

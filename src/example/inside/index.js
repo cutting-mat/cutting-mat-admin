@@ -1,56 +1,56 @@
 export default [{
     path: 'component',
     name: '内置组件',
-    component: (resolve) => require(['./views/Index.vue'], resolve),
+    component: () => import('./views/Index.vue'),
     children: [{
         path: 'countdownButton',
         name: '倒计时按钮',
-        component: (resolve) => require(['./views/countdownButton.vue'], resolve)
+        component: () => import('./views/countdownButton.vue')
     }, {
         path: 'InputNumber',
         name: '数字输入框',
-        component: (resolve) => require(['./views/InputNumber.vue'], resolve)
+        component: () => import('./views/InputNumber.vue')
     }, {
         path: 'InputPassword',
         name: '密码输入框',
-        component: (resolve) => require(['./views/InputPassword.vue'], resolve)
+        component: () => import('./views/InputPassword.vue')
     }, {
         path: 'uploader',
         name: '上传组件',
-        component: (resolve) => require(['./views/Uploader.vue'], resolve)
+        component: () => import('./views/Uploader.vue')
     }, {
         path: 'DickControl',
         name: '数据字典控件',
-        component: (resolve) => require(['./views/DickControl.vue'], resolve)
+        component: () => import('./views/DickControl.vue')
     }, {
         path: 'CURD',
         name: '增删改查组件',
-        component: (resolve) => require(['./views/CURD.vue'], resolve),
+        component: () => import('./views/CURD.vue'),
         children: [{
             path: 'CURDRoleList',
             name: '增删改查-基本应用',
-            component: (resolve) => require(['./views/CURDRoleList.vue'], resolve),
+            component: () => import('./views/CURDRoleList.vue'),
             meta: {
                 title: '基本应用'
             }
         }, {
             path: 'CURDDict',
             name: '增删改查-Table高级配置',
-            component: (resolve) => require(['./views/CURDDict.vue'], resolve),
+            component: () => import('./views/CURDDict.vue'),
             meta: {
                 title: 'Table高级配置'
             }
         }, {
             path: 'CURDAccount',
             name: '增删改查-From高级配置',
-            component: (resolve) => require(['./views/CURDAccount.vue'], resolve),
+            component: () => import('./views/CURDAccount.vue'),
             meta: {
                 title: 'From高级配置'
             }
         }, {
             path: 'CURDMultiHeader',
             name: '增删改查-多级表头',
-            component: (resolve) => require(['./views/CURDMultiHeader.vue'], resolve),
+            component: () => import('./views/CURDMultiHeader.vue'),
             meta: {
                 title: '多级表头'
             }

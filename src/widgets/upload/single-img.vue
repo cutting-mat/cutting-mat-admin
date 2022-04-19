@@ -25,7 +25,7 @@
 </template>
 
 <script>
-const packageInfo = require("./package.json");
+import packageInfo from "./package.json";
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 

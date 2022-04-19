@@ -1,30 +1,30 @@
 export default [{
   path: 'others',
   name: '其他',
-  component: (resolve) => require(['./views/Index.vue'], resolve),
+  component: () => import('./views/Index.vue'),
   children: [{
     path: 'filePreview',
     name: 'Office文档预览',
-    component: (resolve) => require(['./views/file-preview.vue'], resolve)
+    component: () => import('./views/file-preview.vue')
   }, {
     path: 'richtext',
     name: '富文本编辑/展示',
-    component: (resolve) => require(['./views/richtext.vue'], resolve)
+    component: () => import('./views/richtext.vue')
   },
   {
     path: 'fileImport',
     name: '文件导入',
-    component: (resolve) => require(['./views/file-import.vue'], resolve)
+    component: () => import('./views/file-import.vue')
   },
   {
     path: 'Watermark',
     name: '水印组件',
-    component: (resolve) => require(['./views/watermark.vue'], resolve)
+    component: () => import('./views/watermark.vue')
   },
   {
     path: 'input-vlaid',
     name: '输入验证',
-    component: (resolve) => require(['./views/input-vlaid.vue'], resolve)
+    component: () => import('./views/input-vlaid.vue')
   },
 
   ]

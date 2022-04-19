@@ -1,11 +1,11 @@
 export default [{
     path: 'map',
     name: '地图',
-    component: (resolve) => require(['./views/Index.vue'], resolve),
+    component: () => import('./views/Index.vue'),
     children: [{
-            path: 'Nearby',
-            name: '搜索附近',
-            component: (resolve) => require(['./views/Nearby.vue'], resolve)
-        },
+        path: 'Nearby',
+        name: '搜索附近',
+        component: () => import('./views/Nearby.vue')
+    },
     ]
 }]

@@ -3,39 +3,39 @@ import { getSuffix } from "@/core";
 const fileTypes = {
     img: {
         type: ["png", "jpg", "jpeg"],
-        album: require("./img/img.png"),
+        album: `./img/img.png`,// 
     },
     word: {
         type: ["doc", "docx"],
-        album: require("./img/word.png"),
+        album: `./img/word.png`,// 
     },
     excel: {
         type: ["xls", "xlsx"],
-        album: require("./img/excel.png"),
+        album: `./img/excel.png`,// require("./img/excel.png"),
     },
     ppt: {
         type: ["ppt", "pptx"],
-        album: require("./img/ppt.png"),
+        album: `./img/ppt.png`,// require("./img/ppt.png"),
     },
     pdf: {
         type: ["pdf"],
-        album: require("./img/pdf.png"),
+        album: `./img/pdf.png`,// require("./img/pdf.png"),
     },
     video: {
         type: ["mp4", "wmv", "mov"],
-        album: require("./img/video.png"),
+        album: `./img/video.png`,// require("./img/video.png"),
     },
     txt: {
         type: ["txt"],
-        album: require("./img/txt.png"),
+        album: `./img/txt.png`,// require("./img/txt.png"),
     },
     rar: {
         type: ["rar", "zip"],
-        album: require("./img/rar.png"),
+        album: `./img/rar.png`,// require("./img/rar.png"),
     },
     default: {
         type: [],
-        album: require("./img/other.png")
+        album: `./img/other.png`,// require("./img/other.png")
     }
 };
 

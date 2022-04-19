@@ -10,7 +10,7 @@
         v-for="(item, index) in searchResults"
         :key="index"
         class="_item flex-row align-center"
-        :class="{cur: currentItem && (currentItem.uid===item.uid)}"
+        :class="{ cur: currentItem && currentItem.uid === item.uid }"
         @click="handleClick(item)"
       >
         <div class="flex-1">
@@ -18,7 +18,7 @@
             {{ item.title }}
           </div>
           <div class="el">
-            {{item.address}}
+            {{ item.address }}
           </div>
         </div>
         <div class="_check"></div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-const packageInfo = require("./package.json");
+import packageInfo from "./package.json";
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 
@@ -50,7 +50,7 @@ export default {
     zoomLevel: {
       type: Number,
       required: false,
-      default: 14
+      default: 14,
     },
   },
   data() {
@@ -59,7 +59,7 @@ export default {
       map: null,
       marker: null,
       searchResults: [],
-      currentItem: null
+      currentItem: null,
     };
   },
   watch: {
@@ -76,7 +76,7 @@ export default {
     handleClick(item) {
       this.currentItem = item;
       this.setMaker(item.point);
-      this.$emit('change', item)
+      this.$emit("change", item);
     },
     setMaker(point) {
       // 创建地图标点
@@ -108,26 +108,25 @@ export default {
     },
     handleSearch(baiduPoint) {
       // 监听center执行搜索
-      bmapsdk.search(baiduPoint, ["景点","纪念馆","博物馆"], (results) => {
+      bmapsdk.search(baiduPoint, ["景点", "纪念馆", "博物馆"], (results) => {
         let resultHash = {};
-        for(let ri = 0; ri < results.length; ri++){
+        for (let ri = 0; ri < results.length; ri++) {
           let result = results[ri];
           for (let i = 0; i < result.getCurrentNumPois(); i++) {
             let addrInfo = result.getPoi(i);
             // 结果去重
-            if(addrInfo.uid && !resultHash[addrInfo.uid]){
-              resultHash[addrInfo.uid] = addrInfo
+            if (addrInfo.uid && !resultHash[addrInfo.uid]) {
+              resultHash[addrInfo.uid] = addrInfo;
             }
           }
         }
-        
-        this.searchResults = Object.keys(resultHash).map(e => resultHash[e]);
+
+        this.searchResults = Object.keys(resultHash).map((e) => resultHash[e]);
       });
     },
   },
   created() {
     report.send(packageInfo);
-    
   },
   mounted() {
     // 初始化百度地图
@@ -138,7 +137,6 @@ export default {
       if (this.center && this.center.lng && this.center.lat) {
         this.handleCenter(this.center, this.handleSearch);
       }
-     
     });
   },
 };
@@ -148,27 +146,27 @@ export default {
 .bmap >>> img {
   max-width: none;
 }
-.titleBar{
+.titleBar {
   font-size: 16px;
   color: #333;
   padding: 12px 20px;
 }
-.titleBar ._icon{
-  color: #FE664E;
+.titleBar ._icon {
+  color: #fe664e;
 }
 
-.list{
-  background:#fff;
+.list {
+  background: #fff;
   box-sizing: border-box;
   padding: 0 1em;
 }
-.list ._item{
+.list ._item {
   border-bottom: 1px solid #f5f5f5;
   padding: 10px;
   color: #999;
   cursor: pointer;
 }
-.list ._title{
+.list ._title {
   font-size: 14px;
   color: #333;
 }

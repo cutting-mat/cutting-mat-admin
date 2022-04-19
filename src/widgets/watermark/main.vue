@@ -1,17 +1,10 @@
 <template>
-
-  <div
-    id='id_box'
-    class="watermark_box"
-  >
-    <slot
-      name='content'
-      style="position:absolute;"
-    ></slot>
+  <div id="id_box" class="watermark_box">
+    <slot name="content" style="position: absolute"></slot>
   </div>
 </template>
 <script>
-const packageInfo = require("./package.json");
+import packageInfo from "./package.json";
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 export default {
@@ -71,8 +64,7 @@ export default {
   created() {
     report.send(packageInfo);
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     setWatermark(str) {
       this.id = 0.12456489789441561;
@@ -145,7 +137,7 @@ export default {
     },
     switchDispose() {
       let val = this.switch;
-      
+
       if (val) {
         this.initWatermark(this.text);
       } else {
@@ -155,10 +147,9 @@ export default {
   },
   watch: {
     switch() {
-        this.switchDispose();
+      this.switchDispose();
     },
     state(newval) {
-      
       this.DOM =
         newval === "part" ? document.getElementById("id_box") : document.body;
     },

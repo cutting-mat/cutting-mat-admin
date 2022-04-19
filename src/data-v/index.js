@@ -1,7 +1,7 @@
 export default [{
     path: '/data-v',
     name: '数据可视化',
-    component: (resolve) => require(['./views/Index.vue'], resolve),
+    component: () => import('./views/Index.vue'),
     children: [{
         path: 'visual',
         name: '演示1',
@@ -10,7 +10,7 @@ export default [{
             link: 'https://github.com/cutting-mat/animater/blob/main/src/data-v/views/Visual.vue',
             description: '最简单的应用方式，匿名动画组元素依次进场'
         },
-        component: (resolve) => require(['./views/Visual.vue'], resolve),
+        component: () => import('./views/Visual.vue'),
     }, {
         path: 'visual2',
         name: '演示2',
@@ -19,7 +19,7 @@ export default [{
             link: 'https://github.com/cutting-mat/animater/blob/main/src/data-v/views/Visual2.vue',
             description: '支持 `v-modle / value`, 通过数据驱动进出场状态'
         },
-        component: (resolve) => require(['./views/Visual2.vue'], resolve),
+        component: () => import('./views/Visual2.vue'),
     }, {
         path: 'visual3',
         name: '演示3',
@@ -28,11 +28,11 @@ export default [{
             link: 'https://github.com/cutting-mat/animater/blob/main/src/data-v/views/Visual3.vue',
             description: '为动画元素编组，用实例方法控制各动画组切换'
         },
-        component: (resolve) => require(['./views/Visual3.vue'], resolve),
+        component: () => import('./views/Visual3.vue'),
     }, {
         path: 'visual4',
         name: '演示4',
-        component: (resolve) => require(['./views/visual4.vue'], resolve),
+        component: () => import('./views/visual4.vue'),
         meta: {
             title: '页面离场动画',
             link: 'https://github.com/cutting-mat/animater/blob/main/src/data-v/views/Visual4.vue',

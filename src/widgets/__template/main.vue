@@ -3,29 +3,21 @@
 </template>
 
 <script>
-const packageInfo = require('./package.json');
+import packageInfo from "./package.json";
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
-
 
 export default {
   name: `${packageInfo.name}__${packageInfo.version}`,
   data() {
-    return {
-    };
+    return {};
   },
-  methods: {
-    
-  },
+  methods: {},
   created() {
     report.send(packageInfo);
   },
-  mounted() {
-    
-  },
+  mounted() {},
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

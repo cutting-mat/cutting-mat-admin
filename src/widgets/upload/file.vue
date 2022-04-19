@@ -14,14 +14,17 @@
           点击上传
         </el-button>
       </uploader>
-      <div class="flex-1 upload_text">数量限制 {{ limit }} 个，支持 {{ acceptFinnal }}，单文件大小不超过 {{ fileSize }}</div>
+      <div class="flex-1 upload_text">
+        数量限制 {{ limit }} 个，支持 {{ acceptFinnal }}，单文件大小不超过
+        {{ fileSize }}
+      </div>
     </div>
     <TheFileList :value="value" @change="$emit('change', $event)" />
   </div>
 </template>
 
 <script>
-const packageInfo = require('./package.json');
+import packageInfo from "./package.json";
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 
@@ -34,15 +37,15 @@ export default {
     value: {
       type: Array,
       required: false,
-      default(){
-        return []
-      }
+      default() {
+        return [];
+      },
     },
     limit: {
       type: Number,
       required: false,
-      default: 9
-    }
+      default: 9,
+    },
   },
   components: {
     TheFileList: () => import("./assets/__fileList.vue"),
@@ -50,19 +53,21 @@ export default {
   data() {
     return {
       acceptFinnal: "",
-      fileSize: ""
+      fileSize: "",
     };
   },
-  methods: {
-
-  },
+  methods: {},
   created() {
     report.send(packageInfo);
-
   },
   mounted() {
-    this.acceptFinnal = this.$refs.myuploader.acceptFinnal === "*" ? "任意 格式" : this.$refs.myuploader.acceptFinnal;
-    this.fileSize = `${parseInt(this.$refs.myuploader.limitSize / 1024 / 1024)}M`;
+    this.acceptFinnal =
+      this.$refs.myuploader.acceptFinnal === "*"
+        ? "任意 格式"
+        : this.$refs.myuploader.acceptFinnal;
+    this.fileSize = `${parseInt(
+      this.$refs.myuploader.limitSize / 1024 / 1024
+    )}M`;
   },
 };
 </script>

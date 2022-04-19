@@ -1,6 +1,6 @@
 <template>
   <header class="flex-row align-center myheader">
-    <h1 class="logo" @click="$router.push('/')">cutting-mat-admin</h1>
+    <h1 class="logo" @click="$router.push('/')">LOGO</h1>
 
     <ul class="flex-1 navlist">
       <li
@@ -8,7 +8,9 @@
         :key="index"
         class="_item"
         @click="$router.push(item)"
-      >{{ (item.meta && item.meta.title) || item.name }}</li>
+      >
+        {{ (item.meta && item.meta.title) || item.name }}
+      </li>
     </ul>
 
     <el-dropdown
@@ -18,7 +20,11 @@
       @command="handleCommand"
     >
       <span class="el-dropdown-link">
-        <el-avatar icon="el-icon-user-solid"></el-avatar>
+        <el-image :src="user.avatar" fit="cover" class="_image">
+          <div slot="error">
+            <i class="el-icon-user-solid"></i>
+          </div>
+        </el-image>
         <span class="accountName">{{ user.accountName }}</span>
         <i class="el-icon-caret-bottom"></i>
       </span>
@@ -36,26 +42,19 @@ import { event } from "@/core";
 export default {
   data() {
     return {
-      list: [{
-        path: '/data-v',
-        name: '数据可视化',
-      },
-      {
-        path: '/example',
-        name: '组件示例',
-      }]
+      list: [],
     };
   },
   computed: {
     user() {
-      return this.$store.state.user
-    }
+      return this.$store.state.user;
+    },
   },
   methods: {
     handleCommand: function (command) {
       switch (command) {
         case "userInfo":
-          this.$router.push({ name: "个人信息" })
+          this.$router.push({ name: "个人信息" });
           break;
         case "logout":
           this.logout();
@@ -74,7 +73,7 @@ export default {
         event.emit("logout");
       });
     },
-  }
+  },
 };
 </script>
 
@@ -96,8 +95,10 @@ export default {
   color: #fff;
   cursor: pointer;
 }
-.userAvat .el-avatar {
+.userAvat ._image {
   vertical-align: middle;
+  border-radius: 50%;
+  height: 40px;
 }
 .userAvat .accountName {
   display: inline-block;
