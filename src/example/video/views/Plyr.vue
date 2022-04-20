@@ -1,10 +1,10 @@
 <template>
   <div>
     <h2>简介</h2>
-    <p>videojs视频播放。</p>
+    <p>Plyr视频播放器。</p>
     <h2>示例</h2>
     <div class="demo">
-      <videojs
+      <plyr
         style="height: 400px; width: 600px"
         :options="videoOptions"
         @ready="handleReady"
@@ -12,7 +12,7 @@
     </div>
     <pre class="code">
             <textarea readonly rows="9">
-            <videojs
+            <plyr
                 style="height:400px;width:600px"
                 :options="videoOptions"
                 @ready="player => player.src({
@@ -61,7 +61,7 @@ export default {
       props: [
         {
           name: "options",
-          desc: "videojs配置，官方文档：https://videojs.com/getting-started",
+          desc: "plyr配置，官方文档：https://plyr.com/getting-started",
           type: "Object",
           options: "-",
           default: "-",
@@ -84,7 +84,7 @@ export default {
       methods: [
         {
           name: "markerPlugin",
-          desc: "为进度条添加打点信息。来自插件：https://github.com/tower1229/videojs-plugin-marker",
+          desc: "为进度条添加打点信息。来自插件：https://github.com/tower1229/plyr-plugin-marker",
           param: "打点信息[Array]",
           example: `player.markerPlugin({
                         //  打点信息
@@ -102,8 +102,8 @@ export default {
       events: [
         {
           name: "ready",
-          desc: "videojs就绪事件",
-          param: "player[videojs实例]",
+          desc: "plyr就绪事件",
+          param: "player[plyr实例]",
         },
         {
           name: "heartbeat",
@@ -115,10 +115,21 @@ export default {
   },
   methods: {
     handleReady(player) {
-      player.src({
-        src: "https://static.refined-x.com/static/1080p-watermark.mp4",
-        type: "video/mp4",
-      });
+      player.source = {
+        type: "video",
+        sources: [
+          {
+            src: "https://static.refined-x.com/static/1080p-watermark.mp4",
+            type: "video/mp4",
+            size: 720,
+          },
+          {
+            src: "https://static.refined-x.com/static/1080p-watermark.mp4",
+            type: "video/mp4",
+            size: 1080,
+          },
+        ],
+      };
     },
   },
   created() {},

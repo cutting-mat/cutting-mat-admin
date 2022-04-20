@@ -117,25 +117,27 @@ export default {
         if (this.required && !getLength(this.inputValue)) {
           return reject(`请输入${this.label}`);
         }
-        switch (this.validType) {
-          case "count":
-            !this.overWordCount
-              ? resolve()
-              : reject(`超过字数上限，请删减文字`);
-            break;
-          case "mobile":
-            validMobile(this.inputValue)
-              ? resolve()
-              : reject(`手机号格式有误，请重新输入`);
-            break;
-          case "idCard":
-            validId(this.inputValue)
-              ? resolve()
-              : reject(`身份证号格式有误，请重新输入`);
-            break;
-          default:
-            reject(`validType error: ${this.validType}`);
-        }
+        this.$nextTick(() => {
+          switch (this.validType) {
+            case "count":
+              !this.overWordCount
+                ? resolve()
+                : reject(`超过字数上限，请删减文字`);
+              break;
+            case "mobile":
+              validMobile(this.inputValue)
+                ? resolve()
+                : reject(`手机号格式有误，请重新输入`);
+              break;
+            case "idCard":
+              validId(this.inputValue)
+                ? resolve()
+                : reject(`身份证号格式有误，请重新输入`);
+              break;
+            default:
+              reject(`validType error: ${this.validType}`);
+          }
+        });
       });
     },
     getValue() {

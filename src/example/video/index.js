@@ -6,6 +6,10 @@ export default [{
         path: 'videojs',
         name: 'videojs',
         component: () => import('./views/videojs.vue')
+    }, {
+        path: 'Plyr',
+        name: 'Plyr',
+        component: () => import('./views/Plyr.vue')
     },
 
     ]
