@@ -54,10 +54,6 @@
 export default {
   data() {
     return {
-      videoOptions: {
-        autoplay: true,
-        controls: true,
-      },
       props: [
         {
           name: "options",
@@ -111,12 +107,29 @@ export default {
           param: "currentTime[Number]",
         },
       ],
+      videoOptions: {
+        markers: {
+          enable: true,
+          points: [
+            {
+              time: 1,
+              label: "tip1",
+            },
+            {
+              time: 10,
+              label: "tip2",
+            },
+          ],
+        },
+      },
     };
   },
   methods: {
     handleReady(player) {
+      console.log(player);
       player.source = {
         type: "video",
+        title: "Example title",
         sources: [
           {
             src: "https://static.refined-x.com/static/1080p-watermark.mp4",

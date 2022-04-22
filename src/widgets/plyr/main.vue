@@ -38,9 +38,10 @@ export default {
     report.send(packageInfo);
   },
   mounted() {
-    const player = new Plyr(`#${this.playerId}`);
+    const options = Object.assign({}, this.options);
+    const player = new Plyr(`#${this.playerId}`, options);
     this.player = player;
-    player.on("ready", () => {
+    this.$nextTick(() => {
       this.$emit("ready", player);
     });
   },
