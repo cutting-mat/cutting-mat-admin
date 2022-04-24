@@ -17,6 +17,8 @@ import "video.js/dist/video-js.min.css";
 import "@videojs/themes/dist/fantasy/index.css";
 import "@tower1229/videojs-plugin-marker";
 // import "@tower1229/videojs-plugin-marker/dist/style.css";
+import "@tower1229/videojs-plugin-source-switcher";
+// import "@tower1229/videojs-plugin-source-switcher/dist/style.css";
 
 export default {
   name: `${packageInfo.name}__${packageInfo.version}`,
@@ -114,11 +116,20 @@ export default {
 </script>
 
 <style scoped>
-/* 主题样式bug */
 .vjs-theme-fantasy >>> .vjs-playback-rate-value {
   line-height: 54px;
 }
 .vjs-theme-fantasy >>> .vjs-menu-content {
-  bottom: 2.5em;
+  bottom: 54px;
+}
+
+.vjs-theme-fantasy >>> .vjs-resolution-button-label {
+  line-height: 54px;
+}
+.vjs-theme-fantasy >>> .vjs-menu-button-popup .vjs-menu {
+  margin-bottom: 0;
+}
+.vjs-theme-fantasy >>> .vjs-slider-horizontal .vjs-volume-level:before {
+  top: -0.5em;
 }
 </style>

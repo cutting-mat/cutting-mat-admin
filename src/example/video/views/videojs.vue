@@ -4,19 +4,22 @@
     <p>videojs视频播放。</p>
     <h2>示例</h2>
     <div class="demo">
-      <videojs
-        style="height: 400px; width: 600px"
-        :options="videoOptions"
-        @ready="handleReady"
-      />
+      <div style="max-width: 600px; margin: auto">
+        <videojs
+          class="vjs-fluid"
+          :options="videoOptions"
+          @ready="handleReady"
+        />
+      </div>
     </div>
     <pre class="code">
             <textarea readonly rows="9">
             <videojs
-                style="height:400px;width:600px"
+                style="width:600px"
+                class="vjs-fluid"
                 :options="videoOptions"
                 @ready="player => player.src({
-                    src: "http://tracesr.refined-x.com/_nuxt/videos/caozuo.2d1b87a.mp4",
+                    src: "https://static.refined-x.com/static/1080p-watermark.mp4",
                     type: "video/mp4"
                 })"
             />
@@ -49,7 +52,7 @@
 </template>
 
 <script>
-//import * as util from "@/main/assets/util";
+// import * as util from "@/main/assets/util";
 
 export default {
   data() {
@@ -93,7 +96,14 @@ export default {
                                 offset: 2
                             },
                             {
-                                offset: 10
+                                offset: 10,
+                                data: {
+                                  content: 'content2'
+                                },
+                                onClick(e) {
+                                    e.stopPropagation()     // marker点击事件，可以屏蔽原进度条动作
+                                    alert('marker click!')
+                                }
                             },
                         ]
                     });`,
@@ -118,6 +128,18 @@ export default {
       player.src({
         src: "https://static.refined-x.com/static/1080p-watermark.mp4",
         type: "video/mp4",
+      });
+
+      player.markerPlugin({
+        //  打点信息
+        markers: [
+          {
+            offset: 2,
+          },
+          {
+            offset: 10,
+          },
+        ],
       });
     },
   },
