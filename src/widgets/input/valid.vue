@@ -3,7 +3,7 @@
     <el-input
       ref="input"
       v-bind="$attrs"
-      v-model="inputValue"
+      v-model.trim="inputValue"
       :showWordLimit="showWordLimit"
       @input="
         $nextTick(() => {
@@ -36,7 +36,7 @@ import packageInfo from "./package.json";
 import { report } from "@/widgets/__support/report";
 /* ↑↑↑ 组件上报，勿删 ↑↑↑ */
 
-import { validMobile, validId } from "./assets/util";
+import { validMobile, validId, validTel, validEmail } from "./assets/util";
 
 // 获取值的长度
 const getLength = function (value) {
@@ -57,7 +57,7 @@ export default {
     validType: {
       type: String,
       required: false,
-      default: "count", // "count|mobile|idCard"
+      default: "count", // "count|mobile|idCard|tel|email"
     },
     required: {
       type: Boolean,
@@ -114,30 +114,44 @@ export default {
   methods: {
     valid() {
       return new Promise((resolve, reject) => {
-        if (this.required && !getLength(this.inputValue)) {
-          return reject(`请输入${this.label}`);
+        if (!getLength(this.inputValue)) {
+          if (this.required) {
+            return reject(`请输入${this.label}`);
+          } else {
+            return resolve();
+          }
         }
-        this.$nextTick(() => {
-          switch (this.validType) {
-            case "count":
+        switch (this.validType) {
+          case "count":
+            this.$nextTick(() => {
               !this.overWordCount
                 ? resolve()
                 : reject(`超过字数上限，请删减文字`);
-              break;
-            case "mobile":
-              validMobile(this.inputValue)
-                ? resolve()
-                : reject(`手机号格式有误，请重新输入`);
-              break;
-            case "idCard":
-              validId(this.inputValue)
-                ? resolve()
-                : reject(`身份证号格式有误，请重新输入`);
-              break;
-            default:
-              reject(`validType error: ${this.validType}`);
-          }
-        });
+            });
+            break;
+          case "mobile":
+            validMobile(this.inputValue)
+              ? resolve()
+              : reject(`手机号格式有误，请重新输入`);
+            break;
+          case "idCard":
+            validId(this.inputValue)
+              ? resolve()
+              : reject(`身份证号格式有误，请重新输入`);
+            break;
+          case "tel":
+            validTel(this.inputValue)
+              ? resolve()
+              : reject(`电话格式有误，请重新输入`);
+            break;
+          case "email":
+            validEmail(this.inputValue)
+              ? resolve()
+              : reject(`邮箱格式有误，请重新输入`);
+            break;
+          default:
+            reject(`validType error: ${this.validType}`);
+        }
       });
     },
     getValue() {

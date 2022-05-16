@@ -4,7 +4,12 @@
     <p>集成验证方法的输入框。</p>
     <h2>示例</h2>
     <div class="demo">
-      <el-form ref="editForm" :model="editForm" :rules="rules" label-width="80px">
+      <el-form
+        ref="editForm"
+        :model="editForm"
+        :rules="rules"
+        label-width="80px"
+      >
         <el-form-item label="标题" prop="title">
           <input-valid
             v-model="editForm.title"
@@ -12,7 +17,7 @@
             show-word-limit
             required
             label="标题"
-            @ready="rule => rules.title = rule"
+            @ready="(rule) => (rules.title = rule)"
           />
         </el-form-item>
         <el-form-item label="手机号" prop="mobile">
@@ -21,7 +26,7 @@
             validType="mobile"
             required
             label="手机号"
-            @ready="rule => rules.mobile = rule"
+            @ready="(rule) => (rules.mobile = rule)"
           />
         </el-form-item>
         <el-form-item label="身份证" prop="idCard">
@@ -30,7 +35,7 @@
             validType="idCard"
             required
             label="身份证"
-            @ready="rule => rules.idCard = rule"
+            @ready="(rule) => (rules.idCard = rule)"
           />
         </el-form-item>
         <el-form-item>
@@ -83,87 +88,89 @@
 
 export default {
   data() {
-
-
     return {
       editForm: {
-        title: '',
+        title: "",
         mobile: null,
-        idCard: null
+        idCard: null,
       },
       rules: {
         title: [],
         mobile: [],
-        idCard: []
+        idCard: [],
       },
-      props: [{
-        name: 'validType',
-        desc: '验证类型',
-        type: 'String',
-        options: '字数限制: count;验证手机号: mobile; 验证身份证: idCard',
-        default: 'count'
-      }, {
-        name: 'required',
-        desc: '是否必填校验',
-        type: 'Boolean',
-        options: '-',
-        default: 'false'
-      }, {
-        name: 'label',
-        desc: '控件名称，用于拼接必填校验的提示语',
-        type: 'String',
-        options: '-',
-        default: ''
-      }, {
-        name: 'maxlength',
-        desc: '最大输入长度，用于count类型验证，允许输入超长',
-        type: 'Number',
-        options: '-',
-        default: 'Infinity'
-      }, {
-        name: 'showWordLimit',
-        desc: '显示输入字数统计，配合maxlength实现超长字数标红',
-        type: 'Boolean',
-        options: '-',
-        default: 'false'
-      }],
+      props: [
+        {
+          name: "validType",
+          desc: "验证类型",
+          type: "String",
+          options:
+            "字数限制: count;验证手机号: mobile; 验证身份证: idCard; 验证座机: tel; 验证邮箱: email",
+          default: "count",
+        },
+        {
+          name: "required",
+          desc: "是否必填校验",
+          type: "Boolean",
+          options: "-",
+          default: "false",
+        },
+        {
+          name: "label",
+          desc: "控件名称，用于拼接必填校验的提示语",
+          type: "String",
+          options: "-",
+          default: "",
+        },
+        {
+          name: "maxlength",
+          desc: "最大输入长度，用于count类型验证，允许输入超长",
+          type: "Number",
+          options: "-",
+          default: "Infinity",
+        },
+        {
+          name: "showWordLimit",
+          desc: "显示输入字数统计，配合maxlength实现超长字数标红",
+          type: "Boolean",
+          options: "-",
+          default: "false",
+        },
+      ],
       events: [
         {
-          name: 'ready',
-          desc: '组件就绪回调，参数接收根据validType生成的验证规则，可直接用于el-form验证',
-          param: 'rule[Array]',
-        }
+          name: "ready",
+          desc: "组件就绪回调，参数接收根据validType生成的验证规则，可直接用于el-form验证",
+          param: "rule[Array]",
+        },
       ],
       methods: [
         {
-          name: 'valid',
+          name: "valid",
           desc: '根据"validType"验证输入，返回 Promise ，可以直接用做 el-form 的自定义校验方法',
-          param: '-',
-          example: `this.$refs.myInput.valid().then(() => alert("验证通过"))`
+          param: "-",
+          example: `this.$refs.myInput.valid().then(() => alert("验证通过"))`,
         },
         {
-          name: 'getValue',
-          desc: '获取当前输入值',
-          param: '-',
-          example: `this.$refs.myInput.getValue()`
-        }
+          name: "getValue",
+          desc: "获取当前输入值",
+          param: "-",
+          example: `this.$refs.myInput.getValue()`,
+        },
       ],
     };
   },
   methods: {
     handleSubmit() {
-      this.$refs.editForm.validate(valid => {
+      this.$refs.editForm.validate((valid) => {
         if (valid) {
-          this.$message.success('验证通过')
+          this.$message.success("验证通过");
         }
-      })
-    }
+      });
+    },
   },
-  created() {
-
-  },
+  created() {},
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
