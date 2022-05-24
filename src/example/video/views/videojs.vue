@@ -128,6 +128,8 @@ export default {
       player.src({
         src: "https://static.refined-x.com/static/1080p-watermark.mp4",
         type: "video/mp4",
+        // src: "http://ogn0m4it0.bkt.clouddn.com/58IzAY_GglrObBBbbD98wrHIbLk%3D/llhpmYRGVWfZL8dyCPXwCwKovI9R.m3u8",
+        // type: "application/x-mpegURL",
       });
 
       player.markerPlugin({
