@@ -5,18 +5,12 @@
     <h2>示例</h2>
     <div class="demo">
       <div style="max-width: 600px; margin: auto">
-        <videojs
-          class="vjs-fluid"
-          :options="videoOptions"
-          @ready="handleReady"
-        />
+        <video-player :options="videoOptions" @ready="handleReady" />
       </div>
     </div>
     <pre class="code">
             <textarea readonly rows="9">
-            <videojs
-                style="width:600px"
-                class="vjs-fluid"
+            <video-player
                 :options="videoOptions"
                 @ready="player => player.src({
                     src: "https://static.refined-x.com/static/1080p-watermark.mp4",
@@ -52,7 +46,10 @@
 </template>
 
 <script>
+import Vue from "vue";
 // import * as util from "@/main/assets/util";
+import { BusinessVideo } from "@cutting-mat/widgets";
+Vue.component("video-player", BusinessVideo);
 
 export default {
   data() {
