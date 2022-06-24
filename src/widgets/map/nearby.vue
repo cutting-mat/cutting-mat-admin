@@ -108,21 +108,11 @@ export default {
     },
     handleSearch(baiduPoint) {
       // 监听center执行搜索
-      bmapsdk.search(baiduPoint, ["景点", "纪念馆", "博物馆"], (results) => {
-        let resultHash = {};
-        for (let ri = 0; ri < results.length; ri++) {
-          let result = results[ri];
-          for (let i = 0; i < result.getCurrentNumPois(); i++) {
-            let addrInfo = result.getPoi(i);
-            // 结果去重
-            if (addrInfo.uid && !resultHash[addrInfo.uid]) {
-              resultHash[addrInfo.uid] = addrInfo;
-            }
-          }
-        }
-
-        this.searchResults = Object.keys(resultHash).map((e) => resultHash[e]);
-      });
+      bmapsdk
+        .search(baiduPoint, ["景点", "纪念馆", "博物馆"])
+        .then((result) => {
+          this.searchResults = result;
+        });
     },
   },
   created() {
