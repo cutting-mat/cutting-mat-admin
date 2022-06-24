@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div id="sfsfasdfsaf">
     <h2>简介</h2>
     <p>基于Echart封装的图表组件，支持线、柱两种类型</p>
+    <el-button @click="printit">打印</el-button>
+
     <h2>示例</h2>
     <div class="demo">
       <chart :data="data1" />
@@ -28,7 +30,12 @@
       </div>
       <div class="flex-1">
         <div class="demo">
-          <chart :data="data3" :colors="colors" chartType="bar,line" :legend="['宣传', '教育']" />
+          <chart
+            :data="data3"
+            :colors="colors"
+            chartType="bar,line"
+            :legend="['宣传', '教育']"
+          />
         </div>
         <pre class="code">
           <textarea readonly>
@@ -103,7 +110,9 @@
     </pre>
 
     <h3>坐标轴颜色</h3>
-    <p>axisColor(String): 坐标轴，坐标轴刻度标签，坐标轴分割线相关颜色，默认 #000</p>
+    <p>
+      axisColor(String): 坐标轴，坐标轴刻度标签，坐标轴分割线相关颜色，默认 #000
+    </p>
 
     <div class="demo">
       <chart :data="data1" :axisColor="'#2978ff'" />
@@ -151,6 +160,8 @@
 </template>
 
 <script>
+import html2pdf from "html2pdf.js";
+
 export default {
   data() {
     return {
@@ -248,10 +259,21 @@ export default {
       ],
     };
   },
-
+  methods: {
+    printit() {
+      var element = document.getElementById("sfsfasdfsaf");
+      var opt = {
+        filename: "myfile.pdf",
+        html2canvas: {
+          scale: 2,
+          width: element.offsetWidth,
+          height: element.offsetHeight,
+        },
+      };
+      html2pdf().set(opt).from(element).save();
+    },
+  },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

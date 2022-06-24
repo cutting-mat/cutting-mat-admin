@@ -14,6 +14,7 @@
     "@cutting-mat/widgets": "^0.0.9",
     "crypto-js": "^4.1.1",
     "element-ui": "^2.15.6",
+    "html2pdf.js": "^0.10.1",
     "tiny-emitter": "^2.1.0",
     "vue": "^2.6.14",
     "vue-router": "^3.5.2"

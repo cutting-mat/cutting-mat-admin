@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div id="video4234213432">
     <h2>简介</h2>
     <p>videojs视频播放。</p>
+
     <h2>示例</h2>
     <div class="demo">
       <div style="max-width: 600px; margin: auto">
@@ -9,16 +10,16 @@
       </div>
     </div>
     <pre class="code">
-            <textarea readonly rows="9">
-            <video-player
-                :options="videoOptions"
-                @ready="player => player.src({
-                    src: "https://static.refined-x.com/static/1080p-watermark.mp4",
-                    type: "video/mp4"
-                })"
-            />
-            </textarea>
-        </pre>
+        <textarea readonly rows="9">
+        <video-player
+            :options="videoOptions"
+            @ready="player => player.src({
+                src: "https://static.refined-x.com/static/1080p-watermark.mp4",
+                type: "video/mp4"
+            })"
+        />
+        </textarea>
+    </pre>
 
     <h2>配置</h2>
     <el-table :data="props">
