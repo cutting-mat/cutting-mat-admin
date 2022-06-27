@@ -21,9 +21,7 @@ export default {
     // 权限关闭 注册主路由
     if (!config.AccessControl) {
       MainRoute.forEach((route) => {
-        if (route.path) {
-          routeInstance.addRoute(route);
-        }
+        routeInstance.addRoute(route);
       });
       routeInstance.addRoute({
         path: "*",

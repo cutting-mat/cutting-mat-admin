@@ -174,9 +174,7 @@ export default function (Vue, routeInstance, interceptorsRequest) {
         }
 
         dynamicRoute.forEach((route) => {
-          if (route.path) {
-            routeInstance.addRoute(route);
-          }
+          routeInstance.addRoute(route);
         });
 
         routeInstance.addRoute({
