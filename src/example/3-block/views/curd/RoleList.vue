@@ -22,7 +22,6 @@
       :dialogAttribute="{
         title: '角色信息',
       }"
-      @selection-change="handleSelectionChange"
       @loading-state="loading = $event"
     >
       <template v-slot:action="scope">
@@ -46,10 +45,14 @@
 </template>
 
 <script>
+import CURD from "@/core/components/CURD";
 //import { util } from "@/core";
 import * as api from "@/user/api/role";
 
 export default {
+  components: {
+    CURD,
+  },
   data() {
     return {
       apiObj: {
@@ -83,21 +86,12 @@ export default {
       },
       columns: [
         {
-          type: "selection",
-          align: "center"
+          label: "角色名称",
+          prop: "name",
         },
         {
-          label: "基本信息",
-          children: [
-            {
-              label: "角色名称",
-              prop: "name",
-            },
-            {
-              label: "备注",
-              prop: "remark",
-            },
-          ],
+          label: "备注",
+          prop: "remark",
         },
         {
           label: "操作",
@@ -107,13 +101,7 @@ export default {
       ],
     };
   },
-  methods: {
-    handleSelectionChange(selection) {
-      console.log('selection:', selection)
-    }
-  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

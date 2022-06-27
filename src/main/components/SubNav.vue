@@ -22,17 +22,17 @@
           </div>
           <template v-for="(child, ci) in route.children">
             <!-- 三层 -->
-            <el-menu-item-group
-              v-if="child.children && child.children.length"
-              :route="child"
-              :index="child.name"
-              :key="'child' + ci"
-            >
-              <template slot="title">
-                <span>
+            <template v-if="child.children && child.children.length">
+              <el-menu-item
+                :route="child"
+                :index="child.name"
+                :key="'child' + ci"
+                class="second"
+              >
+                <span slot="title" class="flex-row align-center">
                   {{ (child.meta && child.meta.title) || child.name }}
                 </span>
-              </template>
+              </el-menu-item>
               <el-menu-item
                 v-for="(grandson, grandsonindex) in child.children"
                 :route="grandson"
@@ -44,13 +44,13 @@
                   {{ (grandson.meta && grandson.meta.title) || grandson.name }}
                 </span>
               </el-menu-item>
-            </el-menu-item-group>
+            </template>
             <!-- 两层 -->
             <el-menu-item
               v-else
               :route="child"
               :index="child.name"
-              :key="'child' + ci"
+              :key="'child2' + ci"
               class="second"
             >
               <span slot="title" class="flex-row align-center">
@@ -225,17 +225,21 @@ export default {
   border-radius: 6px;
 }
 
+.custom-menu >>> .third {
+  height: 36px;
+  line-height: 36px;
+  color: #999;
+}
+
 .custom-menu >>> .is-active {
   color: #0265ed;
   background: #e6ecf8;
 }
 .custom-menu >>> .el-menu-item:hover {
   background: #e6ecf8;
+  color: #333;
 }
-.custom-menu >>> .el-menu-item-group__title {
-  color: rgba(52, 104, 248, 0.8);
-  padding: 12px 0;
-}
+
 .custom-menu ul > li:last-child {
   margin-bottom: 0;
 }

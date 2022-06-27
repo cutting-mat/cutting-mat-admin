@@ -32,45 +32,6 @@ export default [
         name: "数据字典控件",
         component: () => import("./views/DickControl.vue"),
       },
-      {
-        path: "CURD",
-        name: "增删改查组件",
-        component: () => import("./views/CURD.vue"),
-        children: [
-          {
-            path: "CURDRoleList",
-            name: "增删改查-基本应用",
-            component: () => import("./views/CURDRoleList.vue"),
-            meta: {
-              title: "基本应用",
-            },
-          },
-          {
-            path: "CURDDict",
-            name: "增删改查-Table高级配置",
-            component: () => import("./views/CURDDict.vue"),
-            meta: {
-              title: "Table高级配置",
-            },
-          },
-          {
-            path: "CURDAccount",
-            name: "增删改查-From高级配置",
-            component: () => import("./views/CURDAccount.vue"),
-            meta: {
-              title: "From高级配置",
-            },
-          },
-          {
-            path: "CURDMultiHeader",
-            name: "增删改查-多级表头",
-            component: () => import("./views/CURDMultiHeader.vue"),
-            meta: {
-              title: "多级表头",
-            },
-          },
-        ],
-      },
     ],
   },
 ];

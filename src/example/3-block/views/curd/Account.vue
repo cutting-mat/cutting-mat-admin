@@ -76,11 +76,15 @@
 </template>
 
 <script>
+import CURD from "@/core/components/CURD";
 //import { util } from '@/core';
 import * as api from "@/user/api/account";
 import { list as requestRoles } from "@/user/api/role";
 
 export default {
+  components: {
+    CURD,
+  },
   data() {
     const validatePass = (editForm, value, callback) => {
       if (!value) {
@@ -113,11 +117,11 @@ export default {
       },
       loading: false,
       model: {
-        accountName: {
+        name: {
           label: "用户名",
           required: true,
         },
-        accountNumber: {
+        account: {
           label: "账号",
           required: true,
         },
@@ -179,12 +183,12 @@ export default {
       columns: [
         {
           label: "账号",
-          prop: "accountNumber",
+          prop: "account",
           width: 150,
         },
         {
           label: "用户名",
-          prop: "accountName",
+          prop: "name",
           width: 150,
         },
         {
@@ -213,16 +217,16 @@ export default {
     };
   },
   methods: {
-    handleLoading($event){
-      console.log($event)
-      this.loading = $event
+    handleLoading($event) {
+      console.log($event);
+      this.loading = $event;
     },
     resetPassword: function (data) {
       // 重置密码
       if (!data) {
         return null;
       }
-      this.$confirm(`确定重置账号 ${data.accountNumber} 的密码?`, "提示", {
+      this.$confirm(`确定重置账号 ${data.account} 的密码?`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
@@ -255,5 +259,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

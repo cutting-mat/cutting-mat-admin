@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import CURD from "@/core/components/CURD";
 //import { util } from "@/core";
 import * as api from "@/system/api/dict";
 
@@ -88,7 +89,8 @@ export default {
     },
   },
   components: {
-    DictEditer: () => import("@/system/components/DictEditer"),
+    DictEditer: () => import("@/system/components/DictEditer.vue"),
+    CURD,
   },
   data() {
     return {
