@@ -5,27 +5,21 @@
  * */
 
 // 主模块
-import main from '@/main/index'
+import main from "@/main/index";
 
 // 业务模块
 // import system from '@/system'
 // import user from '@/user'
-import { routes, default as example } from '@/example'
-import dataV from '@/data-v'
-
+import example from "@/example";
+import dataV from "@/data-v";
 
 // 主路由
 export const MainRoute = [
-    Object.assign({}, main[0], {
-        children: [
-            ...example,
-            ...routes,
-        ]
-    }),
-    ...dataV,
+  Object.assign({}, main[0], {
+    children: [...example],
+  }),
+  ...dataV,
 ];
 
 // 旁路路由
-export const BypassRoute = [
-    ...main.slice(1),
-]
+export const BypassRoute = [...main.slice(1)];

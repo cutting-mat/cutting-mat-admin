@@ -124,7 +124,7 @@
         :action="editScope"
         :formAttribute="formAttribute"
       />
-      <div slot="footer" class="dialog-footer">
+      <div slot="footer">
         <el-button type="primary" @click="save">确 定</el-button>
         <el-button @click="dialogVisible = false">取 消</el-button>
       </div>
@@ -151,7 +151,7 @@ export default {
          * scope 用于确认当前模型字段的提交时机, 默认更新和创建均提交
          * */
         return {
-          accountName: {
+          name: {
             // 数据
             type: "string",
             default: null,

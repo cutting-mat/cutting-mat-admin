@@ -1,6 +1,6 @@
 // 开启 mock
-// import mocker from '../mock';
-// mocker()
+import mocker from "../mock";
+mocker();
 
 import Vue from "vue";
 
@@ -26,18 +26,12 @@ Vue.use(preInstall);
 import plugins from "@/core/plugins";
 Vue.use(plugins);
 
-// 大屏动画插件
-import animater from "@cutting-mat/animater";
-Vue.use(animater);
-
-// 组件库
-import widgets from "@/widgets";
-Vue.use(widgets);
-
+import { pinia } from "@/core/plugins/store";
 // 创建应用
 const app = new Vue({
   router: routeInstance,
   render: (h) => h(App),
+  pinia,
 });
 
 // 挂载应用

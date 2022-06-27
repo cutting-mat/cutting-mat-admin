@@ -12,13 +12,17 @@
 </template>
 
 <script>
+import Vue from "vue";
 //import { util } from "@/core";
-import myHeader from "../components/header";
+import myHeader from "../components/header.vue";
+
+import animater from "@cutting-mat/animater";
+Vue.use(animater);
 
 export default {
   components: {
     myHeader,
-    HomePage: () => import("../components/HomePage"),
+    HomePage: () => import("../components/HomePage.vue"),
   },
   data() {
     return {
@@ -28,7 +32,7 @@ export default {
   methods: {},
   created() {
     // const { width, height } = window.screen;
-    const {innerWidth, innerHeight} = window;
+    const { innerWidth, innerHeight } = window;
     this.screen = {
       width: innerWidth,
       height: innerHeight,

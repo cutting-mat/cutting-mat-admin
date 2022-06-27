@@ -23,10 +23,7 @@
 </template>
 
 <script>
-import {
-  captchaImage,
-  validateCaptchaImage,
-} from "@/core/plugins/auth/api/auth";
+import { captchaImage, validateCaptchaImage } from "../api/auth";
 
 export default {
   props: {
@@ -75,16 +72,24 @@ export default {
     },
     valid() {
       return new Promise((resolve, reject) => {
+        if (this.loading) {
+          reject("loading");
+        }
         if (this.formData.userInput) {
+          this.loading = true;
           validateCaptchaImage(this.formData)
             .then((res) => {
+              this.loading = false;
               if (res.status === 200) {
                 resolve(res.data);
               } else {
+                this.fetchData();
                 reject(`验证失败，请重试`);
               }
             })
             .catch(() => {
+              this.loading = false;
+              this.fetchData();
               reject(`验证失败，请重试`);
             });
         } else {

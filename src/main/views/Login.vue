@@ -29,15 +29,11 @@
           ></el-input>
         </el-form-item>
         <el-form-item prop="captcha">
-          <InputCaptchaImage ref="validCode" />
+          <InputCaptchaImage ref="InputCaptchaImage" />
         </el-form-item>
         <div class="flex-row align-center">
           <div class="flex-1">
-            <el-checkbox
-              :value="$store.state.rememberLogin"
-              @change="$store.set('rememberLogin', $event)"
-              >记住我</el-checkbox
-            >
+            <!-- <el-checkbox v-model="$store.rememberLogin">记住我</el-checkbox> -->
           </div>
           <el-link type="info" @click="handleChangePw"> 忘记密码？ </el-link>
         </div>
@@ -50,6 +46,13 @@
             >登录</el-button
           >
         </el-form-item>
+        <div class="flex-row">
+          <div class="flex-1"></div>
+          <el-link type="primary" @click="$router.push({ name: '注册' })">
+            立即注册
+            <i class="el-icon-right"></i>
+          </el-link>
+        </div>
       </el-form>
       <div class="footer-info">
         @2022 版权所有 占位文字
@@ -64,13 +67,14 @@
       </div>
     </div>
     <!-- 验证身份 -->
-    <auth ref="auth" :types="['email', 'mobile']" />
+    <auth ref="auth" :types="['email', 'mobile']" command="reset" />
   </div>
 </template>
 
 <script>
 import { event } from "@/core";
 import { login } from "@/main/api/common";
+import { SetAccountToken } from "@/plugin.permission.config";
 
 export default {
   data() {
@@ -79,13 +83,16 @@ export default {
         if (this.formData.captcha) {
           resolve();
         } else {
-          return this.$refs.validCode
-            .valid()
+          this.$refs.InputCaptchaImage.valid()
             .then((captcha) => {
+              console.log("then", captcha);
               this.formData.captcha = captcha;
               resolve();
             })
-            .catch(reject);
+            .catch((msg) => {
+              console.log("catch", msg);
+              reject(msg);
+            });
         }
       });
     };
@@ -116,7 +123,7 @@ export default {
             trigger: "blur",
           },
         ],
-        captcha: [{ validator: validImage, trigger: "blur" }],
+        captcha: [{ validator: validImage, trigger: [] }],
       },
     };
   },
@@ -132,10 +139,13 @@ export default {
             .then((res) => {
               if (res.status === 200) {
                 this.loading = false;
+                // 存储token
+                SetAccountToken(res.data);
                 // 登录后全局发布 login 事件, 将被 权限模块 接收
-                event.emit("login", {
-                  redirect: this.$router.currentRoute.query.redirect || "/",
-                  data: res.data,
+                event.emit("login", () => {
+                  this.$router.replace({
+                    path: this.$router.currentRoute.query.redirect || "/",
+                  });
                 });
               } else {
                 this.$message({
@@ -153,12 +163,11 @@ export default {
       });
     },
     handleChangePw() {
-      this.$refs.auth.auth().then((res) => {
+      this.$refs.auth.auth().then((authCode) => {
         this.$router.push({
           name: "修改密码",
           query: {
-            authCode: res.authCode,
-            token: res.token,
+            authCode,
           },
         });
       });

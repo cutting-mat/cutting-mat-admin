@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import logo from "./logo";
+import logo from "./logo.vue";
 
 import routes from "../index";
 

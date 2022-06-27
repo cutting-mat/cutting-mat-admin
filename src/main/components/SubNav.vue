@@ -89,7 +89,7 @@ import { deepcopy } from "@/core";
 // 过滤隐藏路由，扩展fullPath
 let filterRoutes = function (routeArray, base) {
   const array = routeArray.filter((e) => !e.meta || !e.meta.hide);
-  return array.map(item => {
+  return array.map((item) => {
     const route = deepcopy(item);
     let pathKey =
       route.path.indexOf("/") === 0
@@ -113,8 +113,8 @@ export default {
     subMenu: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -125,9 +125,18 @@ export default {
   },
   computed: {
     menu: function () {
-      return this.$AccessControl
-        ? this.state.DynamicRoute[0].children
-        : filterRoutes(MainRoute[0].children);
+      // 侧边导航数据
+      return [
+        {
+          name: "数据可视化",
+          meta: {
+            icon: "el-icon-s-platform",
+          },
+        },
+        ...(this.$AccessControl
+          ? this.state.DynamicRoute[0].children
+          : filterRoutes(MainRoute[0].children)),
+      ];
     },
     activeIndex() {
       if (this.$route.meta && this.$route.meta.belong) {
@@ -139,8 +148,8 @@ export default {
   watch: {
     $route: {
       handler(newRoute) {
-        if(!this.subMenu){
-          return null
+        if (!this.subMenu) {
+          return null;
         }
         let targetIndex = -1;
         if (Array.isArray(this.list)) {
@@ -172,11 +181,11 @@ export default {
       immediate: true,
     },
   },
-  created(){
-    if(!this.subMenu){
-      this.list=this.menu
+  created() {
+    if (!this.subMenu) {
+      this.list = this.menu;
     }
-  }
+  },
 };
 </script>
 
