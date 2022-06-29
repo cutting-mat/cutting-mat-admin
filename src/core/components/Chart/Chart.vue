@@ -118,16 +118,6 @@ export default {
         : null;
     },
   },
-  watch: {
-    data: {
-      handler() {
-        if (Array.isArray(this.data) && this.data.length > 0) {
-          this.render(this.data);
-        }
-      },
-      deep: true,
-    },
-  },
   methods: {
     getSeries() {
       /**
@@ -284,18 +274,25 @@ export default {
       this.chartObj.setOption(option);
     },
   },
-  created() {
-    // 预先转换数据格式
-    this.sourceData = datasetTrans(this.data, this.legend);
-  },
   mounted() {
     if (this.chartObj) {
       this.chartObj.dispose();
     }
     this.chartObj = echarts.init(document.getElementById(this.domid));
-    if (Array.isArray(this.data) && this.data.length > 0) {
-      this.render(this.data);
-    }
+    this.$watch(
+      () => this.data,
+      () => {
+        if (Array.isArray(this.data) && this.data.length > 0) {
+          // 预先转换数据格式
+          this.sourceData = datasetTrans(this.data, this.legend);
+          this.render(this.data);
+        }
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
   },
 };
 </script>

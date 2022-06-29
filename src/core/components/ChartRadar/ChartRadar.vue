@@ -49,16 +49,6 @@ export default {
       dataArr: [],
     };
   },
-  watch: {
-    data: {
-      handler() {
-        if (Array.isArray(this.data) && this.data.length > 0) {
-          this.render();
-        }
-      },
-      deep: true,
-    },
-  },
   methods: {
     //处理data中的数据
     handleRadarData(arr) {
@@ -82,9 +72,6 @@ export default {
     getSeriesData() {
       let arr = [];
       return this.data.map((item) => {
-        if (item.label.length !== item.value.length)
-          return this.$message.error("数据有误，请联系后台！");
-
         item.label.forEach((e, k) => {
           let obj = {
             name: e,
@@ -160,9 +147,18 @@ export default {
       this.chartObj.dispose();
     }
     this.chartObj = echarts.init(document.getElementById(this.domid));
-    if (Array.isArray(this.data) && this.data.length > 0) {
-      this.render();
-    }
+    this.$watch(
+      () => this.data,
+      () => {
+        if (Array.isArray(this.data) && this.data.length > 0) {
+          this.render(this.data);
+        }
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
   },
 };
 </script>

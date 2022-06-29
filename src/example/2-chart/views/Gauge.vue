@@ -8,13 +8,13 @@
     <p>value(Number，必传)：仪表盘数值</p>
     <p>range(Array)：仪表盘数值范围，默认值：[ 0,100 ]</p>
     <div class="demo">
-      <chart-gauge :value="30" />
+      <chart-gauge :value="data" />
     </div>
     <pre class="code">
-            <textarea readonly>
-                <chart-gauge :value="30" />
-            </textarea>
-        </pre>
+        <textarea readonly>
+            <chart-gauge :value="data" />
+        </textarea>
+    </pre>
 
     <h2>配置</h2>
     <h3>起止角度</h3>
@@ -23,13 +23,13 @@
       注：以中心点左侧为180，右侧为0 ，上方为90° ）
     </p>
     <div class="demo">
-      <chart-gauge :value="30" :angle="[180, 0]" />
+      <chart-gauge :value="data" :angle="[180, 0]" />
     </div>
     <pre class="code">
-            <textarea readonly>
-                <chart-gauge :value="30" :angle="[180, 0]" />
-            </textarea>
-        </pre>
+        <textarea readonly>
+            <chart-gauge :value="data" :angle="[180, 0]" />
+        </textarea>
+    </pre>
 
     <h3>自定义指针</h3>
     <p>pointerStyle(String)：指针样式。</p>
@@ -52,10 +52,10 @@
       <chart-gauge :value="data" pointerStyle="red" pointerLength="50%" />
     </div>
     <pre class="code">
-            <textarea readonly>
-                <chart-gauge :value="data" pointerStyle="red" pointerLength="50%" />
-            </textarea>
-        </pre>
+        <textarea readonly>
+            <chart-gauge :value="data" pointerStyle="red" pointerLength="50%" />
+        </textarea>
+    </pre>
 
     <h3>自定义表盘</h3>
     <p>
@@ -70,10 +70,10 @@
       />
     </div>
     <pre class="code">
-            <textarea readonly>
-                <chart-gauge :dialBackground="dialBackground" :value="data" pointerStyle="red" />
-            </textarea>
-        </pre>
+          <textarea readonly>
+              <chart-gauge :dialBackground="dialBackground" :value="data" pointerStyle="red" />
+          </textarea>
+      </pre>
   </div>
 </template>
 
@@ -97,8 +97,8 @@ export default {
   },
   methods: {},
   created() {
-    setTimeout(() => {
-      this.data = 50;
+    setInterval(() => {
+      this.data = parseInt(Math.random() * 100);
     }, 3000);
   },
 };

@@ -12,6 +12,7 @@ import { CanvasRenderer } from "echarts/renderers";
 echarts.use([GridComponent, TooltipComponent, ScatterChart, CanvasRenderer]);
 // 全局色表
 import { colors } from "@/core/components/Chart/assets/variate";
+// TODO
 
 export default {
   name: `ChartScatter`,
@@ -43,16 +44,6 @@ export default {
       domid: `domid-${parseInt(Math.random() * 1e8)}`,
       chartObj: null,
     };
-  },
-  watch: {
-    data: {
-      handler() {
-        if (Array.isArray(this.data) && this.data.length > 0) {
-          this.render();
-        }
-      },
-      deep: true,
-    },
   },
   methods: {
     handleArray(i) {
@@ -188,9 +179,18 @@ export default {
       this.chartObj.dispose();
     }
     this.chartObj = echarts.init(document.getElementById(this.domid));
-    if (Array.isArray(this.data) && this.data.length > 0) {
-      this.render();
-    }
+    this.$watch(
+      () => this.data,
+      () => {
+        if (Array.isArray(this.data) && this.data.length > 0) {
+          this.render(this.data);
+        }
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
   },
 };
 </script>

@@ -96,16 +96,6 @@ export default {
       pieData: null,
     };
   },
-  watch: {
-    data: {
-      handler() {
-        if (Array.isArray(this.data) && this.data.length > 0) {
-          this.render();
-        }
-      },
-      deep: true,
-    },
-  },
   methods: {
     legendInfo(i, len) {
       let disLen = i == 0 ? (i + 1) * 5 + "%" : (i + 1) * 10 + "%";
@@ -131,9 +121,6 @@ export default {
     getPieData() {
       let arr = [];
       return this.data.map((item) => {
-        if (item.label.length !== item.value.length)
-          return this.$message.error("数据有误，请联系后台！");
-
         item.label.forEach((e, k) => {
           let obj = {
             name: e,
@@ -216,10 +203,18 @@ export default {
       this.chartObj.dispose();
     }
     this.chartObj = echarts.init(document.getElementById(this.domid));
-    if (Array.isArray(this.data) && this.data.length > 0) {
-      this.render();
-      this.getPieData();
-    }
+    this.$watch(
+      () => this.data,
+      () => {
+        if (Array.isArray(this.data) && this.data.length > 0) {
+          this.render(this.data);
+        }
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
   },
 };
 </script>

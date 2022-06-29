@@ -89,13 +89,6 @@ export default {
       chartObj: null,
     };
   },
-  watch: {
-    value: {
-      handler() {
-        this.render();
-      },
-    },
-  },
   methods: {
     render() {
       let isDialElementShow = {
@@ -139,10 +132,17 @@ export default {
     if (this.chartObj) {
       this.chartObj.dispose();
     }
-    this.$nextTick(() => {
-      this.chartObj = echarts.init(document.getElementById(this.domid));
-      this.render();
-    });
+    this.chartObj = echarts.init(document.getElementById(this.domid));
+    this.$watch(
+      () => this.value,
+      () => {
+        this.render();
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
     window.addEventListener("resize", () => {
       if (this.chartObj) {
         this.chartObj.resize();

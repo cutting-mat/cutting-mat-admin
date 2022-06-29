@@ -9,7 +9,7 @@
   "homepage": "https://cutting-mat.github.io/cutting-mat-admin/",
   "dependencies": {
     "@cutting-mat/animater": "^1.0.9",
-    "@cutting-mat/axios": "^1.1.4",
+    "@cutting-mat/axios": "^1.2.0",
     "@cutting-mat/uploader": "^2.0.15",
     "@cutting-mat/widgets": "^0.0.9",
     "@vue/composition-api": "^1.6.2",

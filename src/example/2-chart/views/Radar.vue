@@ -22,7 +22,7 @@
 
 <script>
 import ChartRadar from "@/core/components/ChartRadar";
-
+import { getChart } from "../api";
 //import * as util from "@/main/assets/util";
 
 export default {
@@ -32,17 +32,24 @@ export default {
   data() {
     return {
       name: ["预算分配"],
-      data: [
-        {
-          label: ["销售", "管理", "信息技术", "客服", "研发", "市场"],
-          value: [43000, 30000, 38000, 50000, 35000, 49000],
-        },
-      ],
+      data: [],
       colorList: ["#B8D3E4", "#72ACD1"],
     };
   },
-  methods: {},
-  created() {},
+  methods: {
+    fetchData(params, opt) {
+      return getChart(params, opt).then((res) => {
+        return res.data;
+      });
+    },
+  },
+  created() {
+    this.fetchData(null, {
+      cache: false,
+    }).then((res) => {
+      this.data = [res[0]];
+    });
+  },
 };
 </script>
 
