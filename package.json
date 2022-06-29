@@ -1,6 +1,6 @@
 {
   "name": "cutting-mat-admin",
-  "version": "2.12.0",
+  "version": "2.12.1",
   "scripts": {
     "serve": "vite --host",
     "build": "vite build",
@@ -14,6 +14,7 @@
     "@cutting-mat/widgets": "^0.0.9",
     "@vue/composition-api": "^1.6.2",
     "crypto-js": "^3.3.0",
+    "echarts": "^5.3.3",
     "element-ui": "^2.15.6",
     "html2pdf.js": "^0.10.1",
     "pinia": "^2.0.14",
