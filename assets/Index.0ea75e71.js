@@ -1,0 +1,1 @@
+/* empty css              */import{n as r}from"./index.ec256302.js";import"./ui.c0058d49.js";const s={};var t=function(){var n=this,e=n._self._c;return e("div",{staticClass:"scrollbar"},[e("router-view",{staticClass:"wrap example"})],1)},_=[],a=r(s,t,_,!1,null,"a9e8490e",null,null);const p=a.exports;export{p as default};

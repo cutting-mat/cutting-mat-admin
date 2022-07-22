@@ -1,0 +1,1 @@
+import{i as t}from"./index.ec256302.js";const o=e=>t.get("/role/s",{params:e}),s=e=>t.get("/role",{params:e}),n=e=>t.post("/role",e),a=e=>t.put("/role",e),l=e=>t.delete("/role",{params:e});export{n as a,s as d,a as e,o as l,l as r};

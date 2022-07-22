@@ -1,0 +1,1 @@
+/* empty css              */import{n as r}from"./index.ec256302.js";import"./ui.c0058d49.js";const n={data(){return{}},methods:{},created(){}};var a=function(){var t=this,e=t._self._c;return e("div",{staticClass:"scrollbar"},[e("router-view",{staticClass:"wrap example"})],1)},s=[],_=r(n,a,s,!1,null,"8a418fc8",null,null);const d=_.exports;export{d as default};

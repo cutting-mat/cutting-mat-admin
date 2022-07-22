@@ -1,0 +1,1 @@
+import{n as r}from"./index.ec256302.js";import"./ui.c0058d49.js";const t={data(){return{}},methods:{},created(){}};var _=function(){var e=this,n=e._self._c;return n("router-view",{staticClass:"scrollbar"})},s=[],a=r(t,_,s,!1,null,"84696fa4",null,null);const d=a.exports;export{d as default};
