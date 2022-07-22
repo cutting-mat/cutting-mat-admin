@@ -306,7 +306,7 @@ p {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.export-right-btn >>> .upload-demo {
+.export-right-btn :deep(.upload-demo) {
   text-align: right;
 }
 .iconImport {

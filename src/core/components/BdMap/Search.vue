@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style scoped>
-.bmap >>> img {
+.bmap :deep(img) {
   max-width: none;
 }
 .titleBar {

@@ -164,7 +164,7 @@ export default {
 .input-valid {
   position: relative;
 }
-.input-valid >>> .overWordCount {
+.input-valid :deep(.overWordCount) {
   color: #f56c6c;
 }
 .input-valid-count {

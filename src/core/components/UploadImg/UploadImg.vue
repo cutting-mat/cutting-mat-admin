@@ -81,28 +81,28 @@ export default {
   margin-bottom: 8px;
 }
 
-.upload-img >>> .el-upload-list--picture-card .el-upload-list__item,
-.upload-img >>> .el-upload--picture-card {
+.upload-img :deep(.el-upload-list--picture-card .el-upload-list__item),
+.upload-img :deep(.el-upload--picture-card) {
   width: 128px;
   height: 128px;
 }
 
-.upload-img >>> .el-upload-list--picture-card .el-upload-list__item-thumbnail {
+.upload-img
+  :deep(.el-upload-list--picture-card .el-upload-list__item-thumbnail) {
   object-fit: cover;
 }
 
 .upload-img
-  >>> .el-upload-list--picture-card
-  .el-upload-list__item-status-label {
+  :deep(.el-upload-list--picture-card .el-upload-list__item-status-label) {
   display: none;
 }
 
-.upload-img >>> .el-upload-list--picture-card .el-upload-list__item-actions {
+.upload-img :deep(.el-upload-list--picture-card .el-upload-list__item-actions) {
   opacity: 1;
   background: none;
 }
 
-.upload-img >>> .el-upload-list__item-delete {
+.upload-img :deep(.el-upload-list__item-delete) {
   display: block;
   position: absolute;
   right: 0;
@@ -113,7 +113,7 @@ export default {
   border-radius: 0 0 0 6px;
 }
 
-.upload-img >>> .el-upload-list__item-delete:hover {
+.upload-img :deep(.el-upload-list__item-delete:hover) {
   color: red;
 }
 </style>

@@ -49,7 +49,7 @@ export default {
   color: #fff;
   padding-top: 20px;
 }
-.visual >>> .visual-block {
+.visual :deep(.visual-block) {
   background: #333;
   margin-bottom: 20px;
   text-align: center;

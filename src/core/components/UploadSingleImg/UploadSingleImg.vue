@@ -57,7 +57,7 @@ export default {
   overflow: hidden;
 }
 
-.upload-single-img >>> .el-upload {
+.upload-single-img :deep(.el-upload) {
   display: block;
 }
 

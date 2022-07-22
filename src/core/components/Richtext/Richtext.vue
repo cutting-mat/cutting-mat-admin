@@ -359,7 +359,7 @@ export default {
   position: relative;
 }
 /* 工具栏 */
-.myTextEditor >>> .ql-toolbar {
+.myTextEditor :deep(.ql-toolbar) {
   position: absolute;
   left: 0;
   width: 100%;
@@ -368,14 +368,14 @@ export default {
   border-color: #dedede;
   border-radius: 4px;
 }
-.myTextEditor >>> .ql-container {
+.myTextEditor :deep(.ql-container) {
   min-height: 300px;
   border: 1px solid #dedede;
   border-radius: 4px;
   font-size: inherit;
 }
 /* 编辑区 */
-.myTextEditor >>> .ql-editor {
+.myTextEditor :deep(.ql-editor) {
   padding: 50px 10px 10px;
   line-height: 1.7;
 }
@@ -390,13 +390,13 @@ export default {
   user-select: none;
   -o-user-select: none;
 }
-.readOnly >>> .ql-toolbar {
+.readOnly :deep(.ql-toolbar) {
   display: none;
 }
-.readOnly >>> .ql-container {
+.readOnly :deep(.ql-container) {
   border: 0;
 }
-.readOnly >>> .ql-editor {
+.readOnly :deep(.ql-editor) {
   padding: 0;
 }
 /* 异步提示 */
@@ -407,7 +407,7 @@ export default {
   top: 0;
   z-index: 10;
 }
-.readOnly.imgZoom >>> .ql-editor img {
+.readOnly.imgZoom :deep(.ql-editor img) {
   max-width: 70px;
   max-height: 70px;
   cursor: pointer;
