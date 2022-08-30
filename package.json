@@ -10,7 +10,7 @@
   "dependencies": {
     "@cutting-mat/animater": "^1.0.9",
     "@cutting-mat/axios": "^1.2.0",
-    "@cutting-mat/uploader": "^2.0.15",
+    "@cutting-mat/uploader": "^4.0.0",
     "@cutting-mat/widgets": "^1.0.1",
     "crypto-js": "^3.3.0",
     "echarts": "^5.3.3",
